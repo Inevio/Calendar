@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="static/reset.css">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <script src="static/jquery-1.11.2.min.js"></script>
+    <script src="static/script.js"></script>
+</head>    
+<body>
+    <section id="calendar">
+        <section class="calendar-top-bar wz-ui-header shadow-border">
+            <section class="calendar-menu">
+                <nav class="calendar-menu-nav">
+                    <li id="dayType" class="hdd wz-dragger calendarType">Day</li>
+                    <li id="weekType" class="hdd wz-dragger calendarType">Week</li>
+                    <li id="monthType" class="hdd active-type wz-dragger calendarType">Month</li>
+                </nav>
+                <article class="calendar-menu-event-finder right">
+                    <input type="text" placeholder="  &#128269;  Search...">
+                </article>
+            </section>
+            <section class="calendar-buttons right">
+                <figure class="wz-view-minimize">
+                    <i></i>
+                </figure>
+                <figure class="wz-view-maximize">
+                    <i></i>
+                </figure>
+                <figure class="wz-view-close">
+                    <i></i>
+                </figure>
+            </section>
+        </section>
+        <section class="calendar-head">
+            <section class="my-calendars" onclick="showMenu('#my-calendars-modal');">
+               <span>My calendars</span>
+               <img src="static/flechita.png" alt=""> 
+            </section>
+            <section class="current-month">
+                <img class="left-arrow" src="static/arrow_back.png" alt="">
+                <span>September 2013</span>
+                <img class="right-arrow" src="static/arrow_back.png" alt="">
+            </section>
+            <section class="create-event right" id="create-event" onclick="showMenu('#create-event-modal');">
+                <img src="" alt="&#43;">
+                <span>Create new event</span>
+            </section>
+            <section id="my-calendars-modal">
+                <section class="my-calendars-list">
+                    <articles id="work" class="calendar">
+                        <input type="checkbox" checked="checked" class="wz-ui-input"><label><i></i><span><figure></figure>Work</span></label>
+                        <span class="right deleteCalendar">Eliminar</span>
+                    </articles>
+                    <articles id="office" class="calendar">
+                        <input type="checkbox" checked="checked" class="wz-ui-input"><label><i></i><span><figure></figure>Office</span></label>
+                        <span class="right deleteCalendar">Eliminar</span>
+                    </articles>
+                    <articles id="home" class="calendar">
+                        <input type="checkbox" checked="checked" class="wz-ui-input"><label><i></i><span><figure></figure>Home</span></label>
+                        <span class="right deleteCalendar">Eliminar</span>
+                    </articles>
+                </section>
+                <section class="add-new-calendar" id="add-new-calendar" onclick="showMenu('#create-calendar-modal');">
+                    <img src="" alt="&#43;">
+                    <span>Add new calendar</span>
+                </section>
+            </section>
+            <section id="create-event-modal">
+                <figure class="wz-view-close" onclick="showMenu('#create-event-modal');">
+                    <i></i>
+                </figure>
+               <!-- Falta implementar -->	
+            </section>
+            <section id="create-calendar-modal">
+                <figure class="wz-view-close" onclick="showMenu('#create-calendar-modal');">
+                    <i></i>
+                </figure>
+                <form>
+                    <artricle class="calendar-name">
+                        <input type="text" placeholder=" Name of calendar">
+                    </artricle>
+                    <artricle class="calendar-color">
+                        <span>Color</span>
+                        <input type="color">
+                    </artricle>
+                    <artricle class="calendar-description">
+                        <span>Description</span><br>
+                        <textArea></textArea>
+                    </artricle>
+                    <button type="submit" class="create-calendar-button right">Create</button>
+                </form>
+            </section>
+        </section>
+        <section id="month-calendar" class="calendar-body calendar-active">
+            <table>
+                <thead class="calendar-day-bar">
+                    <tr class="title-row">
+                        <th class="title-cell">Sunday</th>
+                        <th class="title-cell">Monday</th>
+                        <th class="title-cell">Thusday</th>
+                        <th class="title-cell">Wednesday</th>
+                        <th class="title-cell">Thursday</th>
+                        <th class="title-cell">Friday</th>
+                        <th class="title-cell">Saturday</th>
+                    </tr>
+                </thead>
+                <tbody class="calendar-days">
+                    <tr class="week-row">
+                        <td class="other-month-cell"></td>
+                        <td class="other-month-cell"></td>
+                        <td class="other-month-cell"></td>
+                        <td class="other-month-cell"></td>
+                        <td class="day-cell"><span>1</span></td>
+                        <td class="day-cell"><span>2</span></td>
+                        <td class="day-cell"><span>3</span></td>    
+                    </tr>
+                    <tr class="week-row">
+                        <td class="day-cell"><span>4</span></td>
+                        <td class="day-cell"><span>5</span></td>
+                        <td class="day-cell"><span>6</span></td>
+                        <td class="day-cell"><span>7</span></td>
+                        <td class="day-cell"><span>8</span></td>
+                        <td class="day-cell"><span>9</span></td>
+                        <td class="day-cell"><span>10</span></td>
+                    </tr>
+                    <tr class="week-row">
+                        <td class="day-cell"><span>11</span></td>
+                        <td class="day-cell"><span>12</span></td>
+                        <td class="day-cell"><span>13</span></td>
+                        <td class="day-cell"><span>14</span></td>
+                        <td class="day-cell">
+                            <span>15</span>
+                            <article class="event office"> Me voy a casar</article>
+                            <article class="event"> Reunion con el jefe</article>
+                        </td>
+                        <td class="day-cell"><span>16</span></td>
+                        <td class="day-cell"><span>17</span></td>
+                    </tr>
+                    <tr class="week-row">
+                        <td class="day-cell"><span>18</span></td>
+                        <td class="day-cell"><span>19</span></td>
+                        <td class="day-cell"><span>20</span></td>
+                        <td class="day-cell"><span>21</span></td>
+                        <td class="day-cell day-selected"><span>22</span></td>
+                        <td class="day-cell"><span>23</span></td>
+                        <td class="day-cell"><span>24</span></td>
+                    </tr>
+                    <tr class="week-row">
+                        <td class="day-cell"><span>25</span></td>
+                        <td class="day-cell"><span>26</span></td>
+                        <td class="day-cell"><span>27</span></td>
+                        <td class="day-cell"><span>28</span></td>
+                        <td class="day-cell"><span>29</span></td>
+                        <td class="day-cell"><span>30</span></td>
+                        <td class="day-cell"><span>31</span></td>
+                    </tr>
+                </tbody>
+            </table>    
+        </section>
+        <section id="week-calendar" class="calendar-body">
+            <table>
+                <thead class="calendar-day-bar">
+                    <tr class="title-row">
+                        <th class="title-cell"></th>
+                        <th class="title-cell">15 Sunday</th>
+                        <th class="title-cell">16 Monday</th>
+                        <th class="title-cell">17 Thusday</th>
+                        <th class="title-cell">18 Wednesday</th>
+                        <th class="title-cell">19 Thursday</th>
+                        <th class="title-cell">20 Friday</th>
+                        <th class="title-cell">21 Saturday</th>
+                    </tr>
+                </thead>
+                <tbody class="">
+                    <td class="day-cell">
+                    	<div class="hour-cell">
+                    		<span>00:00</span>
+                    	</div>
+                    	<div class="hour-cell">
+                    		<span>01:00</span>
+                    	</div>
+                    	<div class="hour-cell">
+                    		<span>02:00</span>
+                    	</div>
+                    	<div class="hour-cell">
+                    		<span>03:00</span>
+                    	</div>
+                    	<div class="hour-cell">
+                    		<span>04:00</span>
+                    	</div>
+                    	<div class="hour-cell">
+                    		<span>05:00</span>
+                    	</div>
+                    	<div class="hour-cell">
+                    		<span>06:00</span>
+                    	</div>
+                    	<div class="hour-cell">
+                    		<span>07:00</span>
+                    	</div>
+                    	<div class="hour-cell">
+                    		<span>08:00</span>
+                    	</div>
+                    	<div class="hour-cell">
+                    		<span>09:00</span>
+                    	</div>
+  						<!-- Falta implementar -->
+                    </td>
+                    <td class="day-cell"></td>
+                    <td class="day-cell"></td>
+                    <td class="day-cell"></td>
+                    <td class="day-cell"></td>
+                    <td class="day-cell"></td>
+                    <td class="day-cell"></td>
+                    <!-- Falta implementar -->
+                </tbody>
+            </table>    
+        </section>
+        <section id="day-calendar" class="calendar-body">
+        	<!-- Falta implementar-->
+        </section>
+        <div id="shadow" class="abs top dark hide fullHeight fullWidth center"></div>
+    </section>
+</body>
+</html>
