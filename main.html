@@ -22,7 +22,7 @@
     </section>
 </section>
 <section class="calendar-head">
-    <section class="my-calendars" onclick="showMenu('#my-calendars-modal');">
+    <section class="my-calendars">
        <span>My calendars</span>
        <img src="https://static.inevio.com/app/207/flechita.png" alt=""> 
     </section>
@@ -31,7 +31,7 @@
         <span>September 2013</span>
         <img class="right-arrow" src="https://static.inevio.com/app/207/arrow_back.png" alt="">
     </section>
-    <section class="create-event right" id="create-event" onclick="showMenu('#create-event-modal');">
+    <section class="create-event right" id="create-event">
         <img src="" alt="&#43;">
         <span>Create new event</span>
     </section>
@@ -50,19 +50,19 @@
                 <span class="right deleteCalendar">Eliminar</span>
             </articles>
         </section>
-        <section class="add-new-calendar" id="add-new-calendar" onclick="showMenu('#create-calendar-modal');">
+        <section class="add-new-calendar" id="add-new-calendar">
             <img src="" alt="&#43;">
             <span>Add new calendar</span>
         </section>
     </section>
     <section id="create-event-modal">
-        <figure class="wz-view-close" onclick="showMenu('#create-event-modal');">
+        <figure class="close-image create-event-modal-close">
             <i></i>
         </figure>
        <!-- Falta implementar -->	
     </section>
     <section id="create-calendar-modal">
-        <figure class="wz-view-close" onclick="showMenu('#create-calendar-modal');">
+        <figure class="close-image create-calendar-modal-close">
             <i></i>
         </figure>
         <form>

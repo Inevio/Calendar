@@ -1,18 +1,34 @@
 $( document ).ready(function() {
     //Adds each day-cell a clickable area to select the current day.
-	$(".day-cell").bind( "click", function() {
+	$(".day-cell").on( "click", function() {
         selectDay($( this ));
     });
 	//Adds each top bar buttons functionalty to change between calendar types.
-	$(".calendarType").bind( "click", function() {
+	$(".calendarType").on( "click", function() {
         selectCalendarType($( this ));
     });
     //Adds a shadow when opens these menus
     $('#add-new-calendar').on('click', function() {
-            $('#shadow').show();
+        $('#shadow').show();
     })
     $('#create-event').on('click', function() {
-            $('#shadow').show();
+        $('#shadow').show();
+    })
+    //Adds buttons functionality to open the menus
+    $('.my-calendars').on('click', function() {
+        showMenu('#my-calendars-modal');
+    })
+    $('.create-event').on('click', function() {
+        showMenu('#create-event-modal');
+    })
+    $('.add-new-calendar').on('click', function() {
+        showMenu('#create-calendar-modal');
+    })
+    $('.create-event-modal-close').on('click', function() {
+        showMenu('#create-event-modal');
+    })
+    $('.create-calendar-modal-close').on('click', function() {
+        showMenu('#create-calendar-modal');
     })
 });
 

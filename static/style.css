@@ -120,7 +120,7 @@
 	width: 135px;
 }
 
-.wz-view-minimize, .wz-view-maximize, .wz-view-close {
+.wz-view-minimize, .wz-view-maximize, .wz-view-close, .close-image {
     border: 1px solid transparent;
     border-radius: 2px;
     float: left;
@@ -145,6 +145,13 @@
 }
 
 .wz-view-close i {
+    background: url("@static/close.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
+    display: block;
+    height: 9px;
+    width: 10px;
+}
+
+.close-image i{
     background: url("@static/close.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
     display: block;
     height: 9px;
@@ -344,7 +351,7 @@
     border-radius: 4px;
 }
 
-#create-calendar-modal .wz-view-close {
+#create-calendar-modal .close-image {
     float: right;
     left: 250px;
     position: absolute;
@@ -352,7 +359,7 @@
     cursor: pointer;
 }
 
-#create-calendar-modal .wz-view-close i{
+#create-calendar-modal .close-image i{
     cursor: pointer;
 }
 
