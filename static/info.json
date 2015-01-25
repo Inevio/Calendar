@@ -1,0 +1,85 @@
+{
+
+    "name" : "Calendar",
+
+    "version" : "1.0",
+    "stage"   : "beta",
+    "api"     : "a100d2",
+
+    "language" : {
+
+        "default" : "en-en",
+        "list"    : [ "en-en" ]
+
+    },
+
+    "device" : {
+
+        "desktop" : {
+
+            "primary" : "main",
+            "service" : [],
+            "common" : {
+
+                "css"    : [],
+                "script" : [],
+                "start"  : []
+
+            },
+
+            "view" : {
+
+                "main" : {
+
+                    "template" : "main.html",
+
+                    "maxizable" : true,
+                    "resizable" : false,
+
+                    "width"  : {
+
+                        "default" : 935,
+                        "min"     : 935,
+                        "max"     : 0
+
+                    },
+
+                    "height" : {
+
+                        "default" : 558,
+                        "min"     : 558,
+                        "max"     : 0
+
+                    },
+
+                    "css"    : ["style.css"],
+                    "script" : ["script.js"],
+                    "start"  : []
+
+                }
+
+            }
+
+        }
+
+    },
+
+    "permission" : {
+
+        "user" : {
+
+            "modify" : true,
+            "read"   : true
+
+        },
+
+        "group" : {
+
+            "modify" : true,
+            "read"   : true
+
+        }
+
+    }
+
+}

@@ -40,19 +40,19 @@
 /*  Calendar Top Bar */
 .wz-ui-header{
     width:100%;
-	height: 39px;
+	height: 40px;
 	-webkit-border-radius: 3px 3px 0 0;
 	-moz-border-radius: 3px 3px 0 0;
 	border-radius: 3px 3px 0 0;
-	background-color: #f1f1f1;
+	background-color: #e85c5c;
 	-webkit-box-shadow: 0 2px 4px rgba(0,1,1,.1), inset 0 1px rgba(255,255,255,.1);
 	-moz-box-shadow: 0 2px 4px rgba(0,1,1,.1), inset 0 1px rgba(255,255,255,.1);
 	box-shadow: 0 2px 4px rgba(0,1,1,.1), inset 0 1px rgba(255,255,255,.1);
-	background-image: -webkit-linear-gradient(bottom, #b83e38, #da605b);
-	background-image: -moz-linear-gradient(bottom, #b83e38, #da605b);
-	background-image: -o-linear-gradient(bottom, #b83e38, #da605b);
-	background-image: -ms-linear-gradient(bottom, #b83e38, #da605b);
-	background-image: linear-gradient(to top, #b83e38, #da605b);
+    background-image: -webkit-linear-gradient(bottom, rgba(0,1,2,.05), rgba(0,0,0,.05));
+	background-image: -moz-linear-gradient(bottom, rgba(0,1,2,.05), rgba(0,0,0,.05));
+	background-image: -o-linear-gradient(bottom, rgba(0,1,2,.05), rgba(0,0,0,.05));
+	background-image: -ms-linear-gradient(bottom, rgba(0,1,2,.05), rgba(0,0,0,.05));
+	background-image: linear-gradient(to top, rgba(0,1,2,.05), rgba(0,0,0,.05));
 }
 
 .shadow-border{
@@ -75,14 +75,18 @@
     border-bottom: 2px solid transparent;
     color: #e9b9b7;
     display: inline-block;
-    font-size: 15px;
-    height: 28px;
-    margin: 0 11px;
-    padding: 8px 1px 0;
+    font-size: 14px;
+    height: 100%;
+    padding: 15px 12px 9px;
+    font-family: "Lato";
+}
+
+.calendar-menu li:nth-child(1) {
+    margin-left: 12px;
 }
 
 .calendar-menu li.active-type {
-    border-bottom: 3px solid #7ebe30;
+    background-color: #bc4b4b;
     color: #ffffff;
 }
 
@@ -95,15 +99,16 @@
     float:left;
 }
 
-.calendar-menu-event-finder {
-    width:auto;        
-    height: 21px;
-    padding: 5px 10px;
+.calendar-menu-event-finder {      
+    height: 28px;
+    padding: 5px 10px 7px;
+    width: 173px;
 }
 
 .calendar-menu-event-finder input{
-    width: 137px;
-    height: 25px;
+    padding-left: 31px;
+    width: 142px;    
+    height: 100%;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -112,6 +117,7 @@
     -moz-box-shadow: inset 0 2px rgba(0,0,0,.05);
     box-shadow: inset 0 2px rgba(0,0,0,.05);
     border: solid 1px #a64440;
+    font-family: "Lato";
 }
 
 .calendar-buttons{
@@ -128,6 +134,26 @@
     padding: 6px;
     width: 10px;
     margin: 9px 10px 10px;
+    -webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px
+}
+
+.wz-view-minimize:hover, .wz-view-maximize:hover, .wz-view-close:hover{
+    background-color: #fff;
+}
+
+.magnifying-glass-img {
+    margin-left: 8px;
+    position: absolute;
+    top: 12px;
+}
+
+.magnifying-glass-img i {
+  background: url("@static/search_normal.png") no-repeat scroll center bottom / 16px auto rgba(0, 0, 0, 0);
+  display: block;
+  height: 16px;
+  width: 16px;
 }
 
 .wz-view-minimize i{
