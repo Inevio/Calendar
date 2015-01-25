@@ -86,12 +86,13 @@
 }
 
 .calendar-menu li.active-type {
-    background-color: "#d15656";
-    color= "#de9393";
+    background-color: #bc4b4b;
+    color: #ffffff;
 }
 
 .calendar-menu li:hover {
-    border-bottom: 3px solid #fff;
+    background-color: #d15656;
+    color: #de9393;
 }
 
 .calendar-menu-nav{
@@ -150,10 +151,10 @@
 }
 
 .magnifying-glass-img i {
-  background: url("@static/search_normal.png") no-repeat scroll center bottom / 16px auto rgba(0, 0, 0, 0);
-  display: block;
-  height: 16px;
-  width: 16px;
+    background: url("@static/search_normal.png") no-repeat scroll center bottom / 16px auto rgba(0, 0, 0, 0);
+    display: block;
+    height: 16px;
+    width: 16px;
 }
 
 .wz-view-minimize i{
@@ -209,8 +210,9 @@
 
 /* Calendar general */
 .calendar-head {
-  background: none repeat scroll 0 0 #fff;
-  height: 35px;
+    background: none repeat scroll 0 0 #fff;
+    height: 35px;
+    color: #6f7578;
 }
 
 #day-calendar, #week-calendar, #month-calendar{
@@ -439,6 +441,7 @@
 
 .calendar-body{
 	height: 481px;
+    color: #6f7578;
 }
 
 .calendar-body table{
