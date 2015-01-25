@@ -86,8 +86,8 @@
 }
 
 .calendar-menu li.active-type {
-    background-color: #bc4b4b;
-    color: #ffffff;
+    background-color: "#d15656";
+    color= "#de9393";
 }
 
 .calendar-menu li:hover {
@@ -157,32 +157,55 @@
 }
 
 .wz-view-minimize i{
-    background: url("@static/minimize.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
+    background: url("@static/minimize_normal.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
     display: block;
     height: 9px;
     width: 10px;
 }
 
 .wz-view-maximize i{
-    background: url("@static/enlarge.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
+    background: url("@static/enlarge_normal.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
     display: block;
     height: 9px;
     width: 10px;
 }
 
 .wz-view-close i {
-    background: url("@static/close.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
+    background: url("@static/close_normal.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
+    display: block;
+    height: 9px;
+    width: 10px;
+}
+
+.wz-view-minimize:hover i{
+    background: url("@static/minimize_hover.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
+    display: block;
+    height: 9px;
+    width: 10px;
+}
+
+.wz-view-maximize:hover i{
+    background: url("@static/enlarge_hover.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
+    display: block;
+    height: 9px;
+    width: 10px;
+}
+
+.wz-view-close:hover i {
+    background: url("@static/close_hover.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
     display: block;
     height: 9px;
     width: 10px;
 }
 
 .close-image i{
-    background: url("@static/close.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
+    background: url("@static/close_normal.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
     display: block;
     height: 9px;
     width: 10px;
 }
+
+
 
 /* Calendar general */
 .calendar-head {
