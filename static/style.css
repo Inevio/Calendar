@@ -1,3 +1,4 @@
+/* Generals */
 .right{
     float:right !important;
 }
@@ -65,6 +66,8 @@
 	border: solid 1px rgba(0,0,0,.15);
 }
 
+/* Calendar menu */
+
 .calendar-menu{
     display:block;
     float:left;
@@ -98,6 +101,18 @@
 .calendar-menu-nav{
     width:auto;
     float:left;
+}
+
+#day-calendar, #week-calendar, #month-calendar{
+	display: none;
+}
+
+.calendar-active{
+	width: 100%;
+	height: 85%;
+	background-color: #fff;
+	border: solid 1px rgba(0,0,0,.15);
+	display:block !important;
 }
 
 .calendar-menu-event-finder {      
@@ -207,23 +222,58 @@
 }
 
 
-/* Calendar general */
+/* Calendar head */
 .calendar-head {
     background: none repeat scroll 0 0 #fff;
     height: 35px;
     color: #6f7578;
 }
 
-#day-calendar, #week-calendar, #month-calendar{
-	display: none;
+.my-calendars, .current-month, .create-event {
+    float: left;
+    font-size: 14px;
+    margin-left: 12px;
+    padding: 11px 0;
+    width: auto;
 }
 
-.calendar-active{
-	width: 100%;
-	height: 85%;
-	background-color: #fff;
-	border: solid 1px rgba(0,0,0,.15);
-	display:block !important;
+.my-calendars, .my-calendars span, .create-event, .my-calendars img, .current-month img, .create-event span, .create-event img, .add-new-calendar, .add-new-calendar img, .add-new-calendar span, .deleteCalendar{
+    cursor:pointer;
+}
+
+
+.current-month{
+    margin-left:29%;
+}
+
+.current-month span{
+    margin: 0 20px;
+}
+
+.create-event{
+    margin-right: 20px;
+}
+
+.calendar-body{
+	height: 481px;
+    color: #6f7578;
+}
+
+.calendar-body table{
+    width:100%;
+}
+
+td.other-month-cell{
+    background: #f1f1f1;
+}
+
+.calendar-days th{
+    font-size: 14px;
+}
+
+thead{
+	background-color: #f1f1f1;
+    border-bottom: solid 2px #cacaca;
 }
 
 /* Calendar Modals  */
@@ -413,57 +463,9 @@
     cursor: pointer;
 }
 
-.my-calendars, .current-month, .create-event {
-    float: left;
-    font-size: 14px;
-    margin-left: 12px;
-    padding: 11px 0;
-    width: auto;
-}
-
-.my-calendars, .my-calendars span, .create-event, .my-calendars img, .current-month img, .create-event span, .create-event img, .add-new-calendar, .add-new-calendar img, .add-new-calendar span, .deleteCalendar{
-    cursor:pointer;
-}
-
-
-.current-month{
-    margin-left:29%;
-}
-
-.current-month span{
-    margin: 0 20px;
-}
-
-.create-event{
-    margin-right: 20px;
-}
-
-.calendar-body{
-	height: 481px;
-    color: #6f7578;
-}
-
-.calendar-body table{
-    width:100%;
-}
-
-td.other-month-cell{
-    background: #f1f1f1;
-}
-
-.calendar-days th{
-    font-size: 14px;
-}
-
-thead{
-	background-color: #f1f1f1;
-    border-bottom: solid 2px #cacaca;
-}
-
-
 /* Month calendar */
 #month-calendar .container > table {
-  height: 7.2%;
+    height: 7.2%;
 }
 
 #month-calendar .mv-event-container {
@@ -499,7 +501,7 @@ thead{
     width: 100%;
 }
 
-#month-calendar .st-bg-table {
+#month-calendar .day-table {
     left: 0;
     position: absolute;
     table-layout: fixed;
@@ -507,27 +509,32 @@ thead{
     height: 100%;
 }
 
-#month-calendar .st-grid {
+#month-calendar .grid-table {
   position: relative;
   table-layout: fixed;
   width: 100%;
 }
 
+#month-calendar .grid-table td{
+  position: relative;
+}
+
+#month-calendar .day-tittle-row{height: 22px;}
+
 #month-calendar .day-selected{
     background-color: rgba(126,190,48,.1);
-	border: solid 1px #7ebe30 !important;
+	border: double 1px #7ebe30 !important;
 }
 
 #month-calendar .event {
     color: #4a4a4a;
-	font-size: 12px;
-	font-weight: bold;
-	height: 18px;
-	margin-left: 2px;
-	padding-left: 4px;
-	padding-top: 4px;
-	position: absolute;
-	width: 125px;
+    font-size: 12px;
+    height: 18px;
+    margin-left: 2px;
+    padding-left: 3px;
+    padding-top: 4px;
+    position: absolute;
+    width: 95%;
 }
 
 #month-calendar .office{
@@ -553,6 +560,19 @@ thead{
 	white-space: pre;
     color: #828282;
 } 
+
+#month-calendar .month-row {
+  height: 20%;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+#month-calendar .month-row:nth-child(1){top:0%;}
+#month-calendar .month-row:nth-child(2){top:20%;}
+#month-calendar .month-row:nth-child(3){top:40%;}
+#month-calendar .month-row:nth-child(4){top:60%;}
+#month-calendar .month-row:nth-child(5){top:80%;}
 
 /* Week calendar */
 #week-calendar td, #week-calendar th {
