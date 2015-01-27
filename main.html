@@ -253,62 +253,303 @@
     </section>
 </section>
 <section id="week-calendar" class="calendar-body">
-    <table>
-        <thead class="calendar-day-bar">
-            <tr class="title-row">
-                <th class="title-cell"></th>
-                <th class="title-cell">15 Sunday</th>
-                <th class="title-cell">16 Monday</th>
-                <th class="title-cell">17 Thusday</th>
-                <th class="title-cell">18 Wednesday</th>
-                <th class="title-cell">19 Thursday</th>
-                <th class="title-cell">20 Friday</th>
-                <th class="title-cell">21 Saturday</th>
-            </tr>
-        </thead>
-        <tbody class="">
-            <td class="day-cell">
-                <div class="hour-cell">
-                    <span>00:00</span>
-                </div>
-                <div class="hour-cell">
-                    <span>01:00</span>
-                </div>
-                <div class="hour-cell">
-                    <span>02:00</span>
-                </div>
-                <div class="hour-cell">
-                    <span>03:00</span>
-                </div>
-                <div class="hour-cell">
-                    <span>04:00</span>
-                </div>
-                <div class="hour-cell">
-                    <span>05:00</span>
-                </div>
-                <div class="hour-cell">
-                    <span>06:00</span>
-                </div>
-                <div class="hour-cell">
-                    <span>07:00</span>
-                </div>
-                <div class="hour-cell">
-                    <span>08:00</span>
-                </div>
-                <div class="hour-cell">
-                    <span>09:00</span>
-                </div>
-                <!-- Falta implementar -->
-            </td>
-            <td class="day-cell"></td>
-            <td class="day-cell"></td>
-            <td class="day-cell"></td>
-            <td class="day-cell"></td>
-            <td class="day-cell"></td>
-            <td class="day-cell"></td>
-            <!-- Falta implementar -->
-        </tbody>
-    </table>    
+	<section class="week-top-container">
+		<table class="week-top week-full-mode" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr class="week-day-names">
+					<td class="week-labels" rowspan="3" style="width:60px"></td>
+						<th scope="col" title="lun 26/1">
+							<section class="week-day-name">
+								<span class="week-day">lun 26/1</span>
+							</section>
+						</th>
+						<th scope="col" title="mar 27/1">
+							<section class="week-day-name wk-today">
+								<span class="week-day">mar 27/1</span>
+							</section>
+						</th>
+						<th scope="col" title="mié 28/1">
+							<section class="week-day-name wk-tomorrow">
+								<span class="week-day">mié 28/1</span>
+							</section>
+						</th>
+						<th scope="col" title="jue 29/1">
+							<section class="week-day-name">
+								<span class="week-day">jue 29/1</span>
+							</section>
+						</th>
+						<th scope="col" title="vie 30/1">
+							<section class="week-day-name">
+								<span class="week-day">vie 30/1</span>
+							</section>
+						</th>
+						<th scope="col" title="sáb 31/1">
+							<section class="week-day-name">
+								<span class="week-day">sáb 31/1</span>
+							</section>
+						</th>
+						<th scope="col" title="dom 1/2">
+							<section class="week-day-name">
+								<span class="week-day">dom 1/2</span>
+							</section>
+						</th>
+						<th style="width: 16px;" rowspan="3"> </th>
+				</tr>
+				<tr>
+					<td class="week-all-day" colspan="7">
+						<section class="week-view-all-day">
+							<table cellspacing="0" cellpadding="0" style="height: 30px;">
+								<tbody>
+									<tr>
+										<td class="all-day"> </td>
+										<td class="all-day"> </td>
+										<td class="all-day"> </td>
+										<td class="all-day"> </td>
+										<td class="all-day"> </td>
+										<td class="all-day"> </td>
+										<td class="all-day"> </td>
+									</tr>
+								</tbody>
+							</table>
+							<table class="week-grid" cellspacing="0" cellpadding="0">
+								<tbody>
+									<tr>
+										<td class="all-day-grid" rowspan="2"> </td>
+										<td class="all-day-grid" rowspan="2"> </td>
+										<td class="all-day-grid" rowspan="2"> </td>
+										<td class="all-day-grid" rowspan="2"> </td>
+										<td class="all-day-grid" rowspan="2"> </td>
+										<td class="all-day-grid" rowspan="2"> </td>
+										<td class="all-day-grid" rowspan="2"> </td>
+									</tr>
+									<tr>
+									</tr>
+								</tbody>
+							</table>
+						</section>
+					</td>
+				</tr>
+				<tr class="week-web-content">
+					<td class="week-web-content"></td>
+					<td class="week-web-content"></td>
+					<td class="week-web-content"></td>
+					<td class="week-web-content"></td>
+					<td class="week-web-content"></td>
+					<td class="week-web-content"></td>
+					<td class="week-web-content"></td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	<section class="scroll-time-events" style="height: 311px;">
+		<section class="main-wrapper" style="margin-top:0px;">
+			<table class="time-events" cellspacing="0" cellpadding="0" style="height:1010px">
+				<tbody>
+					<tr height="1">
+						<td style="width:60px;"></td>
+						<td colspan="7">
+							<section class="spanning-wrapper">
+								<section class="hour-markers">
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+									<section class="marker-cell">
+										<section class="dual-marker"></section>
+									</section>
+								</section>
+							</section>
+							<section class="spanning-wrapper"></section>
+						</td>
+					</tr>
+					<tr>
+						<td class="times">
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">00:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">01:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">02:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">03:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">04:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">05:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">06:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">07:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">08:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">09:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">10:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">11:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">12:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">13:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">14:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">15:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">16:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">17:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">18:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">19:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">20:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">21:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle" style="height:41px;">22:00</section>
+							</section>
+							<section style="height:42px;">
+								<section class="time-tittle time-tittle-last" style="height:41px;">23:00</section>
+							</section>
+							<section style="left:0px;top:500px;"></section>
+						</td>
+						<td class="time-col">
+							<section class="time-col-0 time-col-event-wrapper" style="height:1008px;margin-bottom:-1008px;">
+								<section class="gutter"></section>
+							</section>
+							<section class="time-over-0 time-col-overlay-wrapper"></section>
+						</td>
+						<td class="time-col">
+							<section class="time-col-1 time-col-event-wrapper" style="height:1008px;margin-bottom:-1008px;">
+								<section class="gutter"></section>
+							</section>
+							<section class="time-over-1 time-col-overlay-wrapper"></section>
+						</td>
+						<td class="time-col">
+							<section class="time-col-2 time-col-event-wrapper" style="height:1008px;margin-bottom:-1008px;">
+								<section class="gutter"></section>
+							</section>
+							<section class="time-over-2 time-col-overlay-wrapper"></section>
+						</td>
+						<td class="time-col">
+							<section class="time-col-3 time-col-event-wrapper" style="height:1008px;margin-bottom:-1008px;">
+								<section class="gutter"></section>
+							</section>
+							<section class="time-over-3 time-col-overlay-wrapper"></section>
+						</td>
+						<td class="time-col">
+							<section class="time-col-4 time-col-event-wrapper" style="height:1008px;margin-bottom:-1008px;">
+								<section class="gutter"></section>
+							</section>
+							<section class="time-over-4 time-col-overlay-wrapper"></section>
+						</td>
+						<td class="time-col">
+							<section class="time-col-5 time-col-event-wrapper" style="height:1008px;margin-bottom:-1008px;">
+								<section class="gutter"></section>
+							</section>
+							<section class="time-over-5 time-col-overlay-wrapper"></section>
+						</td>
+						<td class="time-col">
+							<section class="time-col-6 time-col-event-wrapper" style="height:1008px;margin-bottom:-1008px;">
+								<section class="gutter"></section>
+							</section>
+							<section class="time-over-6 time-col-overlay-wrapper"></section>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</section>    
 </section>
 <section id="day-calendar" class="calendar-body">
     <!-- Falta implementar-->
