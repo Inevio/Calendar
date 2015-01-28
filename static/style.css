@@ -3,6 +3,8 @@
     float:right !important;
 }
 
+.container{height:100%; position: relative;}
+
 .wz-ui-input[type="checkbox"] {
     display: none;
 }
@@ -263,16 +265,12 @@
     width:100%;
 }
 
-td.other-month-cell{
-    background: #f1f1f1;
-}
-
 .calendar-days th{
     font-size: 14px;
 }
 
 thead{
-	background-color: #f1f1f1;
+	background-color: #f6f8f8;
     border-bottom: solid 2px #cacaca;
 }
 
@@ -474,6 +472,10 @@ thead{
     height: 92.8%;
 }
 
+#month-calendar td.other-month-cell{
+    background: #f6f8f8;
+}
+
 #month-calendar .other-month-cell, #month-calendar .day-cell  {
     height: 100%;
     border: 1px solid #dadada;
@@ -493,6 +495,7 @@ thead{
     vertical-align: middle;
     font-size: 13px;
     text-align: center;
+    border-right: 1px solid #ccd3d5;
 }
 
 #month-calendar .month-row {
@@ -562,10 +565,10 @@ thead{
 } 
 
 #month-calendar .month-row {
-  height: 20%;
-  left: 0;
-  position: absolute;
-  width: 100%;
+    height: 20%;
+    left: 0;
+    position: absolute;
+    width: 100%;
 }
 
 #month-calendar .month-row:nth-child(1){top:0%;}
@@ -575,25 +578,83 @@ thead{
 #month-calendar .month-row:nth-child(5){top:80%;}
 
 /* Week calendar */
-#week-calendar td, #week-calendar th {
-    border: 1px solid #dadada;
-    text-align: left;
-    padding-left: 6px;
-    padding-top: 6px;
-    width: 12.5%;
+#week-calendar .week-top.week-full-mode {
+    overflow: hidden;
+    table-layout: fixed;
+    height: 100%;
+    background-color: #f6f8f8;
 }
 
-#week-calendar .calendar-day-bar th, #week-calendar .calendar-day-bar td {
+#week-calendar .week-top-container {
+    height: 7.2%;
+    border-bottom: 1px solid #ccd3d5;
+}
+
+#week-calendar .week-labels {
+    overflow: hidden;
+    width: 51px;
+}
+
+#week-calendar .week-day-names > th {
+    border-right: 1px solid #ccd3d5;
+    border-left: 1px solid #ccd3d5;
+    border-top: 1px solid #f6f8f8;
     vertical-align: middle;
+}
+
+#week-calendar .week-day {
+    color: #6f7578;
     font-size: 13px;
-    padding: 0px;
-    text-align: center;
 }
 
-#week-calendar .hour-cell{
-	height: 41px;
+#week-calendar .scroll-time-events {
+    line-height: normal;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: relative;
+    height: 92.8%;
 }
 
+#week-calendar .main-wrapper {
+    position: relative;
+    height: 100%;
+}
+
+#week-calendar .spanning-wrapper {
+    position: relative;
+}
+
+#week-calendar .hour-markers {
+    position: absolute;
+    width: 100%;
+}
+
+#week-calendar .time-events {
+    table-layout: fixed;
+}
+
+#week-calendar .marker-cell {
+    height: 40px;
+    border-bottom: 1px solid #dadada;
+}
+
+#week-calendar .times, #week-calendar .times-col {
+    width: 51px;
+    position: relative;
+    background-color: #f6f8f8;
+}
+
+#week-calendar .times > section {
+    height: 40px;
+    position: relative;
+    border-bottom: 1px solid #ccd3d5;
+}
+
+#week-calendar .time-tittle {
+    position: absolute;
+    top: 25%;
+    width: 51px;
+}
 /* Day calendar */
 
 
