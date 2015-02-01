@@ -258,7 +258,9 @@
             <table class="week-top week-full-mode" cellspacing="0" cellpadding="0">
                 <tbody>
                     <tr class="week-day-names">
-                        <td class="week-labels" rowspan="3"></td>
+                            <td class="week-labels" rowspan="3">
+                                <span class="all-day">Dia ent</span>
+                            </td>
                             <th scope="col" title="lun 26/1">
                                 <section class="week-day-name">
                                     <span class="week-day">15 Sunday</span>
@@ -294,6 +296,39 @@
                                     <span class="week-day">21 Saturday</span>
                                 </section>
                             </th>
+                            <td class="week-scroll"></td>
+                    </tr>
+                    <tr class="week-allday-bar">
+                        <td class="week-allday" colspan="7">
+                            <div class="week-view-all-day">
+                                <table class="week-view-all-day-table" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                        <tr>
+                                            <td class="day-all-day sunday">&nbsp;</td>
+                                            <td class="day-all-day monday">&nbsp;</td>
+                                            <td class="day-all-day tuesday">&nbsp;</td>
+                                            <td class="day-all-day wednesday">&nbsp;</td>
+                                            <td class="day-all-day thursday">&nbsp;</td>
+                                            <td class="day-all-day friday">&nbsp;</td>
+                                            <td class="day-all-day saturday">&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="week-view-all-day-grid" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                        <tr>
+                                            <td class="grid-day-all-day" rowspan="2">&nbsp;</td>
+                                            <td class="grid-day-all-day" rowspan="2">&nbsp;</td>
+                                            <td class="grid-day-all-day" rowspan="2">&nbsp;</td>
+                                            <td class="grid-day-all-day" rowspan="2">&nbsp;</td>
+                                            <td class="grid-day-all-day" rowspan="2">&nbsp;</td>
+                                            <td class="grid-day-all-day" rowspan="2">&nbsp;</td>
+                                            <td class="grid-day-all-day" rowspan="2">&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -390,9 +425,6 @@
                         <tr>
                             <td class="times">
                                 <section>
-                                    <section class="time-tittle">Dia ent</section>
-                                </section>
-                                <section>
                                     <section class="time-tittle">00:00</section>
                                 </section>
                                 <section>
@@ -468,43 +500,43 @@
                                     <section class="time-tittle time-tittle-last" >24:00</section>
                                 </section>
                             </td>
-                            <td class="time-col">
+                            <td class="time-col san">
                                 <section class="time-col-0 time-col-event-wrapper">
                                     <section class="gutter"></section>
                                 </section>
                                 <section class="time-over-0 time-col-overlay-wrapper"></section>
                             </td>
-                            <td class="time-col">
+                            <td class="time-col mon">
                                 <section class="time-col-1 time-col-event-wrapper">
                                     <section class="gutter"></section>
                                 </section>
                                 <section class="time-over-1 time-col-overlay-wrapper"></section>
                             </td>
-                            <td class="time-col">
+                            <td class="time-col tue">
                                 <section class="time-col-2 time-col-event-wrapper">
                                     <section class="gutter"></section>
                                 </section>
                                 <section class="time-over-2 time-col-overlay-wrapper"></section>
                             </td>
-                            <td class="time-col">
+                            <td class="time-col wed">
                                 <section class="time-col-3 time-col-event-wrapper">
                                     <section class="gutter"></section>
                                 </section>
                                 <section class="time-over-3 time-col-overlay-wrapper"></section>
                             </td>
-                            <td class="time-col">
+                            <td class="time-col thu day-selected">
                                 <section class="time-col-4 time-col-event-wrapper">
                                     <section class="gutter"></section>
                                 </section>
                                 <section class="time-over-4 time-col-overlay-wrapper"></section>
                             </td>
-                            <td class="time-col">
+                            <td class="time-col fri">
                                 <section class="time-col-5 time-col-event-wrapper">
                                     <section class="gutter"></section>
                                 </section>
                                 <section class="time-over-5 time-col-overlay-wrapper"></section>
                             </td>
-                            <td class="time-col">
+                            <td class="time-col sat">
                                 <section class="time-col-6 time-col-event-wrapper">
                                     <section class="gutter"></section>
                                 </section>
@@ -518,6 +550,15 @@
     </section>
 </section>
 <section id="day-calendar" class="calendar-body">
-    <!-- Falta implementar-->
+    <section class="container">
+        <section class="day-active">
+            <section class="day">
+                
+            </section>
+            <section class="figure">
+                
+            </section>
+        </section>
+    </section>
 </section>
 <div id="shadow" class="abs top dark hide fullHeight fullWidth center"></div>

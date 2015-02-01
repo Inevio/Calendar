@@ -3,6 +3,9 @@ $( document ).ready(function() {
 	$(".day-cell").on( "click", function() {
         selectDay($( this ));
     });
+    $(".time-col").on( "click", function() {
+        selectDay($( this ));
+    });
 	//Adds each top bar buttons functionalty to change between calendar types.
 	$(".calendarType").on( "click", function() {
         selectCalendarType($( this ));
@@ -65,4 +68,19 @@ function showMenu(menu){
 function selectDay(cell){
     $(".day-selected").removeClass("day-selected");
     cell.addClass("day-selected");
+    if(cell.hasClass("mon")){
+        $(".monday").addClass("day-selected");
+    }else if(cell.hasClass("tue")){
+        $(".tuesday").addClass("day-selected");
+    }else if(cell.hasClass("wed")){
+        $(".wednesday").addClass("day-selected");
+    }else if(cell.hasClass("thu")){
+        $(".thursday").addClass("day-selected");
+    }else if(cell.hasClass("fri")){
+        $(".friday").addClass("day-selected");
+    }else if(cell.hasClass("sat")){
+        $(".saturday").addClass("day-selected");
+    }else{
+        $(".sunday").addClass("day-selected");
+    }
 }
