@@ -651,7 +651,7 @@ thead{
     overflow-x: hidden;
     overflow-y: scroll;
     position: relative;
-    height: 92.8%;
+    height: 87.8%;
 }
 
 #week-calendar .main-wrapper {
@@ -666,6 +666,7 @@ thead{
 #week-calendar .hour-markers {
     position: absolute;
     width: 100%;
+    margin-top: 1px;
 }
 
 #week-calendar .time-events {
@@ -714,9 +715,94 @@ thead{
     background-color: rgba(126,190,48,.1);
     border: double 1px #7ebe30;
 }
+
 /* Day calendar */
+#day-calendar .day-active {
+    width: 50%;
+    position: relative;
+    height: 100%;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#day-calendar .time-cells {
+    width: 50%;
+    position: relative;
+    height: 100%;
+}
+
+#day-calendar .day {
+    display: table;
+    height: 50%;
+    width: 49%;
+    float: left;
+}
+
+#day-calendar .figure {
+    display: inline-block;
+    height: 50%;
+    width: 50%;
+}
+
+#day-calendar .event-list {
+    height: 50%;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#day-calendar .day > article {
+    color: #465057;
+    display: table-cell;
+    padding-left: 10%;
+    text-align: left;
+    vertical-align: middle;
+    width: auto;
+}
+
+#day-calendar .day span:first-child {
+    font-family: "Lato";
+    font-size: 160px;
+    font-weight: 300;
+}
 
 
+.day span:last-child {
+    font-size: 27px;
+    font-weight: 300;
+    margin-left: 20px;
+    position: relative;
+    top: -15px;
+}
+
+#day-calendar .mini-calendar {
+    margin-top: 15px;
+}
+
+#day-calendar .mini-calendar-head{
+    width: 205px;
+	height: 47px;
+	-webkit-border-radius: 3px 3px 0 0;
+	-moz-border-radius: 3px 3px 0 0;
+	border-radius: 3px 3px 0 0;
+	background-color: #e85c5c;
+	-webkit-box-shadow: inset 0 -2px rgba(2,2,2,.15);
+	-moz-box-shadow: inset 0 -2px rgba(2,2,2,.15);
+	box-shadow: inset 0 -2px rgba(2,2,2,.15);
+	background-image: -webkit-linear-gradient(bottom, rgba(0,1,2,.05), rgba(0,0,0,.05));
+	background-image: -moz-linear-gradient(bottom, rgba(0,1,2,.05), rgba(0,0,0,.05));
+	background-image: -o-linear-gradient(bottom, rgba(0,1,2,.05), rgba(0,0,0,.05));
+	background-image: -ms-linear-gradient(bottom, rgba(0,1,2,.05), rgba(0,0,0,.05));
+	background-image: linear-gradient(to top, rgba(0,1,2,.05), rgba(0,0,0,.05));
+}
+
+#day-calendar .mini-calendar-body{
+    width: 203px;
+	height: 150px;
+	background-color: #fff;
+	-webkit-box-shadow: 0 2px #ccd3d5;
+	-moz-box-shadow: 0 2px #ccd3d5;
+	box-shadow: 0 2px #ccd3d5;
+	border: solid 1px #ccd3d5;
+}
 
 /* Images transformation */
 .right-arrow{
