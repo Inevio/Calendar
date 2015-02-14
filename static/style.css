@@ -743,6 +743,11 @@ thead{
     width: 50%;
 }
 
+#day-calendar .week-days > article {
+    display: inline-block;
+    padding: 0 3px;
+}
+
 #day-calendar .event-list {
     height: 50%;
     width: 100%;
@@ -765,7 +770,7 @@ thead{
 }
 
 
-.day span:last-child {
+#day-calendar .day span:last-child {
     font-size: 27px;
     font-weight: 300;
     margin-left: 20px;
@@ -780,6 +785,8 @@ thead{
 #day-calendar .mini-calendar-head{
     width: 205px;
 	height: 47px;
+    color: #fff;
+    text-align: center;
 	-webkit-border-radius: 3px 3px 0 0;
 	-moz-border-radius: 3px 3px 0 0;
 	border-radius: 3px 3px 0 0;
@@ -794,6 +801,17 @@ thead{
 	background-image: linear-gradient(to top, rgba(0,1,2,.05), rgba(0,0,0,.05));
 }
 
+
+#day-calendar .mini-calendar-head > span {
+    position: relative;
+    top: 5px;
+}
+
+#day-calendar .week-days {
+    font-size: 11px;
+    margin-top: 14px;
+}
+
 #day-calendar .mini-calendar-body{
     width: 203px;
 	height: 150px;
@@ -802,6 +820,24 @@ thead{
 	-moz-box-shadow: 0 2px #ccd3d5;
 	box-shadow: 0 2px #ccd3d5;
 	border: solid 1px #ccd3d5;
+}
+
+#day-calendar .mini-calendar-body > table {
+  height: 100%;
+}
+
+#day-calendar .mini-calendar-body th {
+  padding-top: 5px;
+}
+
+#day-calendar .current-day {
+  background-color: #f6f8f8;
+  border: 1px solid #ccd3d5;
+}
+
+#day-calendar .day-selected {
+  background-color: #7ebe30;
+  color: #fff;
 }
 
 /* Images transformation */
