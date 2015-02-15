@@ -30,7 +30,7 @@ $( document ).ready(function() {
     $('.create-event-modal-close').on('click', function() {
         showMenu('#create-event-modal');
     })
-    $('.create-calendar-modal-close').on('click', function() {
+    $('.cancel-create-calendar-button').on('click', function() {
         showMenu('#create-calendar-modal');
     })
 });

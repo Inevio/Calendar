@@ -343,33 +343,34 @@ thead{
     width: 100%;
     padding: 11px 0;
     font-size: 13px;
+    background-color: #f6f8f8;
 }
 
-#create-event-modal{
-    width: 289px;
-	height: 289px;
+#create-event-modal{   
+    width: 572px;
+	height: 259px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	background-color: #f1f1f1;
-	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,.3);
-	-moz-box-shadow: 0 1px 5px rgba(0,0,0,.3);
-	box-shadow: 0 1px 5px rgba(0,0,0,.3);
+	background-color: #f6f8f8;
+	-webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+	-moz-box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+	box-shadow: 0 0 0 1px rgba(0,0,0,.15);
     display: none;
     z-index: 4;
     position: absolute;
-    margin-left: 34%;
+    margin-left: 19%;
     margin-top: 11.5%;
     font-size:13px;
 }
 
 #create-calendar-modal{
     width: 289px;
-	height: 198px;
+	height: 211px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	background-color: #f1f1f1;
+	background-color: #f6f8f8;
 	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,.3);
 	-moz-box-shadow: 0 1px 5px rgba(0,0,0,.3);
 	box-shadow: 0 1px 5px rgba(0,0,0,.3);
@@ -378,7 +379,18 @@ thead{
     position: absolute;
     margin-left: 34%;
     margin-top: 17%;
-    font-size:13px;
+    font-size:14px;
+}
+
+
+#create-calendar-modal .calendar-name > span {
+    display: block;
+    margin-bottom: 7px;
+    padding-left: 1px;
+}
+
+#create-calendar-modal calendar-description > span{
+    display: block;
 }
 
 #create-calendar-modal .calendar-name input{
@@ -395,14 +407,14 @@ thead{
 #create-calendar-modal .calendar-name {
     margin-left: 6%;
     position: relative;
-    top: 32px;
+    top: 24px;
     float: left;
 }
 
 #create-calendar-modal .calendar-color {
     margin-left: 9%;
     position: relative;
-    top: 39px;
+    top: 51px;
     float: left;
 }
 
@@ -414,12 +426,12 @@ thead{
 #create-calendar-modal .calendar-description {
     margin-left: 6%;
     position: relative;
-    top: 49px;
+    top: 31px;
     float: left;
 }
 
 #create-calendar-modal .calendar-description textarea{
-    width: 260px;
+    width: 256px;
 	height: 49px;
 	background-color: #fcfeff;
 	-webkit-box-shadow: inset 0 1px rgba(0,0,0,.05);
@@ -430,23 +442,44 @@ thead{
     border-radius: 3px;
 }
 
+.close-image.create-calendar-modal-close i{
+    background: url("@static/close_hover.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
+}
+
 #create-calendar-modal .create-calendar-button{
-    width: 71px;
-	height: 23px;
-	background-color: #75d142;
-	-webkit-box-shadow: inset 0 1px rgba(255,255,255,.3);
-	-moz-box-shadow: inset 0 1px rgba(255,255,255,.3);
-	box-shadow: inset 0 1px rgba(255,255,255,.3);
-	border: solid 1px #1b961b;
-	background-image: -webkit-linear-gradient(bottom, #4e9c21, #7ebe30);
-	background-image: -moz-linear-gradient(bottom, #4e9c21, #7ebe30);
-	background-image: -o-linear-gradient(bottom, #4e9c21, #7ebe30);
-	background-image: -ms-linear-gradient(bottom, #4e9c21, #7ebe30);
-	background-image: linear-gradient(to top, #4e9c21, #7ebe30);
-    margin-right: 10px;
-    margin-top: 68px;
-    color: #fff;
-    border-radius: 4px;
+    width: 86px;
+	height: 34px;
+	background-color: #69a55a;
+	-webkit-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+	-moz-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+	box-shadow: inset 0 -2px rgba(0,0,0,.3);
+	background-image: -webkit-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
+	background-image: -moz-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
+	background-image: -o-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
+	background-image: -ms-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
+	background-image: linear-gradient(to top, rgba(105,165,90,.5), rgba(121,191,104,.5));
+    color:#fff;
+    margin-top: 44px;
+    margin-left: 11px;
+    margin-right: 14px;
+    border-radius: 2px;
+}
+
+#create-calendar-modal .cancel-create-calendar-button{
+    width: 86px;
+	height: 34px;
+	background-color: #ef5251;
+	-webkit-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+	-moz-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+	box-shadow: inset 0 -2px rgba(0,0,0,.3);
+	background-image: -webkit-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
+	background-image: -moz-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
+	background-image: -o-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
+	background-image: -ms-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
+	background-image: linear-gradient(to top, rgba(239,82,81,.5), rgba(255,97,96,.5));
+    color:#fff;
+    margin-top: 44px;
+    border-radius: 2px;
 }
 
 #create-calendar-modal .close-image {

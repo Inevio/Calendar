@@ -42,15 +42,15 @@
         <section class="my-calendars-list">
             <articles id="work" class="calendar">
                 <input type="checkbox" checked="checked" class="wz-ui-input"><label><i></i><span><figure></figure>Work</span></label>
-                <span class="right deleteCalendar">Eliminar</span>
+                <span class="right deleteCalendar">Delete</span>
             </articles>
             <articles id="office" class="calendar">
                 <input type="checkbox" checked="checked" class="wz-ui-input"><label><i></i><span><figure></figure>Office</span></label>
-                <span class="right deleteCalendar">Eliminar</span>
+                <span class="right deleteCalendar">Delete</span>
             </articles>
             <articles id="home" class="calendar">
                 <input type="checkbox" checked="checked" class="wz-ui-input"><label><i></i><span><figure></figure>Home</span></label>
-                <span class="right deleteCalendar">Eliminar</span>
+                <span class="right deleteCalendar">Delete</span>
             </articles>
         </section>
         <section class="add-new-calendar" id="add-new-calendar">
@@ -59,28 +59,24 @@
         </section>
     </section>
     <section id="create-event-modal">
-        <figure class="close-image create-event-modal-close">
-            <i></i>
-        </figure>
        <!-- Falta implementar -->	
     </section>
     <section id="create-calendar-modal">
-        <figure class="close-image create-calendar-modal-close">
-            <i></i>
-        </figure>
         <form>
             <artricle class="calendar-name">
-                <input type="text" placeholder=" Name of calendar">
+                <span>Name of calendar</span>
+                <input type="text">
             </artricle>
             <artricle class="calendar-color">
                 <span>Color</span>
                 <input type="color">
             </artricle>
             <artricle class="calendar-description">
-                <span>Description</span><br>
+                <span>Description</span>
                 <textArea></textArea>
             </artricle>
-            <button type="submit" class="create-calendar-button right">Create</button>
+            <button type="submit" class="create-calendar-button right">CREATE</button>
+            <button class="cancel-create-calendar-button right">CANCEL</button>
         </form>
     </section>
 </section>
