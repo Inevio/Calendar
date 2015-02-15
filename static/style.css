@@ -722,12 +722,17 @@ thead{
     position: relative;
     height: 100%;
     border-right: 1px solid rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    vertical-align: top;
 }
 
 #day-calendar .time-cells {
-    width: 50%;
+    width: 49%;
     position: relative;
     height: 100%;
+    display: inline-block;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #day-calendar .day {
@@ -823,21 +828,65 @@ thead{
 }
 
 #day-calendar .mini-calendar-body > table {
-  height: 100%;
+    height: 100%;
 }
 
 #day-calendar .mini-calendar-body th {
-  padding-top: 5px;
+    padding-top: 5px;
 }
 
 #day-calendar .current-day {
-  background-color: #f6f8f8;
-  border: 1px solid #ccd3d5;
+    background-color: #f6f8f8;
+    border: 1px solid #ccd3d5;
 }
 
 #day-calendar .day-selected {
-  background-color: #7ebe30;
-  color: #fff;
+    background-color: #7ebe30;
+    color: #fff;
+}
+
+#day-calendar .time-cells > table{
+    table-layout: fixed;
+}
+
+#day-calendar .spanning-wrapper{
+    position: relative;
+}
+
+#day-calendar .hour-markers{
+    position: absolute;
+    width: 100%;
+}
+
+#day-calendar .marker-cell{
+    height: 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#day-calendar .times > section {
+    height: 41px;
+    padding-left: 15px;
+    position: relative;
+    top: -8px;
+}
+
+#day-calendar .times-cells{
+    width:60px;
+}
+
+#day-calendar .times {
+    background-color: #f6f8f8;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#day-calendar .time-tittle {
+    color: #6f7578;
+    font-size: 15.5px;
+}
+
+
+#day-calendar tr .times > section:last-child {
+    height: 0px;
 }
 
 /* Images transformation */
