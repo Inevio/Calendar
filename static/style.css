@@ -362,6 +362,7 @@ thead{
     margin-left: 19%;
     margin-top: 11.5%;
     font-size:13px;
+    float:left;
 }
 
 #create-calendar-modal{
