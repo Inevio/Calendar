@@ -59,7 +59,47 @@
         </section>
     </section>
     <section id="create-event-modal">
-       <!-- Falta implementar -->	
+       <form>
+            <section class="left-side">
+                <artricle class="event-name">
+                    <span>Name of the event</span>
+                    <input type="text">
+                </artricle>
+                <artricle class="event-color">
+                    <span>Color</span>
+                    <input type="color">
+                </artricle>
+                <artricle class="event-when">
+                    <span>When</span>
+                    <input type="date">
+                </artricle>
+                <artricle class="event-start">
+                    <span>Start</span>
+                    <input type="number">
+                    <input type="number">
+                </artricle>
+                <artricle class="event-duration">
+                    <span>Duration</span>
+                    <input type="text">
+                </artricle>
+                <artricle class="event-frequency">
+                    <span>Frequency</span>
+                    <input type="number">
+                </artricle>
+                <artricle class="event-alert">
+                    <span>Alert</span>
+                    <input type="text">
+                </artricle>   
+            </section>
+            <section class="right-side">
+                <artricle class="calendar-description">
+                    <span>Description</span>
+                    <textArea></textArea>
+                </artricle>    
+                <button type="submit" class="create-calendar-button right">CREATE</button>
+                <button type="button" class="cancel-create-calendar-button right">CANCEL</button>
+            </section>
+        </form>
     </section>
     <section id="create-calendar-modal">
         <form>
@@ -76,7 +116,7 @@
                 <textArea></textArea>
             </artricle>
             <button type="submit" class="create-calendar-button right">CREATE</button>
-            <button class="cancel-create-calendar-button right">CANCEL</button>
+            <button type="button" class="cancel-create-calendar-button right">CANCEL</button>
         </form>
     </section>
 </section>
