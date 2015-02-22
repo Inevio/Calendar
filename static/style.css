@@ -42,7 +42,7 @@
 
 /*  Calendar Top Bar */
 .wz-ui-header{
-    width:100%;
+    width:935px;
 	height: 40px;
 	-webkit-border-radius: 3px 3px 0 0;
 	-moz-border-radius: 3px 3px 0 0;
@@ -56,6 +56,7 @@
 	background-image: -o-linear-gradient(bottom, rgba(0,1,2,.05), rgba(0,0,0,.05));
 	background-image: -ms-linear-gradient(bottom, rgba(0,1,2,.05), rgba(0,0,0,.05));
 	background-image: linear-gradient(to top, rgba(0,1,2,.05), rgba(0,0,0,.05));
+    float: left;
 }
 
 .shadow-border{
@@ -73,7 +74,7 @@
 .calendar-menu{
     display:block;
     float:left;
-    width:85%;
+    width:799px;
 }
 
 .calendar-menu li {
@@ -103,6 +104,7 @@
 .calendar-menu-nav{
     width:auto;
     float:left;
+    padding-right: 414px;
 }
 
 #day-calendar, #week-calendar, #month-calendar{
@@ -229,13 +231,14 @@
     background: none repeat scroll 0 0 #fff;
     height: 35px;
     color: #6f7578;
+    float:left;
+    width: 935px;
 }
 
 .my-calendars, .current-month, .create-event {
     float: left;
     font-size: 14px;
-    margin-left: 12px;
-    padding: 11px 0;
+    padding: 11px 0 10px 12px;
     width: auto;
 }
 
@@ -243,9 +246,12 @@
     cursor:pointer;
 }
 
+.my-calendars{
+    width: 369px;
+}
 
 .current-month{
-    margin-left:29%;
+    width: 392px;
 }
 
 .current-month span{
@@ -253,16 +259,21 @@
 }
 
 .create-event{
-    margin-right: 20px;
+    padding-right: 20px;
+    width: 118px;
+    text-align: right;
 }
 
 .calendar-body{
 	height: 481px;
     color: #6f7578;
+    float: left;
 }
 
 .calendar-body table{
     width:100%;
+    float: left;
+    height: 34px;
 }
 
 .calendar-days th{
@@ -503,7 +514,8 @@ thead{
 #month-calendar .mv-event-container {
     position: relative;
     width: 100%;
-    height: 92.8%;
+    height: 447px;
+    float: left;
 }
 
 #month-calendar td.other-month-cell{

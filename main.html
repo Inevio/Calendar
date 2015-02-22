@@ -1,5 +1,5 @@
-<section class="calendar-top-bar wz-ui-header wz-dragger">
-    <section class="calendar-menu wz-dragger">
+<section class="calendar-top-bar wz-ui-header wz-dragger wz-fit-x">
+    <section class="calendar-menu wz-dragger wz-fit-x">
         <nav class="calendar-menu-nav wz-dragger">
             <li id="dayType" class="hdd wz-dragger calendarType">Day</li>
             <li id="weekType" class="hdd wz-dragger calendarType">Week</li>
@@ -24,17 +24,17 @@
         </figure>
     </section>
 </section>
-<section class="calendar-head">
-    <section class="my-calendars">
+<section class="calendar-head wz-fit-x">
+    <section class="my-calendars wz-fit-x">
        <span>My calendars</span>
        <img src="https://static.inevio.com/app/207/arrow_calendars.png" alt=""> 
     </section>
-    <section class="current-month">
+    <section class="current-month wz-fit-x">
         <img class="left-arrow" src="https://static.inevio.com/app/207/arrow_back.png" alt="">
         <span>September 2013</span>
         <img class="right-arrow" src="https://static.inevio.com/app/207/arrow_back.png" alt="">
     </section>
-    <section class="create-event right" id="create-event">
+    <section class="create-event wz-fit-x" id="create-event">
         <img src="" alt="&#43;">
         <span>Create new event</span>
     </section>
@@ -121,170 +121,168 @@
     </section>
 </section>
 <section id="month-calendar" class="calendar-body calendar-active">
-    <section class="container">
-        <table>
-            <thead class="calendar-day-bar">
-                <tr class="title-row">
-                    <th class="title-cell">Sunday</th>
-                    <th class="title-cell">Monday</th>
-                    <th class="title-cell">Thusday</th>
-                    <th class="title-cell">Wednesday</th>
-                    <th class="title-cell">Thursday</th>
-                    <th class="title-cell">Friday</th>
-                    <th class="title-cell">Saturday</th>
-                </tr>
-            </thead>
-        </table>
-        <section id="mvEventContainer" class="mv-event-container">
-            <section class="month-row">
-                <table class="day-table" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr>
-                            <td class="other-month-cell"></td>
-                            <td class="other-month-cell"></td>
-                            <td class="other-month-cell"></td>
-                            <td class="other-month-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="grid-table" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr class="day-tittle-row">
-                            <td class="day-tittle"></td>
-                            <td class="day-tittle"></td>
-                            <td class="day-tittle"></td>
-                            <td class="day-tittle"></td>
-                            <td class="day-tittle"><span>1</span></td>
-                            <td class="day-tittle"><span>2</span></td>
-                            <td class="day-tittle"><span>3</span></td>    
-                        </tr>
-                    </tbody>
-                </table>
-            </section>    
-            <section class="month-row">
-                <table class="day-table" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="grid-table" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr class="day-tittle-row">
-                            <td class="day-tittle"><span>4</span></td>
-                            <td class="day-tittle"><span>5</span></td>
-                            <td class="day-tittle"><span>6</span></td>
-                            <td class="day-tittle"><span>7</span></td>
-                            <td class="day-tittle"><span>8</span></td>
-                            <td class="day-tittle"><span>9</span></td>
-                            <td class="day-tittle"><span>10</span></td>    
-                        </tr>
-                    </tbody>
-                </table>
-            </section>    
-            <section class="month-row">
-                <table class="day-table" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell day-selected"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="grid-table" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr class="day-tittle-row">
-                            <td class="day-tittle"><span>11</span></td>
-                            <td class="day-tittle"><span>12</span></td>
-                            <td class="day-tittle"><span>13</span></td>
-                            <td class="day-tittle"><span>14</span></td>
-                            <td class="day-tittle"><span>15</span></td>
-                            <td class="day-tittle"><span>16</span></td>
-                            <td class="day-tittle"><span>17</span></td>    
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><article class="event office"> Me voy a casar</article></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>    
-            <section class="month-row">
-                <table class="day-table" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="grid-table" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr class="day-tittle-row">
-                            <td class="day-tittle"><span>18</span></td>
-                            <td class="day-tittle"><span>19</span></td>
-                            <td class="day-tittle"><span>20</span></td>
-                            <td class="day-tittle"><span>21</span></td>
-                            <td class="day-tittle"><span>22</span></td>
-                            <td class="day-tittle"><span>23</span></td>
-                            <td class="day-tittle"><span>24</span></td>    
-                        </tr>
-                    </tbody>
-                </table>
-            </section>    
-            <section class="month-row">
-                <table class="day-table" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                            <td class="day-cell"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="grid-table" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr class="day-tittle-row">
-                            <td class="day-tittle"><span>25</span></td>
-                            <td class="day-tittle"><span>26</span></td>
-                            <td class="day-tittle"><span>27</span></td>
-                            <td class="day-tittle"><span>28</span></td>
-                            <td class="day-tittle"><span>29</span></td>
-                            <td class="day-tittle"><span>30</span></td>
-                            <td class="day-tittle"><span>31</span></td>    
-                        </tr>
-                    </tbody>
-                </table>   
-            </section>
+    <table>
+        <thead class="calendar-day-bar">
+            <tr class="title-row">
+                <th class="title-cell">Sunday</th>
+                <th class="title-cell">Monday</th>
+                <th class="title-cell">Thusday</th>
+                <th class="title-cell">Wednesday</th>
+                <th class="title-cell">Thursday</th>
+                <th class="title-cell">Friday</th>
+                <th class="title-cell">Saturday</th>
+            </tr>
+        </thead>
+    </table>
+    <section id="mvEventContainer" class="mv-event-container">
+        <section class="month-row">
+            <table class="day-table" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td class="other-month-cell"></td>
+                        <td class="other-month-cell"></td>
+                        <td class="other-month-cell"></td>
+                        <td class="other-month-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="grid-table" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr class="day-tittle-row">
+                        <td class="day-tittle"></td>
+                        <td class="day-tittle"></td>
+                        <td class="day-tittle"></td>
+                        <td class="day-tittle"></td>
+                        <td class="day-tittle"><span>1</span></td>
+                        <td class="day-tittle"><span>2</span></td>
+                        <td class="day-tittle"><span>3</span></td>    
+                    </tr>
+                </tbody>
+            </table>
+        </section>    
+        <section class="month-row">
+            <table class="day-table" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="grid-table" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr class="day-tittle-row">
+                        <td class="day-tittle"><span>4</span></td>
+                        <td class="day-tittle"><span>5</span></td>
+                        <td class="day-tittle"><span>6</span></td>
+                        <td class="day-tittle"><span>7</span></td>
+                        <td class="day-tittle"><span>8</span></td>
+                        <td class="day-tittle"><span>9</span></td>
+                        <td class="day-tittle"><span>10</span></td>    
+                    </tr>
+                </tbody>
+            </table>
+        </section>    
+        <section class="month-row">
+            <table class="day-table" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell day-selected"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="grid-table" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr class="day-tittle-row">
+                        <td class="day-tittle"><span>11</span></td>
+                        <td class="day-tittle"><span>12</span></td>
+                        <td class="day-tittle"><span>13</span></td>
+                        <td class="day-tittle"><span>14</span></td>
+                        <td class="day-tittle"><span>15</span></td>
+                        <td class="day-tittle"><span>16</span></td>
+                        <td class="day-tittle"><span>17</span></td>    
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><article class="event office"> Me voy a casar</article></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>    
+        <section class="month-row">
+            <table class="day-table" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="grid-table" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr class="day-tittle-row">
+                        <td class="day-tittle"><span>18</span></td>
+                        <td class="day-tittle"><span>19</span></td>
+                        <td class="day-tittle"><span>20</span></td>
+                        <td class="day-tittle"><span>21</span></td>
+                        <td class="day-tittle"><span>22</span></td>
+                        <td class="day-tittle"><span>23</span></td>
+                        <td class="day-tittle"><span>24</span></td>    
+                    </tr>
+                </tbody>
+            </table>
+        </section>    
+        <section class="month-row">
+            <table class="day-table" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                        <td class="day-cell"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="grid-table" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr class="day-tittle-row">
+                        <td class="day-tittle"><span>25</span></td>
+                        <td class="day-tittle"><span>26</span></td>
+                        <td class="day-tittle"><span>27</span></td>
+                        <td class="day-tittle"><span>28</span></td>
+                        <td class="day-tittle"><span>29</span></td>
+                        <td class="day-tittle"><span>30</span></td>
+                        <td class="day-tittle"><span>31</span></td>    
+                    </tr>
+                </tbody>
+            </table>   
         </section>
     </section>
 </section>
