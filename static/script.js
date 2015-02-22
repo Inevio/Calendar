@@ -33,6 +33,9 @@ $( document ).ready(function() {
     $('.cancel-create-calendar-button').on('click', function() {
         showMenu('#create-calendar-modal');
     })
+    $('.cancel-create-event-button').on('click', function() {
+        showMenu('#create-event-modal');
+    })
 });
 
 //Displays de calendarType.

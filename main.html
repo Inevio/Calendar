@@ -59,68 +59,64 @@
         </section>
     </section>
     <section id="create-event-modal">
-       <form>
-            <section class="left-side">
-                <artricle class="event-name">
-                    <span>Name of the event</span>
-                    <input type="text">
-                </artricle>
-                <artricle class="event-color">
-                    <span>Color</span>
-                    <input type="color">
-                </artricle>
-                <artricle class="event-when">
-                    <span>When</span>
-                    <input type="date">
-                </artricle>
-                <artricle class="event-start">
-                    <span>Start</span>
-                    <input type="number">
-                    <input type="number">
-                </artricle>
-                <artricle class="event-duration">
-                    <span>Duration</span>
-                    <input type="text">
-                </artricle>
-                <artricle class="event-frequency">
-                    <span>Frequency</span>
-                    <input type="number">
-                </artricle>
-                <artricle class="event-alert">
-                    <span>Alert</span>
-                    <input type="text">
-                </artricle>   
-            </section>
-            <section class="right-side">
-                <artricle class="calendar-description">
-                    <span>Description</span>
-                    <textArea></textArea>
-                </artricle>    
-                <button type="submit" class="create-calendar-button right">CREATE</button>
-                <button type="button" class="cancel-create-calendar-button right">CANCEL</button>
-            </section>
-        </form>
-    </section>
-    <section id="create-calendar-modal">
-        <form>
-            <artricle class="calendar-name">
-                <span>Name of calendar</span>
+        <section class="left-side">
+            <article class="event-name">
+                <span>Name of the event</span>
                 <input type="text">
-            </artricle>
-            <artricle class="calendar-color">
+            </article>
+            <article class="event-color">
                 <span>Color</span>
                 <input type="color">
-            </artricle>
-            <artricle class="calendar-description">
+            </article>
+            <article class="event-when">
+                <span>When</span>
+                <input type="date">
+            </article>
+            <article class="event-start">
+                <span>Start</span>
+                <input type="number">
+                <input type="number">
+            </article>
+            <article class="event-duration">
+                <span>Duration</span>
+                <input type="text">
+            </article>
+            <article class="event-frequency">
+                <span>Frequency</span>
+                <input type="number">
+            </article>
+            <article class="event-alert">
+                <span>Alert</span>
+                <input type="text">
+            </article>   
+        </section>
+        <section class="right-side">
+            <article class="calendar-description">
                 <span>Description</span>
                 <textArea></textArea>
-            </artricle>
-            <button type="submit" class="create-calendar-button right">CREATE</button>
-            <button type="button" class="cancel-create-calendar-button right">CANCEL</button>
-        </form>
+            </article>    
+            <button type="submit" class="create-event-button right">CREATE</button>
+            <button type="button" class="cancel-create-event-button right">CANCEL</button>
+        </section>
+    </section>
+    <section id="create-calendar-modal">
+        <article class="calendar-name">
+            <span>Name of calendar</span>
+            <input type="text">
+        </article>
+        <article class="calendar-color">
+            <span>Color</span>
+            <input type="color">
+        </article>
+        <article class="calendar-description">
+            <span>Description</span>
+            <textArea></textArea>
+        </article>
+        <button type="submit" class="create-calendar-button right">CREATE</button>
+        <button type="button" class="cancel-create-calendar-button right">CANCEL</button>
     </section>
 </section>
-<section id="month-calendar" class="calendar-body calendar-active">
+<section id="month-calendar" class="calendar-body calendar-active wz-fit">
     <table>
         <thead class="calendar-day-bar">
             <tr class="title-row">
