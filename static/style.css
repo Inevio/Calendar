@@ -3,7 +3,7 @@
     float:right !important;
 }
 
-.container{height:100%; position: relative;}
+.container{height:100%; position: relative;float: left;}
 
 .wz-ui-input[type="checkbox"] {
     display: none;
@@ -739,8 +739,9 @@ thead{
 }
 
 #week-calendar .week-top-container {
-    height: 12.2%;
+    height: 59px;
     border-bottom: 2px solid #ccd3d5;
+    float: left;
 }
 
 #week-calendar .week-labels {
@@ -753,16 +754,12 @@ thead{
     border-left: 1px solid #ccd3d5;
     border-top: 1px solid #f6f8f8;
     vertical-align: middle;
+    height: 32px;
 }
 
 #week-calendar .week-day-names {
     background-color: #F6F8F8;
     border-bottom: 1px solid #CCD3D5;
-    height: 57%;
-}
-
-#week-calendar .week-allday-bar {
-    height: 43%;
 }
 
 #week-calendar .all-day {
@@ -778,12 +775,15 @@ thead{
 #week-calendar .week-view-all-day {
     position: relative;
     height: 100%;
+    float: left;
+    width: 100%;
 }
 
 #week-calendar .week-view-all-day-table {
     position: absolute;
     table-layout: fixed;
     height: 100%;
+    width: 100%;
 }
 
 #week-calendar .week-view-all-day-grid {
@@ -793,6 +793,7 @@ thead{
 
 #week-calendar .day-all-day {
     border-right: 1px solid rgb(204, 211, 213);
+    height: 25px;
 }
 
 #week-calendar .week-day {
@@ -805,7 +806,9 @@ thead{
     overflow-x: hidden;
     overflow-y: scroll;
     position: relative;
-    height: 87.8%;
+    height: 420px;
+    width: 934px;
+    float:left;
 }
 
 #week-calendar .main-wrapper {
@@ -825,6 +828,7 @@ thead{
 
 #week-calendar .time-events {
     table-layout: fixed;
+    width: 918px;
 }
 
 #week-calendar .marker-cell {
@@ -839,9 +843,8 @@ thead{
 }
 
 #week-calendar .times > section {
-    height: 40px;
+    height: 41px;
     position: relative;
-    border-bottom: 1px solid #ccd3d5;
 }
 
 #week-calendar .time-tittle {
