@@ -884,12 +884,12 @@ thead{
 }
 
 #day-calendar .time-cells {
-    width: 49%;
     position: relative;
     height: 100%;
     display: inline-block;
     overflow-y: scroll;
     overflow-x: hidden;
+    width: 462px;
 }
 
 #day-calendar .day {
@@ -914,6 +914,84 @@ thead{
     height: 50%;
     width: 100%;
     border-top: 1px solid rgba(0, 0, 0, 0.15);
+    float: left;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#day-calendar .event-list > .day-events {
+    float: left;
+    width: 100%;
+}
+
+.event-list .day-events .day-head {
+    background-color: #f6f8f8;
+    border-bottom: 1px solid #ccd3d5;
+    height: 28px;
+    width: 452px;
+    float: left;
+    font-size: 13px;
+}
+
+.event-list .day-events .event {
+    height: 47px;
+    float: left;
+    width: 456px;
+}
+
+
+.day-events .event .bullet {
+    height: 100%;
+    width: 28px;
+    float: left;
+}
+
+.day-events .event .bullet figure{
+    border-radius: 4px;
+    float: left;
+    height: 8px;
+    position: relative;
+    top: 4px;
+    width: 8px;
+    background-color: #34aadc;
+    margin-left: 9px;
+    margin-top: 18px;
+}
+
+.day-events .event .event-info {
+    float: left;
+    height: 100%;
+    width: 408px;
+    border-bottom: 1px solid #ccd3d5;
+    color: #465057;
+}
+
+.day-head > span {
+    display: inline-block;
+    float: left;
+    padding: 8px 0;
+}
+
+.event-info > span {
+    display: inline-block;
+    float: left;
+    padding: 16px 0;
+    font-size: 15px;
+}
+
+
+.day-head > span:first-child {
+    padding-left: 20px;
+}
+
+.day-head > span:nth-child(2) {
+    float: right;
+    padding-right: 13px;
+}
+
+.event-info > span:nth-child(2) {
+    float: right;
+    color: #9ea4a6;
 }
 
 #day-calendar .day > article {
