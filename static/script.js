@@ -58,11 +58,11 @@ function selectCalendarType(calendarType){
 
 //Display and hides this menu.
 function showMenu(menu){
-    var display = $(menu).css("display");
-    if(display != "block"){
-        $(menu).css("display","block"); 
+    var displayed = $(menu).css("display");
+    if(displayed != "block"){
+        $(menu).show(); 
     }else{
-        $(menu).css("display","none");
+        $(menu).hide();
         $('#shadow').hide();
     }
 }
