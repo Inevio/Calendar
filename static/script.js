@@ -36,6 +36,14 @@ $( document ).ready(function() {
     $('.cancel-create-event-button').on('click', function() {
         showMenu('#create-event-modal');
     })
+    $('.event-color').on('click', function() {
+        $('.color-picker-container').toggle();
+        $('.color-picker-container').offset({ top: 239, left: 619 });
+    })
+    $('.calendar-color').on('click', function() {
+        $('.color-picker-container').toggle();
+        $('.color-picker-container').offset({ top: 301, left: 755 });
+    })
 });
 
 //Displays de calendarType.

@@ -452,6 +452,8 @@ thead{
     height: 25px;
 }
 
+#create-event-modal .event-color:hover {background: #e5e5e5;}
+
 #create-event-modal .event-color .color{
     background: none repeat scroll 0 0 #7ebe30;
     width: 16px;
@@ -586,6 +588,8 @@ thead{
     top: 45px;
 }
 
+#create-calendar-modal .calendar-color:hover {background: #e5e5e5;}
+
 #create-calendar-modal .calendar-color .color{
     background: none repeat scroll 0 0 #7ebe30;
     width: 16px;
@@ -683,6 +687,306 @@ thead{
 
 #create-calendar-modal .close-image i{
     cursor: pointer;
+}
+
+.color-picker-container{
+    display: none;
+    height: auto;
+    width: auto;
+    position: fixed;
+    z-index: 5;
+}
+
+.color-picker-container .arrow {
+    background: url('@static/sprite.png') -234px 0;
+    background-size: 298px 18px;
+    display: block;
+    height: 10px;
+    position: absolute;
+    width: 10px;
+    z-index: 5;
+    top:-6px;
+    left: 6px;
+}
+
+.color-picker-container .color-picker {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+    height: auto;
+    padding: 14px;
+    position: absolute;
+    width: 171px;
+}
+
+.color-picker-container .color-picker-hover {
+    border: 1px solid #fff;
+    height: 16px;
+    outline: 1px solid #000000;
+    position: absolute;
+    width: 16px;
+}
+
+.color-picker-container .color-picker-gray, .color-picker-container .color-picker-color {
+  margin-bottom: 7px;
+}
+
+.color-picker-gray td{
+    width: 16px;
+    height: 16px;
+    border: 1px solid #e1e1e1;
+}
+
+.color-picker-gray td:nth-child(1){
+    background: #000000;
+}
+.color-picker-gray td:nth-child(2){
+    background: #434343;
+}
+.color-picker-gray td:nth-child(3){
+    background: #666666;
+}
+.color-picker-gray td:nth-child(4){
+    background: #999999;
+}
+.color-picker-gray td:nth-child(5){
+    background: #b7b7b7;
+}
+.color-picker-gray td:nth-child(6){
+    background: #cccccc;
+}
+.color-picker-gray td:nth-child(7){
+    background: #d9d9d9;
+}
+.color-picker-gray td:nth-child(8){
+    background: #efefef;
+}
+.color-picker-gray td:nth-child(9){
+    background: #f3f3f3;
+}
+.color-picker-gray td:nth-child(10){
+    background: #ffffff;
+}
+
+.color-picker-color td{
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ffffff;
+}
+.color-picker-color td:nth-child(1){
+    background: #980000;
+}
+.color-picker-color td:nth-child(2){
+    background: #ff0000;
+}
+.color-picker-color td:nth-child(3){
+    background: #ff9a00;
+}
+.color-picker-color td:nth-child(4){
+    background: #ffff00;
+}
+.color-picker-color td:nth-child(5){
+    background: #00ff00;
+}
+.color-picker-color td:nth-child(6){
+    background: #00ffff;
+}
+.color-picker-color td:nth-child(7){
+    background: #4582ea;
+}
+.color-picker-color td:nth-child(8){
+    background: #0000ff;
+}
+.color-picker-color td:nth-child(9){
+    background: #9a00ff;
+}
+.color-picker-color td:nth-child(10){
+    background: #ff00ff;
+}
+.color-picker-variation td{
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ffffff;
+}
+.color-picker-variation tr:nth-child(1) td:nth-child(1){
+    background: #e6b7ae;
+}
+.color-picker-variation tr:nth-child(1) td:nth-child(2){
+    background: #f3cbca;
+}
+.color-picker-variation tr:nth-child(1) td:nth-child(3){
+    background: #fce5cc;
+}
+.color-picker-variation tr:nth-child(1) td:nth-child(4){
+    background: #fff2c9;
+}
+.color-picker-variation tr:nth-child(1) td:nth-child(5){
+    background: #d9e9d2;
+}
+.color-picker-variation tr:nth-child(1) td:nth-child(6){
+    background: #cfdfe3;
+}
+.color-picker-variation tr:nth-child(1) td:nth-child(7){
+    background: #c8d8f8;
+}
+.color-picker-variation tr:nth-child(1) td:nth-child(8){
+    background: #cee1f4;
+}
+.color-picker-variation tr:nth-child(1) td:nth-child(9){
+    background: #d9d0ea;
+}
+.color-picker-variation tr:nth-child(1) td:nth-child(10){
+    background: #ead1db;
+}
+.color-picker-variation tr:nth-child(2) td:nth-child(1){
+    background: #df7d68;
+}
+.color-picker-variation tr:nth-child(2) td:nth-child(2){
+    background: #eb9998;
+}
+.color-picker-variation tr:nth-child(2) td:nth-child(3){
+    background: #facc98;
+}
+.color-picker-variation tr:nth-child(2) td:nth-child(4){
+    background: #ffe694;
+}
+.color-picker-variation tr:nth-child(2) td:nth-child(5){
+    background: #b4d8a5;
+}
+.color-picker-variation tr:nth-child(2) td:nth-child(6){
+    background: #a0c3ca;
+}
+.color-picker-variation tr:nth-child(2) td:nth-child(7){
+    background: #a2c0f5;
+}
+.color-picker-variation tr:nth-child(2) td:nth-child(8){
+    background: #9ec4e9;
+}
+.color-picker-variation tr:nth-child(2) td:nth-child(9){
+    background: #b3a6d7;
+}
+.color-picker-variation tr:nth-child(2) td:nth-child(10){
+    background: #d6a4bd;
+}
+.color-picker-variation tr:nth-child(3) td:nth-child(1){
+    background: #cd401a;
+}
+.color-picker-variation tr:nth-child(3) td:nth-child(2){
+    background: #e16462;
+}
+.color-picker-variation tr:nth-child(3) td:nth-child(3){
+    background: #f7b265;
+}
+.color-picker-variation tr:nth-child(3) td:nth-child(4){
+    background: #ffda5a;
+}
+.color-picker-variation tr:nth-child(3) td:nth-child(5){
+    background: #92c47a;
+}
+.color-picker-variation tr:nth-child(3) td:nth-child(6){
+    background: #73a5b0;
+}
+.color-picker-variation tr:nth-child(3) td:nth-child(7){
+    background: #6b9bee;
+}
+.color-picker-variation tr:nth-child(3) td:nth-child(8){
+    background: #6da6dd;
+}
+.color-picker-variation tr:nth-child(3) td:nth-child(9){
+    background: #8d79c5;
+}
+.color-picker-variation tr:nth-child(3) td:nth-child(10){
+    background: #c27a9f;
+}
+.color-picker-variation tr:nth-child(4) td:nth-child(1){
+    background: #a71900;
+}
+.color-picker-variation tr:nth-child(4) td:nth-child(2){
+    background: #cd0000;
+}
+.color-picker-variation tr:nth-child(4) td:nth-child(3){
+    background: #e79229;
+}
+.color-picker-variation tr:nth-child(4) td:nth-child(4){
+    background: #f2c212;
+}
+.color-picker-variation tr:nth-child(4) td:nth-child(5){
+    background: #7ebe30;
+}
+.color-picker-variation tr:nth-child(4) td:nth-child(6){
+    background: #42818e;
+}
+.color-picker-variation tr:nth-child(4) td:nth-child(7){
+    background: #3774da;
+}
+.color-picker-variation tr:nth-child(4) td:nth-child(8){
+    background: #3984c7;
+}
+.color-picker-variation tr:nth-child(4) td:nth-child(9){
+    background: #674aa9;
+}
+.color-picker-variation tr:nth-child(4) td:nth-child(10){
+    background: #a64b79;
+}
+.color-picker-variation tr:nth-child(5) td:nth-child(1){
+    background: #861e01;
+}
+.color-picker-variation tr:nth-child(5) td:nth-child(2){
+    background: #9b0000;
+}
+.color-picker-variation tr:nth-child(5) td:nth-child(3){
+    background: #b55f00;
+}
+.color-picker-variation tr:nth-child(5) td:nth-child(4){
+    background: #c09000;
+}
+.color-picker-variation tr:nth-child(5) td:nth-child(5){
+    background: #347614;
+}
+.color-picker-variation tr:nth-child(5) td:nth-child(6){
+    background: #0e4f5c;
+}
+.color-picker-variation tr:nth-child(5) td:nth-child(7){
+    background: #0551ce;
+}
+.color-picker-variation tr:nth-child(5) td:nth-child(8){
+    background: #015195;
+}
+.color-picker-variation tr:nth-child(5) td:nth-child(9){
+    background: #351577;
+}
+.color-picker-variation tr:nth-child(5) td:nth-child(10){
+    background: #741847;
+}
+.color-picker-variation tr:nth-child(6) td:nth-child(1){
+    background: #5c0e00;
+}
+.color-picker-variation tr:nth-child(6) td:nth-child(2){
+    background: #660000;
+}
+.color-picker-variation tr:nth-child(6) td:nth-child(3){
+    background: #783f00;
+}
+.color-picker-variation tr:nth-child(6) td:nth-child(4){
+    background: #806000;
+}
+.color-picker-variation tr:nth-child(6) td:nth-child(5){
+    background: #264e0d;
+}
+.color-picker-variation tr:nth-child(6) td:nth-child(6){
+    background: #08333e;
+}
+.color-picker-variation tr:nth-child(6) td:nth-child(7){
+    background: #174389;
+}
+.color-picker-variation tr:nth-child(6) td:nth-child(8){
+    background: #023664;
+}
+.color-picker-variation tr:nth-child(6) td:nth-child(9){
+    background: #1f0d4e;
+}
+.color-picker-variation tr:nth-child(6) td:nth-child(10){
+    background: #4c0f2f;
 }
 
 /* Month calendar */
