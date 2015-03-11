@@ -1,50 +1,93 @@
-$( document ).ready(function() {
-    //Adds each day-cell a clickable area to select the current day.
-	$(".day-cell").on( "click", function() {
-        selectDay($( this ));
-    });
-    $(".time-col").on( "click", function() {
-        selectDay($( this ));
-    });
-	//Adds each top bar buttons functionalty to change between calendar types.
-	$(".calendarType").on( "click", function() {
-        selectCalendarType($( this ));
-    });
-    //Adds a shadow when opens these menus
-    $('#add-new-calendar').on('click', function() {
-        $('#shadow').show();
-    })
-    $('#create-event').on('click', function() {
-        $('#shadow').show();
-    })
-    //Adds buttons functionality to open the menus
-    $('.my-calendars').on('click', function() {
-        showMenu('#my-calendars-modal');
-    })
-    $('.create-event').on('click', function() {
-        showMenu('#create-event-modal');
-    })
-    $('.add-new-calendar').on('click', function() {
-        showMenu('#create-calendar-modal');
-    })
-    $('.create-event-modal-close').on('click', function() {
-        showMenu('#create-event-modal');
-    })
-    $('.cancel-create-calendar-button').on('click', function() {
-        showMenu('#create-calendar-modal');
-    })
-    $('.cancel-create-event-button').on('click', function() {
-        showMenu('#create-event-modal');
-    })
-    $('.event-color').on('click', function() {
-        $('.color-picker-container').toggle();
-        $('.color-picker-container').offset({ top: 239, left: 619 });
-    })
-    $('.calendar-color').on('click', function() {
-        $('.color-picker-container').toggle();
-        $('.color-picker-container').offset({ top: 301, left: 755 });
-    })
+// Constants
+var BROWSER_FIREFOX = 0;
+var BROWSER_IE = 1;
+var BROWSER_WEBKIT = 2;
+var BROWSER_TYPE = /webkit/i.test( navigator.userAgent ) ? BROWSER_WEBKIT : ( /trident/i.test( navigator.userAgent ) ? BROWSER_IE : BROWSER_FIREFOX );
+
+// DOM variables
+var win                     = $(this);
+var createCalendarModal     = $('#create-calendar-modal');
+var createEventModal        = $('#create-event-modal');
+var colorToolbar            = $('.color-toolbar');
+var colorPickerContainer    = $('.color-picker-container');
+var arrow                   = $('.color-picker-container .arrow');
+var colorPickerHover        = $('.color-picker-hover');
+var colorPicker             = $('.color-picker');
+var colorPickerColor        = $('.color-toolbar .color');
+
+//Adds each day-cell a clickable area to select the current day.
+$(".day-cell").on( "click", function() {
+    selectDay($( this ));
 });
+$(".time-col").on( "click", function() {
+    selectDay($( this ));
+});
+//Adds each top bar buttons functionalty to change between calendar types.
+$(".calendarType").on( "click", function() {
+    selectCalendarType($( this ));
+});
+//Adds a shadow when opens these menus
+$('#add-new-calendar').on('click', function() {
+    $('#shadow').show();
+});
+$('#create-event').on('click', function() {
+    $('#shadow').show();
+});
+//Adds buttons functionality to open the menus
+$('.my-calendars').on('click', function() {
+    showMenu('#my-calendars-modal');
+});
+$('.create-event').on('click', function() {
+    showMenu('#create-event-modal');
+});
+$('.add-new-calendar').on('click', function() {
+    showMenu('#create-calendar-modal');
+});
+$('.create-event-modal-close').on('click', function() {
+    showMenu('#create-event-modal');
+});
+$('.cancel-create-calendar-button').on('click', function() {
+    showMenu('#create-calendar-modal');
+});
+$('.cancel-create-event-button').on('click', function() {
+    showMenu('#create-event-modal');
+});
+
+//Color toolbar positioning
+colorToolbar.on('click', function() {
+    colorPickerContainer.toggle();
+    colorPickerContainer
+    .css({
+        top     : $(this).offset().top + arrow.height(),
+        left    : $(this).offset().left - win.offset().left,
+    });
+});
+
+//Color toolbar hover color
+colorPicker
+    .on( 'mousedown', function( e ){
+        e.stopPropagation();
+    })
+    .on( 'mouseenter', 'td', function(){
+        var pos = $(this).position();
+        if( BROWSER_TYPE === BROWSER_FIREFOX ){
+            pos.top = pos.top - parseInt( colorPickerHover.css('border-top-width'), 10 );
+            pos.left = pos.left - parseInt( colorPickerHover.css('border-left-width'), 10 );
+        }
+        colorPickerHover.css({
+            'background-color' : $(this).css('background-color'),
+            top : pos.top,
+            left : pos.left
+        });
+})
+
+colorPickerHover.on( 'click', function(){
+    colorPickerColor
+        .css( 'background-color', colorPickerHover.css('background-color') )
+        .click();
+    colorPickerContainer.css( 'display', 'none' );
+});
+
 
 //Displays de calendarType.
 function selectCalendarType(calendarType){
