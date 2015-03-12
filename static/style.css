@@ -1018,7 +1018,7 @@ thead{
 }
 
 #month-calendar .day-table td {
-    height: 20%;
+    height: 73px;
     background: #ffffff;
     border: 1px solid #dadada;
     width: 14.2857%;
