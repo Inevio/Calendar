@@ -28,17 +28,22 @@ console.log(numOfDays);
 // DOM variables
 var win                     = $(this);
 var currentMonthDOM         = $('.current-month span');
-var nextMonthDOM            = $('.current-month .right-arrow');
-var prevMonthDOM            = $('.current-month .left-arrow');
+var prevMonthDOM            = $('.current-month .prev');
+var nextMonthDOM            = $('.current-month .next');
 var createCalendarModal     = $('#create-calendar-modal');
 var createEventModal        = $('#create-event-modal');
+var createEvent             = $('.create-event');
+var createCalendar          = $('.add-new-calendar');
+var addEventButton          = $('.create-event-button');
+var eventName               = $('.event-name input');
+
 var colorToolbar            = $('.color-toolbar');
 var colorPickerContainer    = $('.color-picker-container');
 var arrow                   = $('.color-picker-container .arrow');
 var colorPickerHover        = $('.color-picker-hover');
 var colorPicker             = $('.color-picker');
 var colorPickerColor        = $('.color-toolbar .color');
-var eventPrototype          = $('.event .wz-prototype');
+var eventPrototype          = $('.event.wz-prototype');
 
 
 //Run code
@@ -66,15 +71,22 @@ $('#create-event').on('click', function() {
 $('.my-calendars').on('click', function() {
     showMenu('#my-calendars-modal');
 });
-$('.create-event').on('click', function() {
+
+createEvent.on('click', function() {
     showMenu('#create-event-modal');
+    var eventDate = dayNames[getDaySelected().getDay()]+", "+getDaySelected().getDate()+"th of "+monthNames[showingMonth]+", "+showingYear;
+    $('.event-when input').val(eventDate);
 });
-$('.add-new-calendar').on('click', function() {
+
+createCalendar.on('click', function() {
     showMenu('#create-calendar-modal');
 });
-$('.create-event-modal-close').on('click', function() {
+
+addEventButton.on('click', function() {
+    addEvent();
     showMenu('#create-event-modal');
 });
+
 $('.cancel-create-calendar-button').on('click', function() {
     showMenu('#create-calendar-modal');
 });
@@ -202,6 +214,7 @@ function initCalendar(){
     numOfDays = dayPerMonth[showingMonth];
     setShowingDate();
     setCells();
+    $( ".day-table td:eq("+(currentDate.getDate()-1)+")" ).addClass("day-selected");
 }
 
 //Determinate if February 28/29
@@ -259,12 +272,44 @@ function setCells(){
 function cleanCells(){
     for (i = 0; i < 42; i++) {
             $( ".day-table td:eq("+i+") span" ).text("");
+            $( ".day-table td:eq("+i+") article" ).remove();
             $( ".day-table td:eq("+i+")" ).removeClass();
     }
+    
+}
+
+function getDaySelected(){
+    return new Date(monthNames[showingMonth]+' '+$('.day-selected span').text()+' ,'+showingYear);
 }
 
 function addEvent(){
+    var daySelected = $('#month-calendar .day-selected');
     var event =  eventPrototype.clone();
     event.removeClass('wz-prototype');
     //toDo
+    event.text(eventName.val())
+    event.css('background-color', colorPickerColor.css('background-color'));
+    if($(".day-selected article").length < 1){
+        daySelected.append(event);
+    }else{
+        var moreEvents = $(".day-selected .moreEvents");
+        if(moreEvents.length == 0){
+            var moreEvents = eventPrototype.clone();
+            moreEvents.removeClass('wz-prototype');
+            moreEvents.addClass("moreEvents");
+            moreEvents.text("1 more...");
+            moreEvents.data('numEventsMore', 1)
+            event.hide();
+            daySelected.append(event);
+            daySelected.append(moreEvents);
+        }else{
+            var numEventsMore = moreEvents.data('numEventsMore');
+            numEventsMore++;
+            moreEvents.data('numEventsMore', numEventsMore);
+            moreEvents.text(numEventsMore+" more...");
+            event.hide();
+            daySelected.append(event);
+            daySelected.append(moreEvents);
+        }
+    }
 }

@@ -25,16 +25,20 @@
     </section>
 </section>
 <section class="calendar-head wz-fit-x">
-    <section class="my-calendars wz-fit-x">
+    <section class="my-calendars wz-fit-x wz-view-option">
        <span>My calendars</span>
        <img src="https://static.inevio.com/app/207/arrow_calendars.png" alt=""> 
     </section>
     <section class="current-month wz-fit-x">
-        <img class="left-arrow" src="https://static.inevio.com/app/207/arrow_back.png" alt="">
-        <span>September 2013</span>
-        <img class="right-arrow" src="https://static.inevio.com/app/207/arrow_back.png" alt="">
+        <section class="wz-view-option prev">
+            <img class="left-arrow" src="https://static.inevio.com/app/207/arrow_back.png" alt="">
+        </section>    
+        <span></span>
+        <section class="wz-view-option next">
+            <img class="right-arrow" src="https://static.inevio.com/app/207/arrow_back.png" alt="">
+        </section>    
     </section>
-    <section class="create-event wz-fit-x" id="create-event">
+    <section class="create-event wz-fit-x wz-view-option" id="create-event">
         <img src="https://static.inevio.com/app/207/plus.png" alt="&#43;"> 
         <span>Create new event</span>
     </section>
@@ -70,7 +74,7 @@
             </figure>
             <article class="event-when">
                 <span>When</span>
-                <input type="date">
+                <input type="date" disabled>
             </article>
             <article class="event-start">
                 <span>Start</span>
@@ -179,7 +183,7 @@
         </thead>
     </table>
     <section id="mvEventContainer" class="mv-event-container">
-        <article class="event office wz-prototype"></article>
+        <article class="event wz-prototype"></article>
         <table class="day-table" cellspacing="0" cellpadding="0">
             <tbody>
                 <tr>
@@ -205,9 +209,7 @@
                     <td class=""><span></span></td>
                     <td class=""><span></span></td>
                     <td class=""><span></span></td>
-                    <td class=""><span></span>
-                        <article class="event office"> Me voy a casar</article>
-                    </td>
+                    <td class=""><span></span></td>
                     <td class=""><span></span></td>
                     <td class=""><span></span></td>
                 </tr>
