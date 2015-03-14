@@ -45,10 +45,6 @@ var colorPicker             = $('.color-picker');
 var colorPickerColor        = $('.color-toolbar .color');
 var eventPrototype          = $('.event.wz-prototype');
 
-
-//Run code
-initCalendar();
-
 //Adds each day-cell a clickable area to select the current day.
 $(".time-col").on( "click", function() {
     selectDay($( this ));
@@ -155,7 +151,7 @@ colorPickerHover.on( 'click', function(){
 
 
 //Displays de calendarType.
-function selectCalendarType(calendarType){
+var selectCalendarType = function(calendarType){
 	$(".calendar-active").removeClass("calendar-active");
 	$(".active-type").removeClass("active-type");
 	type = calendarType.attr("id");
@@ -173,7 +169,7 @@ function selectCalendarType(calendarType){
 }
 
 //Display and hides this menu.
-function showMenu(menu){
+var showMenu = function(menu){
     var displayed = $(menu).css("display");
     if(displayed != "block"){
         $(menu).show(); 
@@ -184,7 +180,7 @@ function showMenu(menu){
 }
 
 //Adds a green area to the cell recieved.
-function selectDay(cell){
+var selectDay = function(cell){
     $(".day-selected").removeClass("day-selected");
     cell.addClass("day-selected");
     if(cell.hasClass("mon")){
@@ -207,7 +203,7 @@ function selectDay(cell){
 // -- APP FUNCTIONALITY --
 
 //Set all de calendar
-function initCalendar(){
+var initCalendar = function(){
     if (showingMonth == 1){
         setFebDays();
     }
@@ -218,7 +214,7 @@ function initCalendar(){
 }
 
 //Determinate if February 28/29
-function setFebDays(){
+var setFebDays = function(){
     if ( (showingYear%100!=0) && (showingYear%4==0) || (showingYear%400==0)){
         dayPerMonth[1] = "29";
     }else{
@@ -227,13 +223,13 @@ function setFebDays(){
 }
 
 //Set the showing date on the calendar header
-function setShowingDate(){
+var setShowingDate = function(){
     var dateText = monthNames[showingMonth]+" "+showingYear;
     currentMonthDOM.text(dateText);
 }
 
 //Set the primary state of the cells of the month view of the calendar
-function setCells(){
+var setCells = function(){
     var nCells = 42;
     var nBlankCells = nCells - numOfDays;
     showingDate = new Date(monthNames[showingMonth]+' 1 ,'+showingYear);
@@ -269,7 +265,7 @@ function setCells(){
 }
 
 //Clean all the cells of the month view of the calendar
-function cleanCells(){
+var cleanCells = function(){
     for (i = 0; i < 42; i++) {
             $( ".day-table td:eq("+i+") span" ).text("");
             $( ".day-table td:eq("+i+") article" ).remove();
@@ -278,11 +274,11 @@ function cleanCells(){
     
 }
 
-function getDaySelected(){
+var getDaySelected = function(){
     return new Date(monthNames[showingMonth]+' '+$('.day-selected span').text()+' ,'+showingYear);
 }
 
-function addEvent(){
+var addEvent = function(){
     var daySelected = $('#month-calendar .day-selected');
     var event =  eventPrototype.clone();
     event.removeClass('wz-prototype');
@@ -313,3 +309,6 @@ function addEvent(){
         }
     }
 }
+
+//Run code
+initCalendar();
