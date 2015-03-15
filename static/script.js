@@ -5,11 +5,11 @@ var BROWSER_WEBKIT = 2;
 var BROWSER_TYPE = /webkit/i.test( navigator.userAgent ) ? BROWSER_WEBKIT : ( /trident/i.test( navigator.userAgent ) ? BROWSER_IE : BROWSER_FIREFOX );
 
 // VARIABLES
-var febNumberOfDays = "";
-var numOfDays = "";
-var monthNames = ["January","February","March","April","May","June","July","August","September","October","November", "December"];
-var dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thrusday","Friday", "Saturday"];
-var dayPerMonth = ["31","","31","30","31","30","31","31","30","31","30","31"];
+var febNumberOfDays = '';
+var numOfDays = '';
+var monthNames = ['January','February','March','April','May','June','July','August','September','October','November', 'December'];
+var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thrusday','Friday', 'Saturday'];
+var dayPerMonth = ['31','','31','30','31','30','31','31','30','31','30','31'];
 //current date
 var currentDate = new Date();
 var currentYear = currentDate.getFullYear();
@@ -46,12 +46,12 @@ var colorPickerColor        = $('.color-toolbar .color');
 var eventPrototype          = $('.event.wz-prototype');
 
 //Adds each day-cell a clickable area to select the current day.
-$(".time-col").on( "click", function() {
+$('.time-col').on( 'click', function() {
     selectDay($( this ));
 });
 
 //Adds each top bar buttons functionalty to change between calendar types.
-$(".calendarType").on( "click", function() {
+$('.calendarType').on( 'click', function() {
     selectCalendarType($( this ));
 });
 
@@ -70,7 +70,7 @@ $('.my-calendars').on('click', function() {
 
 createEvent.on('click', function() {
     showMenu('#create-event-modal');
-    var eventDate = dayNames[getDaySelected().getDay()]+", "+getDaySelected().getDate()+"th of "+monthNames[showingMonth]+", "+showingYear;
+    var eventDate = dayNames[getDaySelected().getDay()]+', '+getDaySelected().getDate()+'th of '+monthNames[showingMonth]+', '+showingYear;
     $('.event-when input').val(eventDate);
 });
 
@@ -152,26 +152,26 @@ colorPickerHover.on( 'click', function(){
 
 //Displays de calendarType.
 var selectCalendarType = function(calendarType){
-	$(".calendar-active").removeClass("calendar-active");
-	$(".active-type").removeClass("active-type");
-	type = calendarType.attr("id");
-	id = "#" + type;
-	$(id).addClass("active-type");
-	if(type == "dayType"){
-		$("#day-calendar").addClass("calendar-active");
-	}else if(type == "weekType"){
-		$("#week-calendar").addClass("calendar-active");
-	}else if(type == "monthType"){
-		$("#month-calendar").addClass("calendar-active");
+	$('.calendar-active').removeClass('calendar-active');
+	$('.active-type').removeClass('active-type');
+	type = calendarType.attr('id');
+	id = '#' + type;
+	$(id).addClass('active-type');
+	if(type == 'dayType'){
+		$('#day-calendar').addClass('calendar-active');
+	}else if(type == 'weekType'){
+		$('#week-calendar').addClass('calendar-active');
+	}else if(type == 'monthType'){
+		$('#month-calendar').addClass('calendar-active');
 	}else{
-		alert("CalendarTypeError");
+		alert('CalendarTypeError');
 	}	
 }
 
 //Display and hides this menu.
 var showMenu = function(menu){
-    var displayed = $(menu).css("display");
-    if(displayed != "block"){
+    var displayed = $(menu).css('display');
+    if(displayed != 'block'){
         $(menu).show(); 
     }else{
         $(menu).hide();
@@ -181,22 +181,22 @@ var showMenu = function(menu){
 
 //Adds a green area to the cell recieved.
 var selectDay = function(cell){
-    $(".day-selected").removeClass("day-selected");
-    cell.addClass("day-selected");
-    if(cell.hasClass("mon")){
-        $(".monday").addClass("day-selected");
-    }else if(cell.hasClass("tue")){
-        $(".tuesday").addClass("day-selected");
-    }else if(cell.hasClass("wed")){
-        $(".wednesday").addClass("day-selected");
-    }else if(cell.hasClass("thu")){
-        $(".thursday").addClass("day-selected");
-    }else if(cell.hasClass("fri")){
-        $(".friday").addClass("day-selected");
-    }else if(cell.hasClass("sat")){
-        $(".saturday").addClass("day-selected");
+    $('.day-selected').removeClass('day-selected');
+    cell.addClass('day-selected');
+    if(cell.hasClass('mon')){
+        $('.monday').addClass('day-selected');
+    }else if(cell.hasClass('tue')){
+        $('.tuesday').addClass('day-selected');
+    }else if(cell.hasClass('wed')){
+        $('.wednesday').addClass('day-selected');
+    }else if(cell.hasClass('thu')){
+        $('.thursday').addClass('day-selected');
+    }else if(cell.hasClass('fri')){
+        $('.friday').addClass('day-selected');
+    }else if(cell.hasClass('sat')){
+        $('.saturday').addClass('day-selected');
     }else{
-        $(".sunday").addClass("day-selected");
+        $('.sunday').addClass('day-selected');
     }
 }
 
@@ -210,21 +210,21 @@ var initCalendar = function(){
     numOfDays = dayPerMonth[showingMonth];
     setShowingDate();
     setCells();
-    $( ".day-table td:eq("+(currentDate.getDate()-1)+")" ).addClass("day-selected");
+    $( '.day-table td:eq('+(currentDate.getDate()-1)+')' ).addClass('day-selected');
 }
 
 //Determinate if February 28/29
 var setFebDays = function(){
     if ( (showingYear%100!=0) && (showingYear%4==0) || (showingYear%400==0)){
-        dayPerMonth[1] = "29";
+        dayPerMonth[1] = '29';
     }else{
-        dayPerMonth[1] = "28";
+        dayPerMonth[1] = '28';
     }
 }
 
 //Set the showing date on the calendar header
 var setShowingDate = function(){
-    var dateText = monthNames[showingMonth]+" "+showingYear;
+    var dateText = monthNames[showingMonth]+' '+showingYear;
     currentMonthDOM.text(dateText);
 }
 
@@ -234,7 +234,7 @@ var setCells = function(){
     var nBlankCells = nCells - numOfDays;
     showingDate = new Date(monthNames[showingMonth]+' 1 ,'+showingYear);
     
-    var prevNumOfDays = "";
+    var prevNumOfDays = '';
     if(showingMonth == 0){
         prevNumOfDays = dayPerMonth[11];
     }else{
@@ -244,32 +244,32 @@ var setCells = function(){
     var firstWeekDayOfMonth = showingDate.getDay();
     prevNumOfDays -= firstWeekDayOfMonth-1;
     for (i = 0; i < firstWeekDayOfMonth; i++) {
-        $( ".day-table td:eq("+i+")" ).addClass("other-month-cell");
-        $( ".day-table td:eq("+i+") span" ).text(prevNumOfDays++);
+        $( '.day-table td:eq('+i+')' ).addClass('other-month-cell');
+        $( '.day-table td:eq('+i+') span' ).text(prevNumOfDays++);
         nBlankCells--;
     }
 
     var dayCounter = 1;
     for (i = firstWeekDayOfMonth; i < nCells - nBlankCells; i++) {
-        $( ".day-table td:eq("+i+") span" ).text(dayCounter++);
-        $( ".day-table td:eq("+i+")" ).addClass("day-cell");
+        $( '.day-table td:eq('+i+') span' ).text(dayCounter++);
+        $( '.day-table td:eq('+i+')' ).addClass('day-cell');
     }
     
     dayCounter = 1;
     for (i = nCells - nBlankCells; i < nCells; i++) {
-        $( ".day-table td:eq("+i+")" ).addClass("other-month-cell");
-        $( ".day-table td:eq("+i+") span" ).text(dayCounter++);
+        $( '.day-table td:eq('+i+')' ).addClass('other-month-cell');
+        $( '.day-table td:eq('+i+') span' ).text(dayCounter++);
     }
     
-    $(".day-cell").on( "click", function() {selectDay($( this ));});
+    $('.day-cell').on( 'click', function() {selectDay($( this ));});
 }
 
 //Clean all the cells of the month view of the calendar
 var cleanCells = function(){
     for (i = 0; i < 42; i++) {
-            $( ".day-table td:eq("+i+") span" ).text("");
-            $( ".day-table td:eq("+i+") article" ).remove();
-            $( ".day-table td:eq("+i+")" ).removeClass();
+            $( '.day-table td:eq('+i+') span' ).text('');
+            $( '.day-table td:eq('+i+') article' ).remove();
+            $( '.day-table td:eq('+i+')' ).removeClass();
     }
     
 }
@@ -285,15 +285,15 @@ var addEvent = function(){
     //toDo
     event.text(eventName.val())
     event.css('background-color', colorPickerColor.css('background-color'));
-    if($(".day-selected article").length < 1){
+    if($('.day-selected article').length < 1){
         daySelected.append(event);
     }else{
-        var moreEvents = $(".day-selected .moreEvents");
+        var moreEvents = $('.day-selected .moreEvents');
         if(moreEvents.length == 0){
             var moreEvents = eventPrototype.clone();
             moreEvents.removeClass('wz-prototype');
-            moreEvents.addClass("moreEvents");
-            moreEvents.text("1 more...");
+            moreEvents.addClass('moreEvents');
+            moreEvents.text('1 more...');
             moreEvents.data('numEventsMore', 1)
             event.hide();
             daySelected.append(event);
@@ -302,7 +302,7 @@ var addEvent = function(){
             var numEventsMore = moreEvents.data('numEventsMore');
             numEventsMore++;
             moreEvents.data('numEventsMore', numEventsMore);
-            moreEvents.text(numEventsMore+" more...");
+            moreEvents.text(numEventsMore+' more...');
             event.hide();
             daySelected.append(event);
             daySelected.append(moreEvents);
