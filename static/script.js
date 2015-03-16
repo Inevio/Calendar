@@ -35,7 +35,10 @@ var createEventModal        = $('#create-event-modal');
 var createEvent             = $('.create-event');
 var createCalendar          = $('.add-new-calendar');
 var addEventButton          = $('.create-event-button');
+var addCalendarButton       = $('.create-calendar-button');
 var eventName               = $('.event-name input');
+var calendarName            = $('.calendar-name input');
+var calendarList            = $('.my-calendars-list');
 
 var colorToolbar            = $('.color-toolbar');
 var colorPickerContainer    = $('.color-picker-container');
@@ -43,7 +46,9 @@ var arrow                   = $('.color-picker-container .arrow');
 var colorPickerHover        = $('.color-picker-hover');
 var colorPicker             = $('.color-picker');
 var colorPickerColor        = $('.color-toolbar .color');
+
 var eventPrototype          = $('.event.wz-prototype');
+var calendarPrototype       = $('.calendar.wz-prototype');
 
 //Adds each day-cell a clickable area to select the current day.
 $('.time-col').on( 'click', function() {
@@ -83,6 +88,11 @@ addEventButton.on('click', function() {
     showMenu('#create-event-modal');
 });
 
+addCalendarButton.on('click', function() {
+    addCalendar();
+    showMenu('#create-calendar-modal');
+});
+
 $('.cancel-create-calendar-button').on('click', function() {
     showMenu('#create-calendar-modal');
 });
@@ -118,7 +128,7 @@ colorToolbar.on('click', function() {
     colorPickerContainer.toggle();
     colorPickerContainer
     .css({
-        top     : $(this).offset().top + arrow.height(),
+        top     : ($(this).offset().top - win.offset().top) + ($(this).outerHeight() +  arrow.height()),
         left    : $(this).offset().left - win.offset().left,
     });
 });
@@ -283,7 +293,7 @@ var addEvent = function(){
     var event =  eventPrototype.clone();
     event.removeClass('wz-prototype');
     //toDo
-    event.text(eventName.val())
+    event.text(eventName.val());
     event.css('background-color', colorPickerColor.css('background-color'));
     if($('.day-selected article').length < 1){
         daySelected.append(event);
@@ -308,6 +318,18 @@ var addEvent = function(){
             daySelected.append(moreEvents);
         }
     }
+}
+
+var addCalendar = function(){
+    var calendar =  calendarPrototype.clone();
+    calendar.removeClass('wz-prototype');
+    //toDo
+    calendar.find('.calendar-name').text(calendarName.val());
+    calendar.find('figure').css('background-color', colorPickerColor.css('background-color'));
+    calendar.find('.deleteCalendar').on( 'click', function(){
+        calendar.remove();
+    });
+    calendarList.append(calendar);
 }
 
 //Run code

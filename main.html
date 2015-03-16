@@ -38,22 +38,15 @@
             <img class="right-arrow" src="https://static.inevio.com/app/207/arrow_back.png" alt="">
         </section>    
     </section>
-    <section class="create-event wz-fit-x wz-view-option" id="create-event">
+    <section class="create-event wz-fit-x wz-view-option right" id="create-event">
         <img src="https://static.inevio.com/app/207/plus.png" alt="&#43;"> 
         <span>Create new event</span>
     </section>
     <section id="my-calendars-modal">
+        <i class="arrow"></i>
         <section class="my-calendars-list">
-            <articles id="work" class="calendar">
-                <input type="checkbox" checked="checked" class="wz-ui-input"><label><i></i><span><figure></figure>Work</span></label>
-                <span class="right deleteCalendar">Delete</span>
-            </articles>
-            <articles id="office" class="calendar">
-                <input type="checkbox" checked="checked" class="wz-ui-input"><label><i></i><span><figure></figure>Office</span></label>
-                <span class="right deleteCalendar">Delete</span>
-            </articles>
-            <articles id="home" class="calendar">
-                <input type="checkbox" checked="checked" class="wz-ui-input"><label><i></i><span><figure></figure>Home</span></label>
+            <articles class="calendar wz-prototype">
+                <input type="checkbox" class="wz-ui-input"><label><i></i><figure></figure><span class="calendar-name"></span></label>
                 <span class="right deleteCalendar">Delete</span>
             </articles>
         </section>
@@ -68,54 +61,35 @@
                 <span>Name of the event</span>
                 <input type="text">
             </article>
-            <figure class="event-color color-toolbar">
+            <figure class="event-color color-toolbar right">
                 <i data-tool-value="#e45f5f" data-tool="color" class="color" style="background-color: #e45f5f;"></i>
                 <i class="arrow"></i>
             </figure>
             <article class="event-when">
                 <span>When</span>
-                <input type="date" disabled>
+                <input disabled>
             </article>
             <article class="event-start">
                 <span>Start</span>
-                <input type="number">
-                <input type="number">
+                <input>
+                <section class="dropdown"><i class="arrow"></i></section>
+                <input>
+                <section class="dropdown"><i class="arrow"></i></section>
             </article>
-            <article class="event-duration">
+            <article class="event-duration right">
                 <span>Duration</span>
-                 <select>
-                    <option value="1">1 hour</option>
-                    <option value="2">2 hours</option>
-                    <option value="3">3 hours</option>
-                    <option value="4">4 hours</option>
-                    <option value="5">5 hours</option>
-                    <option value="6">6 hours</option>
-                    <option value="7">7 hours</option>
-                    <option value="8">8 hours</option> 
-                    <option value="9">9 hours</option> 
-                    <option value="10">10 hours</option>
-                    <option value="11">11 hours</option>
-                    <option value="12">12 hours</option>
-                    <option value="13">13 hours</option>
-                    <option value="14">14 hours</option>
-                    <option value="15">15 hours</option>
-                    <option value="16">16 hours</option>
-                    <option value="18">18 hours</option>
-                    <option value="19">19 hours</option>
-                    <option value="20">20 hours</option> 
-                    <option value="21">21 hours</option> 
-                    <option value="22">22 hours</option>
-                    <option value="23">23 hours</option>
-                    <option value="all-day">all day</option>                                                         
-                </select> 
+                <input>                                                         
+                <section class="dropdown"><i class="arrow"></i></section> 
             </article>
             <article class="event-frequency">
                 <span>Frequency</span>
-                <input type="number">
+                <input>
+                <section class="dropdown"><i class="arrow"></i></section>
             </article>
-            <article class="event-alert">
+            <article class="event-alert right">
                 <span>Alert</span>
                 <input type="text">
+                <section class="dropdown"><i class="arrow"></i></section>
             </article>
             <article class="separator"></article>   
         </section>
@@ -824,4 +798,4 @@
         </section>
     </section>
 </section>
-<div id="shadow" class="abs top dark hide fullHeight fullWidth center"></div>
+<div id="shadow" class="abs top dark hide fullWidth center"></div>
