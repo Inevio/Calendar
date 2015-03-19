@@ -5,10 +5,12 @@ var BROWSER_WEBKIT = 2;
 var BROWSER_TYPE = /webkit/i.test( navigator.userAgent ) ? BROWSER_WEBKIT : ( /trident/i.test( navigator.userAgent ) ? BROWSER_IE : BROWSER_FIREFOX );
 
 // VARIABLES
+var calendarView = 'month';
 var febNumberOfDays = '';
 var numOfDays = '';
 var monthNames = ['January','February','March','April','May','June','July','August','September','October','November', 'December'];
-var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thrusday','Friday', 'Saturday'];
+var monthShortNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov', 'Dec'];
+var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday', 'Saturday'];
 var dayPerMonth = ['31','','31','30','31','30','31','31','30','31','30','31'];
 //current date
 var currentDate = new Date();
@@ -169,13 +171,17 @@ var selectCalendarType = function(calendarType){
 	$(id).addClass('active-type');
 	if(type == 'dayType'){
 		$('#day-calendar').addClass('calendar-active');
+        calendarView = 'day';
 	}else if(type == 'weekType'){
 		$('#week-calendar').addClass('calendar-active');
+        calendarView = 'week';
 	}else if(type == 'monthType'){
 		$('#month-calendar').addClass('calendar-active');
+        calendarView = 'month';
 	}else{
 		alert('CalendarTypeError');
-	}	
+	}
+    initCalendar();
 }
 
 //Display and hides this menu.
@@ -193,6 +199,8 @@ var showMenu = function(menu){
 var selectDay = function(cell){
     $('.day-selected').removeClass('day-selected');
     cell.addClass('day-selected');
+    showingDate.setDate(cell.find('span').text());
+    
     if(cell.hasClass('mon')){
         $('.monday').addClass('day-selected');
     }else if(cell.hasClass('tue')){
@@ -219,8 +227,12 @@ var initCalendar = function(){
     }
     numOfDays = dayPerMonth[showingMonth];
     setShowingDate();
-    setCells();
-    $( '.day-table td:eq('+(currentDate.getDate()-1)+')' ).addClass('day-selected');
+    if(calendarView == 'month'){
+        setMonthCells();
+    }else if(calendarView == 'week'){
+        setWeekCells();
+    }
+    $( '.day-table td:eq('+(currentDate.getDate()-1)+')' ).addClass('day-selected');    
 }
 
 //Determinate if February 28/29
@@ -234,12 +246,17 @@ var setFebDays = function(){
 
 //Set the showing date on the calendar header
 var setShowingDate = function(){
-    var dateText = monthNames[showingMonth]+' '+showingYear;
+    var dateText = '';
+    if(calendarView == 'month'){
+        dateText = monthNames[showingMonth]+', '+showingYear;
+    }else if(calendarView == 'week'){
+        dateText = monthShortNames[showingMonth]+', '+showingYear;
+    }
     currentMonthDOM.text(dateText);
 }
 
 //Set the primary state of the cells of the month view of the calendar
-var setCells = function(){
+var setMonthCells = function(){
     var nCells = 42;
     var nBlankCells = nCells - numOfDays;
     showingDate = new Date(monthNames[showingMonth]+' 1 ,'+showingYear);
@@ -272,6 +289,19 @@ var setCells = function(){
     }
     
     $('.day-cell').on( 'click', function() {selectDay($( this ));});
+}
+
+var setWeekCells = function(){  
+    $( '.week-day-name .week-day:eq('+showingDate.getDay()+')' ).text(showingDate.getDate()+' '+dayNames[showingDate.getDay()]);
+    var showingDateAux = showingDate;
+    for (i = showingDate.getDay()-1; i >= 0; i--) {
+        showingDateAux.setDate(showingDate.getDate()-1);
+        $( '.week-day-name .week-day:eq('+i+')' ).text(showingDateAux.getDate()+' '+dayNames[showingDateAux.getDay()]);
+    }
+    for (i = showingDate.getDay()+1; i < 7; i++) {
+        showingDateAux.setDate(showingDate.getDate()+1);
+        $( '.week-day-name .week-day:eq('+i+')' ).text(showingDateAux.getDate()+' '+dayNames[showingDateAux.getDay()]);
+    }
 }
 
 //Clean all the cells of the month view of the calendar
