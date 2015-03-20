@@ -266,8 +266,10 @@
 }
 
 .current-month span{
-    margin: 7px 20px;
+    margin: 7px 10px;
     float: left;
+    width: 98px;
+    text-align: center;
 }
 
 .create-event{
@@ -1171,6 +1173,8 @@ thead{
     padding-top: 5px;
     width: 5.5%;
     height: 4.3%;
+    font-size: 13px;
+    text-align: center;
 }
 
 #week-calendar .week-view-all-day {
@@ -1255,6 +1259,7 @@ thead{
     height: 100%;
     padding-top: 11px;
     text-align: center;
+    font-size: 13px;
 }
 
 #week-calendar .week-scroll{
@@ -1518,12 +1523,16 @@ thead{
 
 #day-calendar .time-tittle {
     color: #6f7578;
-    font-size: 15.5px;
+    font-size: 13px;
 }
 
 
 #day-calendar tr .times > section:last-child {
     height: 0px;
+}
+
+#day-calendar .time-cells > table {
+  width: 463px;
 }
 
 /* Images transformation */

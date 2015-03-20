@@ -18,14 +18,13 @@ var currentYear = currentDate.getFullYear();
 var currentMonth = currentDate.getMonth();
 var currentDay = currentDate.getDay();
 //date showing
-var showingDate = new Date(monthNames[currentMonth]+' 1 ,'+currentYear);
+var showingDate = new Date();
 var showingYear = showingDate.getFullYear();
 var showingMonth = showingDate.getMonth();
 var showingDay = showingDate.getDay();
 
 
 
-console.log(numOfDays);
 
 // DOM variables
 var win                     = $(this);
@@ -199,8 +198,11 @@ var showMenu = function(menu){
 var selectDay = function(cell){
     $('.day-selected').removeClass('day-selected');
     cell.addClass('day-selected');
-    showingDate.setDate(cell.find('span').text());
-    
+    if(calendarView == 'month'){
+        showingDate.setDate(cell.find('span').text());
+    }else if(calendarView == 'week'){
+        showingDate.setDate(+$( '.week-day-names th:eq('+(cell.index()-1)+')' ).find('span').text().substring(0, 2));
+    }
     if(cell.hasClass('mon')){
         $('.monday').addClass('day-selected');
     }else if(cell.hasClass('tue')){
@@ -229,10 +231,11 @@ var initCalendar = function(){
     setShowingDate();
     if(calendarView == 'month'){
         setMonthCells();
+        selectDay($( '.day-table td:eq('+(showingDate.getDate()-1)+')' ));  
     }else if(calendarView == 'week'){
         setWeekCells();
+        selectDay($( '.time-events td.time-col:eq('+(showingDate.getDay())+')' ));    
     }
-    $( '.day-table td:eq('+(currentDate.getDate()-1)+')' ).addClass('day-selected');    
 }
 
 //Determinate if February 28/29
@@ -250,7 +253,11 @@ var setShowingDate = function(){
     if(calendarView == 'month'){
         dateText = monthNames[showingMonth]+', '+showingYear;
     }else if(calendarView == 'week'){
-        dateText = monthShortNames[showingMonth]+', '+showingYear;
+        var firstDayOfWeek = new Date();
+        firstDayOfWeek.setDate(showingDate.getDate() - showingDate.getDay());        
+        var lastDayOfWeek = new Date();
+        lastDayOfWeek.setDate(showingDate.getDate() + (6 - showingDate.getDay()));
+        dateText = firstDayOfWeek.getDate()+'-'+lastDayOfWeek.getDate()+' '+monthShortNames[showingMonth]+', '+showingYear;
     }
     currentMonthDOM.text(dateText);
 }
@@ -259,7 +266,6 @@ var setShowingDate = function(){
 var setMonthCells = function(){
     var nCells = 42;
     var nBlankCells = nCells - numOfDays;
-    showingDate = new Date(monthNames[showingMonth]+' 1 ,'+showingYear);
     
     var prevNumOfDays = '';
     if(showingMonth == 0){
@@ -268,7 +274,7 @@ var setMonthCells = function(){
         prevNumOfDays = dayPerMonth[showingMonth-1];
     }
     
-    var firstWeekDayOfMonth = showingDate.getDay();
+    var firstWeekDayOfMonth = new Date(monthNames[showingMonth]+' 1 ,'+showingYear).getDay();
     prevNumOfDays -= firstWeekDayOfMonth-1;
     for (i = 0; i < firstWeekDayOfMonth; i++) {
         $( '.day-table td:eq('+i+')' ).addClass('other-month-cell');
@@ -291,15 +297,16 @@ var setMonthCells = function(){
     $('.day-cell').on( 'click', function() {selectDay($( this ));});
 }
 
-var setWeekCells = function(){  
+var setWeekCells = function(){
     $( '.week-day-name .week-day:eq('+showingDate.getDay()+')' ).text(showingDate.getDate()+' '+dayNames[showingDate.getDay()]);
-    var showingDateAux = showingDate;
+    var showingDateAux = new Date(showingDate.getTime());
     for (i = showingDate.getDay()-1; i >= 0; i--) {
-        showingDateAux.setDate(showingDate.getDate()-1);
+        showingDateAux.setDate(showingDateAux.getDate()-1);
         $( '.week-day-name .week-day:eq('+i+')' ).text(showingDateAux.getDate()+' '+dayNames[showingDateAux.getDay()]);
     }
+    showingDateAux = new Date(showingDate.getTime());
     for (i = showingDate.getDay()+1; i < 7; i++) {
-        showingDateAux.setDate(showingDate.getDate()+1);
+        showingDateAux.setDate(showingDateAux.getDate()+1);
         $( '.week-day-name .week-day:eq('+i+')' ).text(showingDateAux.getDate()+' '+dayNames[showingDateAux.getDay()]);
     }
 }
