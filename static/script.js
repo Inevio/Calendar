@@ -19,12 +19,6 @@ var currentMonth = currentDate.getMonth();
 var currentDay = currentDate.getDay();
 //date showing
 var showingDate = new Date();
-var showingYear = showingDate.getFullYear();
-var showingMonth = showingDate.getMonth();
-var showingDay = showingDate.getDay();
-
-
-
 
 // DOM variables
 var win                     = $(this);
@@ -76,7 +70,7 @@ $('.my-calendars').on('click', function() {
 
 createEvent.on('click', function() {
     showMenu('#create-event-modal');
-    var eventDate = dayNames[getDaySelected().getDay()]+', '+getDaySelected().getDate()+'th of '+monthNames[showingMonth]+', '+showingYear;
+    var eventDate = dayNames[getDaySelected().getDay()]+', '+getDaySelected().getDate()+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
     $('.event-when input').val(eventDate);
 });
 
@@ -103,25 +97,23 @@ $('.cancel-create-event-button').on('click', function() {
 
 //Adds buttons functionality to change month
 nextMonthDOM.on('click', function() {
-    if(showingMonth == 11){
-        showingMonth = 0;
-        showingYear++;
-    }else{
-        showingMonth++;
+    if(calendarView == 'month'){
+        showingDate.setMonth(showingDate.getMonth()+1);
+    }else if(calendarView =='week'){
+        showingDate.setDate(showingDate.getDate()+7);
     }
     cleanCells();
     initCalendar();
 });
 
 prevMonthDOM.on('click', function() {
-    if(showingMonth == 0){
-        showingMonth = 11;
-        showingYear--;
-    }else{
-        showingMonth--;
+    if(calendarView == 'month'){
+        showingDate.setMonth(showingDate.getMonth()-1);
+    }else if(calendarView =='week'){
+        showingDate.setDate(showingDate.getDate()-7);
     }
     cleanCells();
-    initCalendar();;
+    initCalendar();
 });
 
 //Color toolbar positioning
@@ -196,6 +188,7 @@ var showMenu = function(menu){
 
 //Adds a green area to the cell recieved.
 var selectDay = function(cell){
+    console.log('/////'+showingDate);
     $('.day-selected').removeClass('day-selected');
     cell.addClass('day-selected');
     if(calendarView == 'month'){
@@ -218,28 +211,31 @@ var selectDay = function(cell){
     }else{
         $('.sunday').addClass('day-selected');
     }
+    console.log('-------'+showingDate);
 }
 
 // -- APP FUNCTIONALITY --
 
 //Set all de calendar
 var initCalendar = function(){
-    if (showingMonth == 1){
+    console.log('1-->'+showingDate);
+    if (showingDate.getMonth() == 1){
         setFebDays();
     }
-    numOfDays = dayPerMonth[showingMonth];
+    numOfDays = dayPerMonth[showingDate.getMonth()];
     setShowingDate();
+    var dayToSelect = '';
     if(calendarView == 'month'){
-        setMonthCells();
-        selectDay($( '.day-table td:eq('+(showingDate.getDate()-1)+')' ));  
+        dayToSelect = setMonthCells();
     }else if(calendarView == 'week'){
-        setWeekCells();
-        selectDay($( '.time-events td.time-col:eq('+(showingDate.getDay())+')' ));    
+        dayToSelect = setWeekCells();
     }
+    selectDay(dayToSelect);  
 }
 
 //Determinate if February 28/29
 var setFebDays = function(){
+    var showingYear = showingDate.getFullYear();
     if ( (showingYear%100!=0) && (showingYear%4==0) || (showingYear%400==0)){
         dayPerMonth[1] = '29';
     }else{
@@ -249,32 +245,35 @@ var setFebDays = function(){
 
 //Set the showing date on the calendar header
 var setShowingDate = function(){
+    console.log('3-->'+showingDate);
     var dateText = '';
     if(calendarView == 'month'){
-        dateText = monthNames[showingMonth]+', '+showingYear;
+        dateText = monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
     }else if(calendarView == 'week'){
         var firstDayOfWeek = new Date();
         firstDayOfWeek.setDate(showingDate.getDate() - showingDate.getDay());        
         var lastDayOfWeek = new Date();
         lastDayOfWeek.setDate(showingDate.getDate() + (6 - showingDate.getDay()));
-        dateText = firstDayOfWeek.getDate()+'-'+lastDayOfWeek.getDate()+' '+monthShortNames[showingMonth]+', '+showingYear;
+        dateText = firstDayOfWeek.getDate()+'-'+lastDayOfWeek.getDate()+' '+monthShortNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
     }
     currentMonthDOM.text(dateText);
+    console.log('4-->'+showingDate);
 }
 
 //Set the primary state of the cells of the month view of the calendar
 var setMonthCells = function(){
+    console.log('5-->'+showingDate);
     var nCells = 42;
     var nBlankCells = nCells - numOfDays;
     
     var prevNumOfDays = '';
-    if(showingMonth == 0){
+    if(showingDate.getMonth() == 0){
         prevNumOfDays = dayPerMonth[11];
     }else{
-        prevNumOfDays = dayPerMonth[showingMonth-1];
+        prevNumOfDays = dayPerMonth[showingDate.getMonth()-1];
     }
     
-    var firstWeekDayOfMonth = new Date(monthNames[showingMonth]+' 1 ,'+showingYear).getDay();
+    var firstWeekDayOfMonth = new Date(monthNames[showingDate.getMonth()]+' 1 ,'+showingDate.getFullYear()).getDay();
     prevNumOfDays -= firstWeekDayOfMonth-1;
     for (i = 0; i < firstWeekDayOfMonth; i++) {
         $( '.day-table td:eq('+i+')' ).addClass('other-month-cell');
@@ -295,9 +294,15 @@ var setMonthCells = function(){
     }
     
     $('.day-cell').on( 'click', function() {selectDay($( this ));});
+    console.log('6-->'+showingDate);
+    
+    var dayToSelect = $( '.day-table td:eq('+(firstWeekDayOfMonth+(showingDate.getDate()-1))+')' );
+    
+    return dayToSelect;
 }
 
 var setWeekCells = function(){
+    console.log('7-->'+showingDate);
     $( '.week-day-name .week-day:eq('+showingDate.getDay()+')' ).text(showingDate.getDate()+' '+dayNames[showingDate.getDay()]);
     var showingDateAux = new Date(showingDate.getTime());
     for (i = showingDate.getDay()-1; i >= 0; i--) {
@@ -309,6 +314,9 @@ var setWeekCells = function(){
         showingDateAux.setDate(showingDateAux.getDate()+1);
         $( '.week-day-name .week-day:eq('+i+')' ).text(showingDateAux.getDate()+' '+dayNames[showingDateAux.getDay()]);
     }
+    console.log('8-->'+showingDate);
+    
+    return $( '.time-events td.time-col:eq('+(showingDate.getDay())+')' );
 }
 
 //Clean all the cells of the month view of the calendar
@@ -322,7 +330,7 @@ var cleanCells = function(){
 }
 
 var getDaySelected = function(){
-    return new Date(monthNames[showingMonth]+' '+$('.day-selected span').text()+' ,'+showingYear);
+    return new Date(monthNames[showingDate.getMonth()]+' '+$('.day-selected span').text()+' ,'+showingDate.getFullYear());
 }
 
 var addEvent = function(){

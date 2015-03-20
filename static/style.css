@@ -255,8 +255,8 @@
 }
 
 .my-calendars{
-    width: 83px;
-    margin: 6.5px 249px 3.5px 12px;
+    width: 93px;
+    margin: 6.5px 239px 3.5px 12px;
     font-size: 13px;
 }
 
@@ -1398,6 +1398,7 @@ thead{
 .event-info > span:nth-child(2) {
     float: right;
     color: #9ea4a6;
+    font-size: 13px;
 }
 
 #day-calendar .day > article {
