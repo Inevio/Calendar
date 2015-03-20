@@ -188,7 +188,6 @@ var showMenu = function(menu){
 
 //Adds a green area to the cell recieved.
 var selectDay = function(cell){
-    console.log('/////'+showingDate);
     $('.day-selected').removeClass('day-selected');
     cell.addClass('day-selected');
     if(calendarView == 'month'){
@@ -211,14 +210,12 @@ var selectDay = function(cell){
     }else{
         $('.sunday').addClass('day-selected');
     }
-    console.log('-------'+showingDate);
 }
 
 // -- APP FUNCTIONALITY --
 
 //Set all de calendar
 var initCalendar = function(){
-    console.log('1-->'+showingDate);
     if (showingDate.getMonth() == 1){
         setFebDays();
     }
@@ -245,7 +242,6 @@ var setFebDays = function(){
 
 //Set the showing date on the calendar header
 var setShowingDate = function(){
-    console.log('3-->'+showingDate);
     var dateText = '';
     if(calendarView == 'month'){
         dateText = monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
@@ -257,12 +253,10 @@ var setShowingDate = function(){
         dateText = firstDayOfWeek.getDate()+'-'+lastDayOfWeek.getDate()+' '+monthShortNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
     }
     currentMonthDOM.text(dateText);
-    console.log('4-->'+showingDate);
 }
 
 //Set the primary state of the cells of the month view of the calendar
 var setMonthCells = function(){
-    console.log('5-->'+showingDate);
     var nCells = 42;
     var nBlankCells = nCells - numOfDays;
     
@@ -294,7 +288,6 @@ var setMonthCells = function(){
     }
     
     $('.day-cell').on( 'click', function() {selectDay($( this ));});
-    console.log('6-->'+showingDate);
     
     var dayToSelect = $( '.day-table td:eq('+(firstWeekDayOfMonth+(showingDate.getDate()-1))+')' );
     
@@ -302,7 +295,6 @@ var setMonthCells = function(){
 }
 
 var setWeekCells = function(){
-    console.log('7-->'+showingDate);
     $( '.week-day-name .week-day:eq('+showingDate.getDay()+')' ).text(showingDate.getDate()+' '+dayNames[showingDate.getDay()]);
     var showingDateAux = new Date(showingDate.getTime());
     for (i = showingDate.getDay()-1; i >= 0; i--) {
@@ -314,7 +306,6 @@ var setWeekCells = function(){
         showingDateAux.setDate(showingDateAux.getDate()+1);
         $( '.week-day-name .week-day:eq('+i+')' ).text(showingDateAux.getDate()+' '+dayNames[showingDateAux.getDay()]);
     }
-    console.log('8-->'+showingDate);
     
     return $( '.time-events td.time-col:eq('+(showingDate.getDay())+')' );
 }
