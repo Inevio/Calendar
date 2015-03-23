@@ -32,6 +32,9 @@ var createCalendar          = $('.add-new-calendar');
 var addEventButton          = $('.create-event-button');
 var addCalendarButton       = $('.create-calendar-button');
 var eventName               = $('.event-name input');
+var eventStartTimeHour      = $('.event-start input:eq(0)');
+var eventStartTimeMinutes   = $('.event-start input:eq(1)');
+var eventDuration           = $('.event-duration input');
 var calendarName            = $('.calendar-name input');
 var calendarList            = $('.my-calendars-list');
 
@@ -42,7 +45,8 @@ var colorPickerHover        = $('.color-picker-hover');
 var colorPicker             = $('.color-picker');
 var colorPickerColor        = $('.color-toolbar .color');
 
-var eventPrototype          = $('.event.wz-prototype');
+var monthEventPrototype     = $('#month-calendar .event.wz-prototype');
+var weekEventPrototype     = $('#week-calendar .event.wz-prototype');
 var calendarPrototype       = $('.calendar.wz-prototype');
 
 //Adds each day-cell a clickable area to select the current day.
@@ -325,34 +329,71 @@ var getDaySelected = function(){
 }
 
 var addEvent = function(){
-    var daySelected = $('#month-calendar .day-selected');
-    var event =  eventPrototype.clone();
-    event.removeClass('wz-prototype');
-    //toDo
-    event.text(eventName.val());
-    event.css('background-color', colorPickerColor.css('background-color'));
-    if($('.day-selected article').length < 1){
-        daySelected.append(event);
-    }else{
-        var moreEvents = $('.day-selected .moreEvents');
-        if(moreEvents.length == 0){
-            var moreEvents = eventPrototype.clone();
-            moreEvents.removeClass('wz-prototype');
-            moreEvents.addClass('moreEvents');
-            moreEvents.text('1 more...');
-            moreEvents.data('numEventsMore', 1)
-            event.hide();
+    if(calendarView == 'month'){
+        var daySelected = $('#month-calendar .day-selected');
+        var event =  monthEventPrototype.clone();
+        event.removeClass('wz-prototype');
+        //toDo
+        event.text(eventName.val());
+        event.css('background-color', colorPickerColor.css('background-color'));
+        if($('.day-selected article').length < 1){
             daySelected.append(event);
-            daySelected.append(moreEvents);
         }else{
-            var numEventsMore = moreEvents.data('numEventsMore');
-            numEventsMore++;
-            moreEvents.data('numEventsMore', numEventsMore);
-            moreEvents.text(numEventsMore+' more...');
-            event.hide();
-            daySelected.append(event);
-            daySelected.append(moreEvents);
+            var moreEvents = $('.day-selected .moreEvents');
+            if(moreEvents.length == 0){
+                var moreEvents = monthEventPrototype.clone();
+                moreEvents.removeClass('wz-prototype');
+                moreEvents.addClass('moreEvents');
+                moreEvents.text('1 more...');
+                moreEvents.data('numEventsMore', 1)
+                event.hide();
+                daySelected.append(event);
+                daySelected.append(moreEvents);
+            }else{
+                var numEventsMore = moreEvents.data('numEventsMore');
+                numEventsMore++;
+                moreEvents.data('numEventsMore', numEventsMore);
+                moreEvents.text(numEventsMore+' more...');
+                event.hide();
+                daySelected.append(event);
+                daySelected.append(moreEvents);
+            }
         }
+    }else if(calendarView == 'week'){
+        var startTimeHour = +eventStartTimeHour.val(); 
+        var startTimeMinutes = +eventStartTimeMinutes.val();
+        var weekDaySelected = $('.time-col.day-selected').index() -1;
+        var daySelected = $('.hour-markers .marker-cell:eq('+startTimeHour+')');
+        var event = weekEventPrototype.clone();
+        event.removeClass('wz-prototype');
+        //toDo
+        event.find('span:eq(0)').text(eventName.val());
+        event.css('background-color', colorPickerColor.css('background-color'));
+        if(eventDuration.val() == 'all day'){
+            daySelected = $('.day-all-day.day-selected');
+            event.css('display', 'inline-block');
+            event.css('margin-left', '-1.6px');
+            event.css('width', '101px');
+            if(daySelected.children().length > 0){
+                var nEvents = daySelected.data('nEvents') + 1;
+                var nextTop = daySelected.data('nextTop');
+                daySelected.data('nEvents', nEvents);
+                $('.day-all-day').css('height', 20*nEvents);
+                $('.scroll-time-events').css('height', (481 - parseInt($('.week-top-container').css('height'))));
+                event.css('top', nextTop+'px');
+                daySelected.data('nextTop', nextTop+18);
+            }else{
+                daySelected.data('nEvents', 1);
+                daySelected.data('nextTop', 17);
+            }
+        }else{
+            var eventTime = startTimeHour+':'+startTimeMinutes+' '+(startTimeHour+(+(eventDuration.val().substring(0, 2))))+':'+startTimeMinutes;
+            event.find('span:eq(1)').text(eventTime);
+            event.css('left', 14.28 * weekDaySelected +'%');
+            event.css('height', 37 * (+(eventDuration.val().substring(0, 2)))+'px');
+            event.css('margin-top', 0.666666 * startTimeMinutes +'px');
+        }
+        daySelected.append(event);
     }
 }
 
