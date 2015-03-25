@@ -30,7 +30,9 @@ var createEventModal        = $('#create-event-modal');
 var createEvent             = $('.create-event');
 var createCalendar          = $('.add-new-calendar');
 var addEventButton          = $('.create-event-button');
+var cancelEventButton       = $('.cancel-create-event-button');
 var addCalendarButton       = $('.create-calendar-button');
+var cancelCalendarButton    = $('.cancel-create-calendar-button');
 var eventName               = $('.event-name input');
 var eventStartTimeHour      = $('.event-start input:eq(0)');
 var eventStartTimeMinutes   = $('.event-start input:eq(1)');
@@ -92,10 +94,12 @@ addCalendarButton.on('click', function() {
     showMenu('#create-calendar-modal');
 });
 
-$('.cancel-create-calendar-button').on('click', function() {
+cancelCalendarButton.on('click', function() {
+    colorPickerContainer.hide();
     showMenu('#create-calendar-modal');
 });
-$('.cancel-create-event-button').on('click', function() {
+cancelEventButton.on('click', function() {
+    colorPickerContainer.hide();
     showMenu('#create-event-modal');
 });
 
