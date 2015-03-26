@@ -117,7 +117,7 @@
 }
 
 .calendar-active{
-	width: 100%;
+	width: 933px;
 	background-color: #fff;
 	border: solid 1px rgba(0,0,0,.15);
 	display:block !important;
@@ -258,6 +258,7 @@
     width: 93px;
     margin: 6.5px 239px 3.5px 12px;
     font-size: 13px;
+    height: 13px;
 }
 
 .current-month{
@@ -291,7 +292,7 @@
 }
 
 .calendar-body table{
-    width:935px;
+    width:100%;
     float: left;
     height: 34px;
 }
@@ -1061,7 +1062,7 @@ thead{
 
 #month-calendar .mv-event-container {
     position: relative;
-    width: 935px;
+    width: 100%;
     height: 447px;
     float: left;
 }

@@ -22,6 +22,9 @@ var showingDate = new Date();
 
 // DOM variables
 var win                     = $(this);
+var monthCalendar           = $('#month-calendar');
+var weekCalendar            = $('#week-calendar');
+var dayCalendar             = $('#day-calendar');
 var currentMonthDOM         = $('.current-month span');
 var prevMonthDOM            = $('.current-month .prev');
 var nextMonthDOM            = $('.current-month .next');
@@ -163,20 +166,27 @@ colorPickerHover.on( 'click', function(){
 
 //Displays de calendarType.
 var selectCalendarType = function(calendarType){
+    $('.wz-fit-ignore').removeClass('wz-fit-ignore');
 	$('.calendar-active').removeClass('calendar-active');
 	$('.active-type').removeClass('active-type');
 	type = calendarType.attr('id');
 	id = '#' + type;
 	$(id).addClass('active-type');
 	if(type == 'dayType'){
-		$('#day-calendar').addClass('calendar-active');
+		dayCalendar.addClass('calendar-active');
         calendarView = 'day';
+        monthCalendar.addClass('wz-fit-ignore');
+        weekCalendar.addClass('wz-fit-ignore');
 	}else if(type == 'weekType'){
-		$('#week-calendar').addClass('calendar-active');
+		weekCalendar.addClass('calendar-active');
         calendarView = 'week';
+        monthCalendar.addClass('wz-fit-ignore');
+        dayCalendar.addClass('wz-fit-ignore');
 	}else if(type == 'monthType'){
-		$('#month-calendar').addClass('calendar-active');
+		monthCalendar.addClass('calendar-active');
         calendarView = 'month';
+        dayCalendar.addClass('wz-fit-ignore');
+        weekCalendar.addClass('wz-fit-ignore');
 	}else{
 		alert('CalendarTypeError');
 	}
@@ -320,12 +330,15 @@ var setWeekCells = function(){
 
 //Clean all the cells of the month view of the calendar
 var cleanCells = function(){
-    for (i = 0; i < 42; i++) {
+    if(calendarView == 'month'){
+        for (i = 0; i < 42; i++) {
             $( '.day-table td:eq('+i+') span' ).text('');
             $( '.day-table td:eq('+i+') article' ).remove();
             $( '.day-table td:eq('+i+')' ).removeClass();
+        }
+    }else if(calendarView == 'week'){
+        $( '#week-calendar .event').remove();
     }
-    
 }
 
 var getDaySelected = function(){
