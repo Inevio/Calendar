@@ -252,7 +252,10 @@ var initCalendar = function(){
     }else if(calendarView == 'week'){
         dayToSelect = setWeekCells();
     }
-    selectDay(dayToSelect);  
+    selectDay(dayToSelect);
+    if(calendarView == 'week'){
+        setHour();
+    }
 }
 
 //Determinate if February 28/29
@@ -350,6 +353,19 @@ var cleanCells = function(){
 
 var getDaySelected = function(){
     return new Date(monthNames[showingDate.getMonth()]+' '+$('.day-selected span').text()+' ,'+showingDate.getFullYear());
+}
+
+var setHour = function(){
+    if($('.active-day-moment-bar').length == 0){
+        var hour = currentDate.getHours();
+        var minutes = currentDate.getMinutes();
+        var offset = (41 * hour) + (0.66666666 * minutes);
+        var dayMomentBar = $('.day-moment.wz-prototype').clone();
+        dayMomentBar.removeClass('wz-prototype');
+        dayMomentBar.addClass('active-day-moment-bar');
+        dayMomentBar.css('top', offset+'px');
+        $('.day-selected').append(dayMomentBar);
+    }
 }
 
 var addEvent = function(){

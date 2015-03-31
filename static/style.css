@@ -132,15 +132,15 @@
 }
 
 .calendar-menu-event-finder {      
-    height: 26px;
-    padding: 5px 20px 9px;
-    width: 170px;
+    height: 28px;
+    padding: 5px 20px 7px;
+    width: 173px;
     font-size: 15px;
 }
 
 .calendar-menu-event-finder input{
     padding-left: 31px;
-    width: 142px;    
+    width: 173px;    
     height: 100%;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -152,6 +152,9 @@
     border: 1px solid #bd4c4c;
     font-family: "Lato";
     color: #6f7578;
+    -webkit-box-sizing: border-box; 
+    -moz-box-sizing: border-box;   
+    box-sizing: border-box; 
 }
 
 .calendar-buttons{
@@ -1187,14 +1190,12 @@ thead{
 }
 
 #week-calendar .week-top-container {
-    border-bottom: 2px solid #ccd3d5;
     float: left;
 }
 
 #week-calendar .week-labels {
-    overflow: hidden;
     border-right: 1px solid #ccd3d5;
-    width: 51px;
+    width: 49px;
 }
 
 #week-calendar .week-day-names > th {
@@ -1211,15 +1212,14 @@ thead{
 }
 
 #week-calendar .all-day {
-    margin-top: 31px;
-    position: absolute;
-    border-top: 1px solid #ccd3d5;
+    border-bottom: 2px solid #f6f8f8;
     border-right: 1px solid #ccd3d5;
-    padding-top: 5px;
-    width: 5.5%;
-    height: 4.3%;
     font-size: 13px;
     text-align: center;
+}
+
+.week-allday-bar > td:first-child {
+    background-color: #F6F8F8;
 }
 
 #week-calendar .week-view-all-day {
@@ -1245,6 +1245,7 @@ thead{
     border-right: 1px solid rgb(204, 211, 213);
     height: 25px;
     position: relative;
+    border-bottom: 2px solid #ccd3d5 !important;
 }
 
 #week-calendar .week-day {
@@ -1288,9 +1289,15 @@ thead{
 }
 
 #week-calendar .times, #week-calendar .times-col {
-    width: 52px;
+    width: 49px;
     position: relative;
     background-color: #f6f8f8;
+}
+
+@-moz-document url-prefix() {
+    #week-calendar .time-events .times, #week-calendar .time-events .times-col{
+        width: 50px;
+    }
 }
 
 #week-calendar .times > section {
@@ -1300,12 +1307,13 @@ thead{
 
 #week-calendar .time-tittle {
     position: absolute;
-    width: 51px;
+    width: 49px;
     border-right: 1px solid #ccd3d5;
     height: 100%;
     padding-top: 11px;
     text-align: center;
     font-size: 13px;
+    background-color: #f6f8f8;
 }
 
 #week-calendar .week-scroll{
@@ -1313,8 +1321,11 @@ thead{
 }
 
 #week-calendar .time-col {
-    border-left: 1px solid #dde5e6;
+    border-right: 1px solid #dde5e6;
     position: relative;
+    -webkit-box-sizing: border-box; 
+    -moz-box-sizing: border-box;   
+    box-sizing: border-box;
 }
 
 #week-calendar .day-selected {
