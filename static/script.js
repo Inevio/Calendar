@@ -213,6 +213,13 @@ var selectDay = function(cell){
     }else if(calendarView == 'week'){
         showingDate.setDate(+$( '.week-day-names th:eq('+(cell.index()-1)+')' ).find('span').text().substring(0, 2));
     }
+    
+    $('.white-background').removeClass('white-background');
+    $('.title-cell:eq('+cell.index()+')').addClass('white-background');
+    $('.week-day-names th').removeClass('white-background');
+    $('.week-day-names th:eq('+(cell.index()-1)+')').addClass('white-background');
+    
+    
     if(cell.hasClass('mon')){
         $('.monday').addClass('day-selected');
     }else if(cell.hasClass('tue')){
