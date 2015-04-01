@@ -42,6 +42,9 @@ var eventStartTimeMinutes   = $('.event-start input:eq(1)');
 var eventDuration           = $('.event-duration input');
 var calendarName            = $('.calendar-name input');
 var calendarList            = $('.my-calendars-list');
+var dayNumberDisplay        = $('.day article span:first-child');
+var dayNameDisplay          = $('.day article span:last-child');
+var miniCalendarTittle      = $('.mini-calendar-head > span');
 
 var colorToolbar            = $('.color-toolbar');
 var colorPickerContainer    = $('.color-picker-container');
@@ -53,6 +56,9 @@ var colorPickerColor        = $('.color-toolbar .color');
 var monthEventPrototype     = $('#month-calendar .event.wz-prototype');
 var weekEventPrototype     = $('#week-calendar .event.wz-prototype');
 var calendarPrototype       = $('.calendar.wz-prototype');
+var dayMomentBarPrototype   = $('.day-moment.wz-prototype');
+var dayMomentBulletPrototype= $('.day-moment-bullet.wz-prototype');
+var dayMomentTimePrototype= $('.day-moment-time.wz-prototype');
 
 //Adds each day-cell a clickable area to select the current day.
 $('.time-col').on( 'click', function() {
@@ -112,6 +118,8 @@ nextMonthDOM.on('click', function() {
         showingDate.setMonth(showingDate.getMonth()+1);
     }else if(calendarView =='week'){
         showingDate.setDate(showingDate.getDate()+7);
+    }else if(calendarView =='day'){
+        showingDate.setMonth(showingDate.getMonth()+1);
     }
     cleanCells();
     initCalendar();
@@ -122,6 +130,8 @@ prevMonthDOM.on('click', function() {
         showingDate.setMonth(showingDate.getMonth()-1);
     }else if(calendarView =='week'){
         showingDate.setDate(showingDate.getDate()-7);
+    }else if(calendarView == 'day'){
+        showingDate.setMonth(showingDate.getMonth()-1);
     }
     cleanCells();
     initCalendar();
@@ -212,6 +222,13 @@ var selectDay = function(cell){
         showingDate.setDate(cell.find('span').text());
     }else if(calendarView == 'week'){
         showingDate.setDate(+$( '.week-day-names th:eq('+(cell.index()-1)+')' ).find('span').text().substring(0, 2));
+    }else if(calendarView == 'day'){
+        showingDate.setDate(cell.text());
+        var dateText = showingDate.getDate()+' '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
+        currentMonthDOM.text(dateText);
+        dayNumberDisplay.text(showingDate.getDate());
+        dayNameDisplay.text(dayNames[showingDate.getDay()]);
+        miniCalendarTittle.text(monthNames[showingDate.getMonth()]+' '+showingDate.getFullYear());
     }
     
     $('.white-background').removeClass('white-background');
@@ -251,6 +268,8 @@ var initCalendar = function(){
         dayToSelect = setMonthCells();
     }else if(calendarView == 'week'){
         dayToSelect = setWeekCells();
+    }else if(calendarView == 'day'){
+        dayToSelect = setDayCells();
     }
     selectDay(dayToSelect);
     if(calendarView == 'week'){
@@ -279,6 +298,8 @@ var setShowingDate = function(){
         var lastDayOfWeek = new Date();
         lastDayOfWeek.setDate(showingDate.getDate() + (6 - showingDate.getDay()));
         dateText = firstDayOfWeek.getDate()+'-'+lastDayOfWeek.getDate()+' '+monthShortNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
+    }else if(calendarView == 'day'){
+        dateText = showingDate.getDate()+' '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
     }
     currentMonthDOM.text(dateText);
 }
@@ -338,6 +359,28 @@ var setWeekCells = function(){
     return $( '.time-events td.time-col:eq('+(showingDate.getDay())+')' );
 }
 
+var setDayCells = function(){
+    var nCells = 42;
+    var nBlankCells = nCells - numOfDays;
+    var firstWeekDayOfMonth = new Date(monthNames[showingDate.getMonth()]+' 1 ,'+showingDate.getFullYear()).getDay();
+    nBlankCells = nBlankCells - firstWeekDayOfMonth;
+
+    var dayCounter = 1;
+    for (i = firstWeekDayOfMonth; i < nCells - nBlankCells; i++) {
+        $( '.mini-calendar-body table th:eq('+i+')' ).text(dayCounter++);
+        $( '.mini-calendar-body table th:eq('+i+')' ).addClass('day-cell');
+    }
+    $('.day-cell').on( 'click', function() {selectDay($( this ));});
+    
+    dayNumberDisplay.text(showingDate.getDate());
+    dayNameDisplay.text(dayNames[showingDate.getDay()]);
+    miniCalendarTittle.text(monthNames[showingDate.getMonth()]+' '+showingDate.getFullYear());
+    
+    var dayToSelect = $( '.mini-calendar-body table th:eq('+(firstWeekDayOfMonth+(showingDate.getDate()-1))+')' );
+    
+    return dayToSelect;
+}
+
 //Clean all the cells of the month view of the calendar
 var cleanCells = function(){
     if(calendarView == 'month'){
@@ -348,6 +391,11 @@ var cleanCells = function(){
         }
     }else if(calendarView == 'week'){
         $( '#week-calendar .event').remove();
+    }else if(calendarView == 'day'){
+        for (i = 0; i < 42; i++) {
+            $( '.mini-calendar-body table th:eq('+i+')').text('');
+            $( '.mini-calendar-body table th:eq('+i+')' ).removeClass();
+        }
     }
 }
 
@@ -358,13 +406,29 @@ var getDaySelected = function(){
 var setHour = function(){
     if($('.active-day-moment-bar').length == 0){
         var hour = currentDate.getHours();
-        var minutes = currentDate.getMinutes();
+        var minutes = ('0'+currentDate.getMinutes()).slice(-2);
         var offset = (41 * hour) + (0.66666666 * minutes);
-        var dayMomentBar = $('.day-moment.wz-prototype').clone();
+        var dayMomentBar = dayMomentBarPrototype.clone();
+        var dayMomentBullet = dayMomentBulletPrototype.clone();
+        var dayMomentTime = dayMomentTimePrototype.clone();
         dayMomentBar.removeClass('wz-prototype');
+        dayMomentBullet.removeClass('wz-prototype');
+        dayMomentTime.removeClass('wz-prototype');
+        
+        dayMomentTime.text(hour+':'+minutes);
+        if(10 > +(minutes) > 50){
+            dayMomentTime.css('background-color', '#f6f8f8');
+        }
+        if(minutes != 0){
+            $('.time-events tbody').append(dayMomentTime);
+        }
         dayMomentBar.addClass('active-day-moment-bar');
         dayMomentBar.css('top', offset+'px');
-        $('.day-selected').append(dayMomentBar);
+        dayMomentTime.css('top', (offset-16)+'px');
+        dayMomentBullet.css('top', (offset-5)+'px');
+        
+        $('.time-events tbody').append(dayMomentBar);
+        $('.day-selected').append(dayMomentBullet);
     }
 }
 
