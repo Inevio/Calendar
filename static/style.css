@@ -1303,6 +1303,12 @@ thead{
 #week-calendar .times > section {
     height: 41px;
     position: relative;
+    border-right: 1px solid #ccd3d5;
+    width: 49px;
+}
+
+#week-calendar .times .time-tittle:first-child {
+  margin-top: 21px;
 }
 
 #week-calendar .time-tittle {
@@ -1326,6 +1332,8 @@ thead{
     -webkit-box-sizing: border-box; 
     -moz-box-sizing: border-box;   
     box-sizing: border-box;
+    height: 37px;
+    border-top: 0 none !important;
 }
 
 #week-calendar .day-selected {
@@ -1361,27 +1369,36 @@ thead{
 
 .day-moment {
     background-color: #de706c;
-    height: 2px;
+    height: 1px;
     position: absolute;
     width: 868px;
     right: 0;
 }
 
+#day-calendar .day-moment {
+    width: 396px;
+}
+
 .day-moment-bullet{
     background-color: #de706c;
-    border-radius: 4px;
-    height: 8px;
+    border: 1px solid #fff;
+    border-radius: 6px;
+    height: 11px;
+    left: -8px;
     position: absolute;
-    left: -6px;
-    width: 8px;
+    width: 11px;
 }
 
 .day-moment-time {
-  color: #de706c;
-  font-size: 13px;
-  font-weight: bolder;
-  padding: 9px 0 9px 8px;
-  position: absolute;
+    background-color: #de706c;
+    border-radius: 24px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bolder;
+    margin-left: 10px;
+    margin-top: 8px;
+    padding: 2px 6px;
+    position: absolute;
 }
 
 /* Day calendar */
@@ -1586,7 +1603,7 @@ thead{
 }
 
 #day-calendar .mini-calendar-body th {
-    padding-top: 5px;
+    vertical-align: middle;
 }
 
 #day-calendar .current-day {
@@ -1636,11 +1653,6 @@ thead{
 #day-calendar .time-tittle {
     color: #6f7578;
     font-size: 13px;
-}
-
-
-#day-calendar tr .times > section:last-child {
-    height: 0px;
 }
 
 #day-calendar .time-cells > table {

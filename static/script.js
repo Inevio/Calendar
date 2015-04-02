@@ -12,11 +12,6 @@ var monthNames = ['January','February','March','April','May','June','July','Augu
 var monthShortNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov', 'Dec'];
 var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday', 'Saturday'];
 var dayPerMonth = ['31','','31','30','31','30','31','31','30','31','30','31'];
-//current date
-var currentDate = new Date();
-var currentYear = currentDate.getFullYear();
-var currentMonth = currentDate.getMonth();
-var currentDay = currentDate.getDay();
 //date showing
 var showingDate = new Date();
 
@@ -404,32 +399,38 @@ var getDaySelected = function(){
 }
 
 var setHour = function(){
-    if($('.active-day-moment-bar').length == 0){
-        var hour = currentDate.getHours();
-        var minutes = ('0'+currentDate.getMinutes()).slice(-2);
-        var offset = (41 * hour) + (0.66666666 * minutes);
-        var dayMomentBar = dayMomentBarPrototype.clone();
-        var dayMomentBullet = dayMomentBulletPrototype.clone();
-        var dayMomentTime = dayMomentTimePrototype.clone();
-        dayMomentBar.removeClass('wz-prototype');
-        dayMomentBullet.removeClass('wz-prototype');
-        dayMomentTime.removeClass('wz-prototype');
-        
-        dayMomentTime.text(hour+':'+minutes);
-        if(10 > +(minutes) > 50){
-            dayMomentTime.css('background-color', '#f6f8f8');
-        }
-        if(minutes != 0){
-            $('.time-events tbody').append(dayMomentTime);
-        }
-        dayMomentBar.addClass('active-day-moment-bar');
-        dayMomentBar.css('top', offset+'px');
-        dayMomentTime.css('top', (offset-16)+'px');
-        dayMomentBullet.css('top', (offset-5)+'px');
-        
-        $('.time-events tbody').append(dayMomentBar);
-        $('.day-selected').append(dayMomentBullet);
+    $('.day-moment-time').remove();
+    $('.day-moment').remove();
+    $('.day-moment-bullet').remove();
+    
+    var currentDate = new Date();
+    var hour = currentDate.getHours();
+    var minutes = ('0'+currentDate.getMinutes()).slice(-2);
+    var offset = (41 * hour) + (0.66666666 * minutes);
+    var dayMomentBar = dayMomentBarPrototype.clone();
+    var dayMomentBullet = dayMomentBulletPrototype.clone();
+    var dayMomentTime = dayMomentTimePrototype.clone();
+    dayMomentBar.removeClass('wz-prototype');
+    dayMomentBullet.removeClass('wz-prototype');
+    dayMomentTime.removeClass('wz-prototype');
+
+    dayMomentTime.text(hour+':'+minutes);
+    if(10 > +(minutes) > 50){
+        dayMomentTime.css('background-color', '#f6f8f8');
     }
+    
+    dayMomentBar.css('top', offset+'px');
+    dayMomentTime.css('top', (offset-16)+'px');
+    dayMomentBullet.css('top', (offset-6)+'px');
+    
+    if(minutes != 0){
+        $('.time-events tbody').append(dayMomentTime);
+        $('.time-cells tbody').append(dayMomentTime.clone());
+    }
+
+    $('.time-events tbody').append(dayMomentBar);
+    $('.day-selected').append(dayMomentBullet); 
+    $('.time-cells tbody').append(dayMomentBar.clone());
 }
 
 var addEvent = function(){
@@ -515,3 +516,4 @@ var addCalendar = function(){
 
 //Run code
 initCalendar();
+setInterval(function(){setHour();}, 60000);
