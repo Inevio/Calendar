@@ -439,9 +439,9 @@ var addEvent = function(){
         var event =  monthEventPrototype.clone();
         event.removeClass('wz-prototype');
         //toDo
-        event.text(eventName.val());
-        event.css('background-color', colorPickerColor.css('background-color'));
-        if($('.day-selected article').length < 1){
+        event.html('<figure></figure>'+eventName.val());
+        event.find('figure').css('background-color', colorPickerColor.css('background-color'));
+        if($('.day-selected > article').length < 1){
             daySelected.append(event);
         }else{
             var moreEvents = $('.day-selected .moreEvents');
