@@ -21,8 +21,8 @@ var monthCalendar           = $('#month-calendar');
 var weekCalendar            = $('#week-calendar');
 var dayCalendar             = $('#day-calendar');
 var currentMonthDOM         = $('.current-month span');
-var prevMonthDOM            = $('.current-month .prev');
-var nextMonthDOM            = $('.current-month .next');
+var prevDOM                 = $('.current-month .prev');
+var nextDOM                 = $('.current-month .next');
 var createCalendarModal     = $('#create-calendar-modal');
 var createEventModal        = $('#create-event-modal');
 var createEvent             = $('.create-event');
@@ -55,60 +55,55 @@ var dayMomentBarPrototype   = $('.day-moment.wz-prototype');
 var dayMomentBulletPrototype= $('.day-moment-bullet.wz-prototype');
 var dayMomentTimePrototype= $('.day-moment-time.wz-prototype');
 
-//Adds each day-cell a clickable area to select the current day.
-$('.time-col').on( 'click', function() {
-    selectDay($( this ));
-});
+//Add getWeek function to Date object
+Date.prototype.getWeek = function() {
+  var onejan = new Date(this.getFullYear(),0,1);
+  var today = new Date(this.getFullYear(),this.getMonth(),this.getDate());
+  var dayOfYear = ((today - onejan + 86400000)/86400000);
+  return Math.ceil(dayOfYear/7)
+};
 
 //Adds each top bar buttons functionalty to change between calendar types.
 $('.calendarType').on( 'click', function() {
     selectCalendarType($( this ));
 });
 
-//Adds a shadow when opens these menus
-$('#add-new-calendar').on('click', function() {
-    $('#shadow').show();
-});
-$('#create-event').on('click', function() {
-    $('#shadow').show();
-});
-
 //Adds buttons functionality to open the menus
 $('.my-calendars').on('click', function() {
-    showMenu('#my-calendars-modal');
+    showMenu('#my-calendars-modal', false);
 });
 
 createEvent.on('click', function() {
-    showMenu('#create-event-modal');
+    showMenu('#create-event-modal', true);
     var eventDate = dayNames[getDaySelected().getDay()]+', '+getDaySelected().getDate()+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
     $('.event-when input').val(eventDate);
 });
 
 createCalendar.on('click', function() {
-    showMenu('#create-calendar-modal');
+    showMenu('#create-calendar-modal', true);
 });
 
 addEventButton.on('click', function() {
     addEvent();
-    showMenu('#create-event-modal');
+    showMenu('#create-event-modal', true);
 });
 
 addCalendarButton.on('click', function() {
     addCalendar();
-    showMenu('#create-calendar-modal');
+    showMenu('#create-calendar-modal', true);
 });
 
 cancelCalendarButton.on('click', function() {
     colorPickerContainer.hide();
-    showMenu('#create-calendar-modal');
+    showMenu('#create-calendar-modal', true);
 });
 cancelEventButton.on('click', function() {
     colorPickerContainer.hide();
-    showMenu('#create-event-modal');
+    showMenu('#create-event-modal', true);
 });
 
-//Adds buttons functionality to change month
-nextMonthDOM.on('click', function() {
+//Adds buttons functionality to change month/week
+nextDOM.on('click', function() {
     if(calendarView == 'month'){
         showingDate.setMonth(showingDate.getMonth()+1);
     }else if(calendarView =='week'){
@@ -120,7 +115,7 @@ nextMonthDOM.on('click', function() {
     initCalendar();
 });
 
-prevMonthDOM.on('click', function() {
+prevDOM.on('click', function() {
     if(calendarView == 'month'){
         showingDate.setMonth(showingDate.getMonth()-1);
     }else if(calendarView =='week'){
@@ -157,8 +152,8 @@ colorPicker
             'background-color' : $(this).css('background-color'),
             top : pos.top,
             left : pos.left
-        });
-})
+    })
+});
 
 //Set the color picker to the color picked
 colorPickerHover.on( 'click', function(){
@@ -199,14 +194,11 @@ var selectCalendarType = function(calendarType){
 }
 
 //Display and hides this menu.
-var showMenu = function(menu){
-    var displayed = $(menu).css('display');
-    if(displayed != 'block'){
-        $(menu).show(); 
-    }else{
-        $(menu).hide();
-        $('#shadow').hide();
+var showMenu = function(menu, shadow){
+    if(shadow){
+        $('#shadow').toggle();
     }
+    $(menu).toggle();
 }
 
 //Adds a green area to the cell recieved.
@@ -226,26 +218,46 @@ var selectDay = function(cell){
         miniCalendarTittle.text(monthNames[showingDate.getMonth()]+' '+showingDate.getFullYear());
     }
     
-    $('.white-background').removeClass('white-background');
-    $('.title-cell:eq('+cell.index()+')').addClass('white-background');
-    $('.week-day-names th').removeClass('white-background');
-    $('.week-day-names th:eq('+(cell.index()-1)+')').addClass('white-background');
     
-    
-    if(cell.hasClass('mon')){
-        $('.monday').addClass('day-selected');
-    }else if(cell.hasClass('tue')){
-        $('.tuesday').addClass('day-selected');
-    }else if(cell.hasClass('wed')){
-        $('.wednesday').addClass('day-selected');
-    }else if(cell.hasClass('thu')){
-        $('.thursday').addClass('day-selected');
-    }else if(cell.hasClass('fri')){
-        $('.friday').addClass('day-selected');
-    }else if(cell.hasClass('sat')){
-        $('.saturday').addClass('day-selected');
-    }else{
-        $('.sunday').addClass('day-selected');
+}
+
+var setCurrentDay = function(cell){
+    $('.day-moment-time').remove();
+    $('.day-moment').remove();
+    $('.day-moment-bullet').remove();
+    $('.current-day').removeClass('current-day');
+    var currentDay = new Date();
+    console.log(currentDay.getWeek());
+    console.log(showingDate.getWeek());
+    if((showingDate.getMonth() == currentDay.getMonth() && (calendarView == 'month' || calendarView == 'day')) || (showingDate.getWeek() == currentDay.getWeek() && calendarView == 'week') ){
+        cell.addClass('current-day');
+
+        $('.white-background').removeClass('white-background');
+        $('.title-cell:eq('+cell.index()+')').addClass('white-background');
+        $('.week-day-names th').removeClass('white-background');
+        $('.week-day-names th:eq('+(cell.index()-1)+')').addClass('white-background');
+
+        var dayToSelect = '';
+        if(cell.hasClass('mon')){
+            dayToSelect = $('.monday');
+        }else if(cell.hasClass('tue')){
+            dayToSelect = $('.tuesday');
+        }else if(cell.hasClass('wed')){
+            dayToSelect = $('.wednesday');
+        }else if(cell.hasClass('thu')){
+            dayToSelect = $('.thursday');
+        }else if(cell.hasClass('fri')){
+            dayToSelect = $('.friday');
+        }else if(cell.hasClass('sat')){
+            dayToSelect = $('.saturday');
+        }else{
+            dayToSelect = $('.sunday');
+        }
+        dayToSelect.addClass('current-day');
+        
+        if(calendarView == 'week' || calendarView == 'day'){
+            setHour();
+        }
     }
 }
 
@@ -266,10 +278,8 @@ var initCalendar = function(){
     }else if(calendarView == 'day'){
         dayToSelect = setDayCells();
     }
+    setCurrentDay(dayToSelect);
     selectDay(dayToSelect);
-    if(calendarView == 'week'){
-        setHour();
-    }
 }
 
 //Determinate if February 28/29
@@ -331,9 +341,10 @@ var setMonthCells = function(){
         $( '.day-table td:eq('+i+') span' ).text(dayCounter++);
     }
     
-    $('.day-cell').on( 'click', function() {selectDay($( this ));});
+    addByClick();
     
-    var dayToSelect = $( '.day-table td:eq('+(firstWeekDayOfMonth+(showingDate.getDate()-1))+')' );
+    var currentDate = new Date();
+    var dayToSelect = $( '.day-table td:eq('+(firstWeekDayOfMonth+(currentDate.getDate()-1))+')' );
     
     return dayToSelect;
 }
@@ -351,7 +362,12 @@ var setWeekCells = function(){
         $( '.week-day-name .week-day:eq('+i+')' ).text(showingDateAux.getDate()+' '+dayNames[showingDateAux.getDay()]);
     }
     
-    return $( '.time-events td.time-col:eq('+(showingDate.getDay())+')' );
+    addByClick();
+    
+    var currentDate = new Date();
+    var dayToSelect = $( '.time-events td.time-col:eq('+(currentDate.getDay())+')' );
+    
+    return dayToSelect;
 }
 
 var setDayCells = function(){
@@ -362,16 +378,18 @@ var setDayCells = function(){
 
     var dayCounter = 1;
     for (i = firstWeekDayOfMonth; i < nCells - nBlankCells; i++) {
-        $( '.mini-calendar-body table th:eq('+i+')' ).text(dayCounter++);
-        $( '.mini-calendar-body table th:eq('+i+')' ).addClass('day-cell');
+        $( '.mini-calendar-body table td:eq('+i+')' ).text(dayCounter++);
+        $( '.mini-calendar-body table td:eq('+i+')' ).addClass('day-cell');
     }
-    $('.day-cell').on( 'click', function() {selectDay($( this ));});
     
     dayNumberDisplay.text(showingDate.getDate());
     dayNameDisplay.text(dayNames[showingDate.getDay()]);
     miniCalendarTittle.text(monthNames[showingDate.getMonth()]+' '+showingDate.getFullYear());
     
-    var dayToSelect = $( '.mini-calendar-body table th:eq('+(firstWeekDayOfMonth+(showingDate.getDate()-1))+')' );
+    addByClick();
+    
+    var currenDate = new Date();
+    var dayToSelect = $( '.mini-calendar-body table td:eq('+(firstWeekDayOfMonth+(currenDate.getDate()-1))+')' );
     
     return dayToSelect;
 }
@@ -399,9 +417,6 @@ var getDaySelected = function(){
 }
 
 var setHour = function(){
-    $('.day-moment-time').remove();
-    $('.day-moment').remove();
-    $('.day-moment-bullet').remove();
     
     var currentDate = new Date();
     var hour = currentDate.getHours();
@@ -514,6 +529,31 @@ var addCalendar = function(){
     calendarList.append(calendar);
 }
 
+//Add events by clicking
+var addByClick = function(){
+    $('td').off('click');
+    if(calendarView == 'month'){
+        $('.day-cell').on('click', function(){
+            showMenu('#create-event-modal', true);
+            var eventDate = dayNames[$(this).index()]+', '+$(this).find('span').text()+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
+            $('.event-when input').val(eventDate);    
+        })
+    }else if(calendarView == 'week'){
+        $('.time-col').on('click', function(){
+            showMenu('#create-event-modal', true);
+            var eventDate = dayNames[$(this).index()-1]+', '+$('.week-day-names th:eq('+($(this).index()-1)+')').find('span').text().substring(0, 2)+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
+            $('.event-when input').val(eventDate);    
+        })
+    }else if(calendarView == 'day'){
+        $('.day-cell').on('click', function(){
+            selectDay($( this ));
+            showMenu('#create-event-modal', true);
+            var eventDate = dayNames[$(this).index()]+', '+$(this).text()+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
+            $('.event-when input').val(eventDate);    
+        })
+    }
+}
+
 //Run code
 initCalendar();
-setInterval(function(){setHour();}, 60000);
+setInterval(function(){setHour()}, 60000);

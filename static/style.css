@@ -316,7 +316,7 @@
 .current-month span{
     margin: 7px 10px;
     float: left;
-    width: 98px;
+    width: 105px;
     text-align: center;
     color: #465057;
 }
@@ -1157,7 +1157,7 @@ thead{
     color: #929799;
 }
 
-#month-calendar .day-selected{
+#month-calendar .current-day{
     background-color: rgba(126,190,48,.1);
 	border: double 1px #7ebe30 !important;
 }
@@ -1349,7 +1349,7 @@ thead{
     border-top: 0 none !important;
 }
 
-#week-calendar .day-selected {
+#week-calendar .current-day {
     -webkit-border-radius: 0 0 0 134px/0 0 0 1px;
     -moz-border-radius: 0 0 0 134px/0 0 0 1px;
     border-radius: 0 0 0 134px/0 0 0 1px;
@@ -1615,8 +1615,9 @@ thead{
     font-size: 13px;
 }
 
-#day-calendar .mini-calendar-body th {
+#day-calendar .mini-calendar-body td {
     vertical-align: middle;
+    text-align: center;
 }
 
 #day-calendar .current-day {
@@ -1624,9 +1625,10 @@ thead{
     border: 1px solid #ccd3d5;
 }
 
-#day-calendar .day-selected {
+#day-calendar .mini-calendar-body .day-selected {
     background-color: #7ebe30;
     color: #fff;
+    border: 1px solid #7ebe30;
 }
 
 #day-calendar .time-cells > table{
