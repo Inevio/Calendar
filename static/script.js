@@ -1,3 +1,5 @@
+'use strict'
+
 // CONSTANTS
 var BROWSER_FIREFOX = 0;
 var BROWSER_IE = 1;
@@ -12,9 +14,22 @@ var monthNames = ['January','February','March','April','May','June','July','Augu
 var monthShortNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov', 'Dec'];
 var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday', 'Saturday'];
 var dayPerMonth = ['31','','31','30','31','30','31','31','30','31','30','31'];
-var cellToInsert = '';
 //date showing
 var showingDate = new Date();
+
+//Event
+var Event = function(){ 
+    this.title = '';
+    this.description = '';
+    this.allDay = '';
+    this.stringDate = '';
+    this.startDate = '';
+    this.endDate = '';
+    this.repeat = '';
+    this.calendar = '';
+    this.alert = '';
+    this.cell = '';
+}
 
 // DOM variables
 var win                     = $(this);
@@ -172,8 +187,8 @@ var selectCalendarType = function(calendarType){
     $('.wz-fit-ignore').removeClass('wz-fit-ignore');
 	$('.calendar-active').removeClass('calendar-active');
 	$('.active-type').removeClass('active-type');
-	type = calendarType.attr('id');
-	id = '#' + type;
+	var type = calendarType.attr('id');
+	var id = '#' + type;
 	$(id).addClass('active-type');
 	if(type == 'dayType'){
 		dayCalendar.addClass('calendar-active');
@@ -230,8 +245,6 @@ var setCurrentDay = function(cell){
     $('.day-moment-bullet').remove();
     $('.current-day').removeClass('current-day');
     var currentDay = new Date();
-    console.log(currentDay.getWeek());
-    console.log(showingDate.getWeek());
     if((showingDate.getMonth() == currentDay.getMonth() && (calendarView == 'month' || calendarView == 'day')) || (showingDate.getWeek() == currentDay.getWeek() && calendarView == 'week') ){
         cell.addClass('current-day');
 
@@ -326,20 +339,20 @@ var setMonthCells = function(){
     
     var firstWeekDayOfMonth = new Date(monthNames[showingDate.getMonth()]+' 1 ,'+showingDate.getFullYear()).getDay();
     prevNumOfDays -= firstWeekDayOfMonth-1;
-    for (i = 0; i < firstWeekDayOfMonth; i++) {
+    for (var i = 0; i < firstWeekDayOfMonth; i++) {
         $( '.day-table td:eq('+i+')' ).addClass('other-month-cell');
         $( '.day-table td:eq('+i+') span' ).text(prevNumOfDays++);
         nBlankCells--;
     }
 
     var dayCounter = 1;
-    for (i = firstWeekDayOfMonth; i < nCells - nBlankCells; i++) {
+    for (var i = firstWeekDayOfMonth; i < nCells - nBlankCells; i++) {
         $( '.day-table td:eq('+i+') span' ).text(dayCounter++);
         $( '.day-table td:eq('+i+')' ).addClass('day-cell');
     }
     
     dayCounter = 1;
-    for (i = nCells - nBlankCells; i < nCells; i++) {
+    for (var i = nCells - nBlankCells; i < nCells; i++) {
         $( '.day-table td:eq('+i+')' ).addClass('other-month-cell');
         $( '.day-table td:eq('+i+') span' ).text(dayCounter++);
     }
@@ -355,12 +368,12 @@ var setMonthCells = function(){
 var setWeekCells = function(){
     $( '.week-day-name .week-day:eq('+showingDate.getDay()+')' ).text(showingDate.getDate()+' '+dayNames[showingDate.getDay()]);
     var showingDateAux = new Date(showingDate.getTime());
-    for (i = showingDate.getDay()-1; i >= 0; i--) {
+    for (var i = showingDate.getDay()-1; i >= 0; i--) {
         showingDateAux.setDate(showingDateAux.getDate()-1);
         $( '.week-day-name .week-day:eq('+i+')' ).text(showingDateAux.getDate()+' '+dayNames[showingDateAux.getDay()]);
     }
     showingDateAux = new Date(showingDate.getTime());
-    for (i = showingDate.getDay()+1; i < 7; i++) {
+    for (var i = showingDate.getDay()+1; i < 7; i++) {
         showingDateAux.setDate(showingDateAux.getDate()+1);
         $( '.week-day-name .week-day:eq('+i+')' ).text(showingDateAux.getDate()+' '+dayNames[showingDateAux.getDay()]);
     }
@@ -380,7 +393,7 @@ var setDayCells = function(){
     nBlankCells = nBlankCells - firstWeekDayOfMonth;
 
     var dayCounter = 1;
-    for (i = firstWeekDayOfMonth; i < nCells - nBlankCells; i++) {
+    for (var i = firstWeekDayOfMonth; i < nCells - nBlankCells; i++) {
         $( '.mini-calendar-body table td:eq('+i+')' ).text(dayCounter++);
         $( '.mini-calendar-body table td:eq('+i+')' ).addClass('day-cell');
     }
@@ -400,7 +413,7 @@ var setDayCells = function(){
 //Clean all the cells of the month view of the calendar
 var cleanCells = function(){
     if(calendarView == 'month'){
-        for (i = 0; i < 42; i++) {
+        for (var i = 0; i < 42; i++) {
             $( '.day-table td:eq('+i+') span' ).text('');
             $( '.day-table td:eq('+i+') article' ).remove();
             $( '.day-table td:eq('+i+')' ).removeClass();
@@ -408,7 +421,7 @@ var cleanCells = function(){
     }else if(calendarView == 'week'){
         $( '#week-calendar .event').remove();
     }else if(calendarView == 'day'){
-        for (i = 0; i < 42; i++) {
+        for (var i = 0; i < 42; i++) {
             $( '.mini-calendar-body table th:eq('+i+')').text('');
             $( '.mini-calendar-body table th:eq('+i+')' ).removeClass();
         }
@@ -454,16 +467,26 @@ var setHour = function(){
 }
 
 var addEvent = function(){
+    var event = createEventModal.data('event');
+    console.log(event);
+    console.log(event.cell);
+    var eventTime = {
+        hour    : +eventStartTimeHour.val(),
+        minutes : +eventStartTimeMinutes.val()
+    };
+    
+    fixEventTime(eventTime);
+    
     if(calendarView == 'month'){
-        var event =  monthEventPrototype.clone();
-        event.removeClass('wz-prototype');
+        var eventDom =  monthEventPrototype.clone();
+        eventDom.removeClass('wz-prototype');
         //toDo
-        event.html('<figure></figure>'+eventName.val());
-        event.find('figure').css('background-color', colorPickerColor.css('background-color'));
-        if(cellToInsert.find('article').length < 1){
-            cellToInsert.append(event);
+        eventDom.html('<figure></figure>'+eventName.val());
+        eventDom.find('figure').css('background-color', colorPickerColor.css('background-color'));
+        if(event.cell.find('article').length < 1){
+            event.cell.append(eventDom);
         }else{
-            var moreEvents = cellToInsert.find('.moreEvents');
+            var moreEvents = event.cell.find('.moreEvents');
             if(moreEvents.length == 0){
                 var moreEvents = monthEventPrototype.clone();
                 moreEvents.removeClass('ellipsis');
@@ -471,58 +494,56 @@ var addEvent = function(){
                 moreEvents.addClass('moreEvents');
                 moreEvents.text('1 more...');
                 moreEvents.data('numEventsMore', 1)
-                event.hide();
-                cellToInsert.append(event);
-                cellToInsert.append(moreEvents);
+                eventDom.hide();
+                event.cell.append(eventDom);
+                event.cell.append(moreEvents);
             }else{
                 var numEventsMore = moreEvents.data('numEventsMore');
                 numEventsMore++;
                 moreEvents.data('numEventsMore', numEventsMore);
                 moreEvents.text(numEventsMore+' more...');
-                event.hide();
-                cellToInsert.append(event);
-                cellToInsert.append(moreEvents);
+                eventDom.hide();
+                event.cell.append(eventDom);
+                event.cell.append(moreEvents);
             }
         }
     }else if(calendarView == 'week'){
-        var startTimeHour = +eventStartTimeHour.val(); 
-        var startTimeMinutes = +eventStartTimeMinutes.val();
-        var weekDaySelected = cellToInsert.index() -1;
-        var daySelected = $('.hour-markers .marker-cell:eq('+startTimeHour+')');
-        var event = weekEventPrototype.clone();
-        event.removeClass('wz-prototype');
+        var weekDaySelected = event.cell.index() -1;
+        var daySelected = $('.hour-markers .marker-cell:eq('+eventTime.hour+')');
+        var eventDom = weekEventPrototype.clone();
+        eventDom.removeClass('wz-prototype');
         //toDo
-        event.html(eventName.val());
-        event.css('color', '#fff');
+        eventDom.find('span:eq(0)').text(eventName.val());
         
-        event.css('border-left', '2px solid '+colorPickerHover.attr('data-border-color'));
-        event.css('background-color', colorPickerColor.css('background-color'));
-        event.css('color', colorPickerHover.attr('data-text-color'));
+        eventDom.css('border-left', '2px solid '+colorPickerHover.attr('data-border-color'));
+        eventDom.css('background-color', colorPickerColor.css('background-color'));
+        eventDom.css('color', colorPickerHover.attr('data-text-color'));
+        
         if(eventDuration.val() == 'all day'){
-            daySelected = $('.day-all-day:eq('+(cellToInsert.index()-1)+')');
-            event.css('display', 'inline-block');
-            event.css('margin-left', '-1.6px');
-            event.css('width', '101px');
+            daySelected = $('.day-all-day:eq('+(event.cell.index()-1)+')');
+            eventDom.css('display', 'inline-block');
+            eventDom.css('margin-left', '-1.6px');
+            eventDom.css('width', '101px');
             if(daySelected.children().length > 0){
                 var nEvents = daySelected.data('nEvents') + 1;
                 var nextTop = daySelected.data('nextTop');
                 daySelected.data('nEvents', nEvents);
                 $('.day-all-day').css('height', 20*nEvents);
                 $('.scroll-time-events').css('height', (481 - parseInt($('.week-top-container').css('height'))));
-                event.css('margin-top', nextTop+'px');
+                eventDom.css('margin-top', nextTop+'px');
                 daySelected.data('nextTop', nextTop+18);
             }else{
                 daySelected.data('nEvents', 1);
                 daySelected.data('nextTop', 18);
             }
         }else{
-            var eventTime = startTimeHour+':'+startTimeMinutes+' '+(startTimeHour+(+(eventDuration.val().substring(0, 2))))+':'+startTimeMinutes;
-            event.find('span:eq(1)').text(eventTime);
-            event.css('left', 14.28 * weekDaySelected +'%');
-            event.css('height', 37 * (+(eventDuration.val().substring(0, 2)))+'px');
-            event.css('margin-top', 0.666666 * startTimeMinutes +'px');
+            var eventTimeString = eventTime.hour+':'+eventTime.minutes+' - '+(eventTime.hour+(+(eventDuration.val().substring(0, 2))))+':'+eventTime.minutes;
+            eventDom.find('span:eq(1)').text(eventTimeString);
+            eventDom.css('left', 14.28 * weekDaySelected +'%');
+            eventDom.css('height', 37 * (+(eventDuration.val().substring(0, 2)))+'px');
+            eventDom.css('margin-top', 0.666666 * eventTime.minutes +'px');
         }
-        daySelected.append(event);
+        daySelected.append(eventDom);
     }
 }
 
@@ -540,28 +561,63 @@ var addCalendar = function(){
 
 //Add events by clicking
 var addByClick = function(){
+    
     $('td').off('click');
+    var event = new Event();
+    
     if(calendarView == 'month'){
-        $('.day-cell').on('click', function(){
+        
+        $('.day-cell').on('dblclick', function(){
+            var object = $(this);
             showMenu('#create-event-modal', true);
-            var eventDate = dayNames[$(this).index()]+', '+$(this).find('span').text()+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
-            $('.event-when input').val(eventDate);
-            cellToInsert = $(this);
-        })
+            event.stringDate = dayNames[object.index()]+', '+object.find('span').text()+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
+            $('.event-when input').val(event.stringDate);
+            eventDuration.val('1 hour');
+            event.cell = object;
+        });
+        
     }else if(calendarView == 'week'){
-        $('.time-col').on('click', function(){
+        
+        $('.time-col').on('dblclick', function(){
+            var object = $(this);
             showMenu('#create-event-modal', true);
-            var eventDate = dayNames[$(this).index()-1]+', '+$('.week-day-names th:eq('+($(this).index()-1)+')').find('span').text().substring(0, 2)+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
-            $('.event-when input').val(eventDate);
-            cellToInsert = $(this);
-        })
+            event.stringDate = dayNames[object.index()-1]+', '+$('.week-day-names th:eq('+(object.index()-1)+')').find('span').text().substring(0, 2)+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
+            $('.event-when input').val(event.stringDate);
+            eventDuration.val('1 hour');
+            event.allDay = false;
+            event.cell = object;
+        });
+        
+        $('.day-all-day').on('dblclick', function(){
+            var object = $(this);
+            showMenu('#create-event-modal', true);
+            event.stringDate = dayNames[object.index()-1]+', '+$('.week-day-names th:eq('+(object.index()-1)+')').find('span').text().substring(0, 2)+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
+            $('.event-when input').val(event.stringDate);
+            eventDuration.val('all day');
+            event.allDay = true;
+            event.cell = object;
+        });
+        
     }else if(calendarView == 'day'){
-        $('.day-cell').on('click', function(){
-            selectDay($( this ));
+        
+        $('.day-cell').on('dblclick', function(){
+            var object = $(this);
+            selectDay(object);
             showMenu('#create-event-modal', true);
-            var eventDate = dayNames[$(this).index()]+', '+$(this).text()+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
-            $('.event-when input').val(eventDate);    
-        })
+            event.stringDate = dayNames[object.index()]+', '+object.text()+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
+            $('.event-when input').val(event.stringDate);
+            event.cell = object;
+        });
+    }
+    createEventModal.data('event', event);
+}
+
+var fixEventTime = function(eventTime){
+    if(eventTime.hour.toString().length < 2){
+        eventTime.hour = '0'+eventTime.hour;
+    }
+    if(eventTime.minutes.toString().length < 2){
+        eventTime.minutes = '0'+eventTime.minutes;
     }
 }
 
