@@ -33,9 +33,9 @@ var Event = function(){
 
 // DOM variables
 var win                     = $(this);
-var monthCalendar           = $('#month-calendar');
-var weekCalendar            = $('#week-calendar');
-var dayCalendar             = $('#day-calendar');
+var monthCalendar           = $('.month-calendar');
+var weekCalendar            = $('.week-calendar');
+var dayCalendar             = $('.day-calendar');
 var currentMonthDOM         = $('.current-month span');
 var prevDOM                 = $('.current-month .prev');
 var nextDOM                 = $('.current-month .next');
@@ -64,12 +64,12 @@ var colorPickerHover        = $('.color-picker-hover');
 var colorPicker             = $('.color-picker');
 var colorPickerColor        = $('.color-toolbar .color');
 
-var monthEventPrototype     = $('#month-calendar .event.wz-prototype');
-var weekEventPrototype     = $('#week-calendar .event.wz-prototype');
+var monthEventPrototype     = $('.month-calendar .event.wz-prototype');
+var weekEventPrototype      = $('.week-calendar .event.wz-prototype');
 var calendarPrototype       = $('.calendar.wz-prototype');
 var dayMomentBarPrototype   = $('.day-moment.wz-prototype');
 var dayMomentBulletPrototype= $('.day-moment-bullet.wz-prototype');
-var dayMomentTimePrototype= $('.day-moment-time.wz-prototype');
+var dayMomentTimePrototype  = $('.day-moment-time.wz-prototype');
 
 //Add getWeek function to Date object
 Date.prototype.getWeek = function() {
@@ -80,8 +80,9 @@ Date.prototype.getWeek = function() {
 };
 
 //Adds each top bar buttons functionalty to change between calendar types.
-$('.calendarType').on( 'click', function() {
+$('.calendar-type').on( 'click', function() {
     selectCalendarType($( this ));
+    $( this ).addClass('active-type');
 });
 
 //Adds buttons functionality to open the menus
@@ -187,20 +188,17 @@ var selectCalendarType = function(calendarType){
     $('.wz-fit-ignore').removeClass('wz-fit-ignore');
 	$('.calendar-active').removeClass('calendar-active');
 	$('.active-type').removeClass('active-type');
-	var type = calendarType.attr('id');
-	var id = '#' + type;
-	$(id).addClass('active-type');
-	if(type == 'dayType'){
+	if(calendarType.hasClass('day-type')){
 		dayCalendar.addClass('calendar-active');
         calendarView = 'day';
         monthCalendar.addClass('wz-fit-ignore');
         weekCalendar.addClass('wz-fit-ignore');
-	}else if(type == 'weekType'){
+	}else if(calendarType.hasClass('week-type')){
 		weekCalendar.addClass('calendar-active');
         calendarView = 'week';
         monthCalendar.addClass('wz-fit-ignore');
         dayCalendar.addClass('wz-fit-ignore');
-	}else if(type == 'monthType'){
+	}else if(calendarType.hasClass('month-type')){
 		monthCalendar.addClass('calendar-active');
         calendarView = 'month';
         dayCalendar.addClass('wz-fit-ignore');
@@ -214,7 +212,7 @@ var selectCalendarType = function(calendarType){
 //Display and hides this menu.
 var showMenu = function(menu, shadow){
     if(shadow){
-        $('#shadow').toggle();
+        $('.shadow').toggle();
     }
     $(menu).toggle();
 }
@@ -419,7 +417,7 @@ var cleanCells = function(){
             $( '.day-table td:eq('+i+')' ).removeClass();
         }
     }else if(calendarView == 'week'){
-        $( '#week-calendar .event').remove();
+        $( '.week-calendar .event').remove();
     }else if(calendarView == 'day'){
         for (var i = 0; i < 42; i++) {
             $( '.mini-calendar-body table th:eq('+i+')').text('');

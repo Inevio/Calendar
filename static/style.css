@@ -120,7 +120,7 @@
     padding-right: 414px;
 }
 
-#day-calendar, #week-calendar, #month-calendar{
+.day-calendar, .week-calendar, .month-calendar{
 	display: none;
 }
 
@@ -879,18 +879,14 @@ thead{
 }
 
 /* Month calendar */
-#month-calendar .container > table {
-    height: 7.2%;
-}
-
-#month-calendar .mv-event-container {
+.month-calendar .mv-event-container {
     position: relative;
     width: 100%;
     height: 444px;
     float: left;
 }
 
-#month-calendar .calendar-day-bar th {
+.month-calendar .calendar-day-bar th {
     vertical-align: middle;
     font-size: 13px;
     text-align: center;
@@ -898,7 +894,7 @@ thead{
     height: 32px;
 }
 
-#month-calendar .day-table {
+.month-calendar .day-table {
     left: 0;
     position: absolute;
     table-layout: fixed;
@@ -907,7 +903,7 @@ thead{
     font-size: 13px;
 }
 
-#month-calendar .day-table td {
+.month-calendar .day-table td {
     height: 73px;
     background: #ffffff;
     border-right: 1px solid #ccd3d5;
@@ -915,11 +911,11 @@ thead{
     vertical-align: top;
 }
 
-#month-calendar td.other-month-cell{
+.month-calendar td.other-month-cell{
     background: #f6f8f8;
 }
 
-#month-calendar td span {
+.month-calendar td span {
     top: 6px;
     left: 6px;
     position: relative;
@@ -928,16 +924,16 @@ thead{
     width: 100%;
 }
 
-#month-calendar .other-month-cell > span {
+.month-calendar .other-month-cell > span {
     color: #929799;
 }
 
-#month-calendar .current-day{
+.month-calendar .current-day{
     background-color: rgba(126,190,48,.1);
 	border: double 1px #7ebe30 !important;
 }
 
-#month-calendar .event {
+.month-calendar .event {
     color: #4a4a4a;
     float: left;
     font-size: 12px;
@@ -950,12 +946,12 @@ thead{
     margin-bottom: 1px;
 }
 
-#month-calendar .event b {
+.month-calendar .event b {
     margin-right: 5px;
     float: right;
 }
 
-#month-calendar .event figure {
+.month-calendar .event figure {
     width: 8px;
     height: 8px;
     border-radius: 4px;
@@ -964,29 +960,29 @@ thead{
     margin-top: -11px;
 }
 
-#month-calendar .event{
+.month-calendar .event{
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 }
 
 /* Week calendar */
-#week-calendar .week-top.week-full-mode {
+.week-calendar .week-top.week-full-mode {
     overflow: hidden;
     table-layout: fixed;
     height: 100%;
 }
 
-#week-calendar .week-top-container {
+.week-calendar .week-top-container {
     float: left;
 }
 
-#week-calendar .week-labels {
+.week-calendar .week-labels {
     border-right: 1px solid #ccd3d5;
     width: 49px;
 }
 
-#week-calendar .week-day-names > th {
+.week-calendar .week-day-names > th {
     border-right: 1px solid #ccd3d5;
     border-left: 1px solid #ccd3d5;
     border-top: 1px solid #f6f8f8;
@@ -994,12 +990,12 @@ thead{
     height: 32px;
 }
 
-#week-calendar .week-day-names {
+.week-calendar .week-day-names {
     background-color: #F6F8F8;
     border-bottom: 1px solid #CCD3D5;
 }
 
-#week-calendar .all-day {
+.week-calendar .all-day {
     border-bottom: 2px solid #f6f8f8;
     border-right: 1px solid #ccd3d5;
     font-size: 13px;
@@ -1010,38 +1006,38 @@ thead{
     background-color: #F6F8F8;
 }
 
-#week-calendar .week-view-all-day {
+.week-calendar .week-view-all-day {
     position: relative;
     height: 100%;
     float: left;
     width: 100%;
 }
 
-#week-calendar .week-view-all-day-table {
+.week-calendar .week-view-all-day-table {
     position: absolute;
     table-layout: fixed;
     height: 100%;
     width: 100%;
 }
 
-#week-calendar .week-view-all-day-grid {
+.week-calendar .week-view-all-day-grid {
     position: relative;
     table-layout: fixed;
 }
 
-#week-calendar .day-all-day {
+.week-calendar .day-all-day {
     border-right: 1px solid rgb(204, 211, 213);
     height: 25px;
     position: relative;
     border-bottom: 2px solid #ccd3d5 !important;
 }
 
-#week-calendar .week-day {
+.week-calendar .week-day {
     color: #6f7578;
     font-size: 13px;
 }
 
-#week-calendar .scroll-time-events {
+.week-calendar .scroll-time-events {
     line-height: normal;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -1051,55 +1047,55 @@ thead{
     float:left;
 }
 
-#week-calendar .main-wrapper {
+.week-calendar .main-wrapper {
     position: relative;
     height: 100%;
 }
 
-#week-calendar .spanning-wrapper {
+.week-calendar .spanning-wrapper {
     position: relative;
 }
 
-#week-calendar .hour-markers {
+.week-calendar .hour-markers {
     position: absolute;
     width: 100%;
     margin-top: 1px;
 }
 
-#week-calendar .time-events {
+.week-calendar .time-events {
     table-layout: fixed;
     width: 918px;
 }
 
-#week-calendar .marker-cell {
+.week-calendar .marker-cell {
     height: 40px;
     border-bottom: 1px solid #dadada;
 }
 
-#week-calendar .times, #week-calendar .times-col {
+.week-calendar .times, .week-calendar .times-col {
     width: 49px;
     position: relative;
     background-color: #f6f8f8;
 }
 
 @-moz-document url-prefix() {
-    #week-calendar .time-events .times, #week-calendar .time-events .times-col{
+    .week-calendar .time-events .times, .week-calendar .time-events .times-col{
         width: 50px;
     }
 }
 
-#week-calendar .times > section {
+.week-calendar .times > section {
     height: 41px;
     position: relative;
     border-right: 1px solid #ccd3d5;
     width: 49px;
 }
 
-#week-calendar .times .time-tittle:first-child {
+.week-calendar .times .time-tittle:first-child {
   margin-top: 21px;
 }
 
-#week-calendar .time-tittle {
+.week-calendar .time-tittle {
     position: absolute;
     width: 49px;
     border-right: 1px solid #ccd3d5;
@@ -1110,11 +1106,11 @@ thead{
     background-color: #f6f8f8;
 }
 
-#week-calendar .week-scroll{
+.week-calendar .week-scroll{
     width:17px;
 }
 
-#week-calendar .time-col {
+.week-calendar .time-col {
     border-right: 1px solid #dde5e6;
     position: relative;
     -webkit-box-sizing: border-box; 
@@ -1124,7 +1120,7 @@ thead{
     border-top: 0 none !important;
 }
 
-#week-calendar .current-day {
+.week-calendar .current-day {
     -webkit-border-radius: 0 0 0 134px/0 0 0 1px;
     -moz-border-radius: 0 0 0 134px/0 0 0 1px;
     border-radius: 0 0 0 134px/0 0 0 1px;
@@ -1132,7 +1128,7 @@ thead{
     border: double 1px #7ebe30;
 }
 
-#week-calendar .event {
+.week-calendar .event {
     display: block;
     position: absolute;
     width: 102px;
@@ -1163,7 +1159,7 @@ thead{
     right: 0;
 }
 
-#day-calendar .day-moment {
+.day-calendar .day-moment {
     width: 396px;
 }
 
@@ -1190,7 +1186,7 @@ thead{
 }
 
 /* Day calendar */
-#day-calendar .day-active {
+.day-calendar .day-active {
     width: 469px;
     position: relative;
     height: 100%;
@@ -1199,7 +1195,7 @@ thead{
     vertical-align: top;
 }
 
-#day-calendar .time-cells {
+.day-calendar .time-cells {
     position: relative;
     height: 100%;
     display: inline-block;
@@ -1208,25 +1204,25 @@ thead{
     width: 461px;
 }
 
-#day-calendar .day {
+.day-calendar .day {
     display: table;
     height: 50%;
     width: 49%;
     float: left;
 }
 
-#day-calendar .figure {
+.day-calendar .figure {
     display: inline-block;
     height: 50%;
     width: 50%;
 }
 
-#day-calendar .week-days > article {
+.day-calendar .week-days > article {
     display: inline-block;
     padding: 0 3px;
 }
 
-#day-calendar .event-list {
+.day-calendar .event-list {
     height: 50%;
     width: 100%;
     border-top: 1px solid rgba(0, 0, 0, 0.15);
@@ -1235,7 +1231,7 @@ thead{
     overflow-x: hidden;
 }
 
-#day-calendar .event-list > .day-events {
+.day-calendar .event-list > .day-events {
     float: left;
     width: 100%;
 }
@@ -1311,7 +1307,7 @@ thead{
     font-size: 13px;
 }
 
-#day-calendar .day > article {
+.day-calendar .day > article {
     color: #465057;
     display: table-cell;
     padding-left: 10%;
@@ -1320,7 +1316,7 @@ thead{
     width: auto;
 }
 
-#day-calendar .day span:first-child {
+.day-calendar .day span:first-child {
     font-family: "Lato";
     font-size: 155px;
     font-weight: 300;
@@ -1330,7 +1326,7 @@ thead{
 }
 
 
-#day-calendar .day span:last-child {
+.day-calendar .day span:last-child {
     font-size: 24px;
     font-weight: 300;
     margin-left: 20px;
@@ -1339,11 +1335,11 @@ thead{
     font-weight: lighter;
 }
 
-#day-calendar .mini-calendar {
+.day-calendar .mini-calendar {
     margin-top: 15px;
 }
 
-#day-calendar .mini-calendar-head{
+.day-calendar .mini-calendar-head{
     width: 205px;
 	height: 47px;
     color: #fff;
@@ -1363,18 +1359,18 @@ thead{
 }
 
 
-#day-calendar .mini-calendar-head > span {
+.day-calendar .mini-calendar-head > span {
     position: relative;
     top: 5px;
     font-size: 13px;
 }
 
-#day-calendar .week-days {
+.day-calendar .week-days {
     font-size: 10px;
     margin-top: 14px;
 }
 
-#day-calendar .mini-calendar-body{
+.day-calendar .mini-calendar-body{
     width: 203px;
 	height: 150px;
 	background-color: #fff;
@@ -1384,68 +1380,68 @@ thead{
 	border: solid 1px #ccd3d5;
 }
 
-#day-calendar .mini-calendar-body > table {
+.day-calendar .mini-calendar-body > table {
     height: 100%;
     width: 100%;
     font-size: 13px;
 }
 
-#day-calendar .mini-calendar-body td {
+.day-calendar .mini-calendar-body td {
     vertical-align: middle;
     text-align: center;
 }
 
-#day-calendar .current-day {
+.day-calendar .current-day {
     background-color: #f6f8f8;
     border: 1px solid #ccd3d5;
 }
 
-#day-calendar .mini-calendar-body .day-selected {
+.day-calendar .mini-calendar-body .day-selected {
     background-color: #7ebe30;
     color: #fff;
     border: 1px solid #7ebe30;
 }
 
-#day-calendar .time-cells > table{
+.day-calendar .time-cells > table{
     table-layout: fixed;
 }
 
-#day-calendar .spanning-wrapper{
+.day-calendar .spanning-wrapper{
     position: relative;
 }
 
-#day-calendar .hour-markers{
+.day-calendar .hour-markers{
     position: absolute;
     width: 100%;
 }
 
-#day-calendar .marker-cell{
+.day-calendar .marker-cell{
     height: 40px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-#day-calendar .times > section {
+.day-calendar .times > section {
     height: 41px;
     padding-left: 5px;
     position: relative;
     top: -8px;
 }
 
-#day-calendar .times-cells{
+.day-calendar .times-cells{
     width:49px;
 }
 
-#day-calendar .times {
+.day-calendar .times {
     background-color: #f6f8f8;
     border-right: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-#day-calendar .time-tittle {
+.day-calendar .time-tittle {
     color: #6f7578;
     font-size: 13px;
 }
 
-#day-calendar .time-cells > table {
+.day-calendar .time-cells > table {
   width: 463px;
 }
 
