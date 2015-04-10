@@ -39,8 +39,8 @@ var dayCalendar             = $('.day-calendar');
 var currentMonthDOM         = $('.current-month span');
 var prevDOM                 = $('.current-month .prev');
 var nextDOM                 = $('.current-month .next');
-var createCalendarModal     = $('#create-calendar-modal');
-var createEventModal        = $('#create-event-modal');
+var createCalendarModal     = $('.create-calendar-modal');
+var createEventModal        = $('.create-event-modal');
 var createEvent             = $('.create-event');
 var createCalendar          = $('.add-new-calendar');
 var addEventButton          = $('.create-event-button');
@@ -87,36 +87,36 @@ $('.calendar-type').on( 'click', function() {
 
 //Adds buttons functionality to open the menus
 $('.my-calendars').on('click', function() {
-    showMenu('#my-calendars-modal', false);
+    showMenu('.my-calendars-modal', false);
 });
 
 createEvent.on('click', function() {
-    showMenu('#create-event-modal', true);
+    showMenu('.create-event-modal', true);
     var eventDate = dayNames[getDaySelected().getDay()]+', '+getDaySelected().getDate()+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
     $('.event-when input').val(eventDate);
 });
 
 createCalendar.on('click', function() {
-    showMenu('#create-calendar-modal', true);
+    showMenu('.create-calendar-modal', true);
 });
 
 addEventButton.on('click', function() {
     addEvent();
-    showMenu('#create-event-modal', true);
+    showMenu('.create-event-modal', true);
 });
 
 addCalendarButton.on('click', function() {
     addCalendar();
-    showMenu('#create-calendar-modal', true);
+    showMenu('.create-calendar-modal', true);
 });
 
 cancelCalendarButton.on('click', function() {
     colorPickerContainer.hide();
-    showMenu('#create-calendar-modal', true);
+    showMenu('.create-calendar-modal', true);
 });
 cancelEventButton.on('click', function() {
     colorPickerContainer.hide();
-    showMenu('#create-event-modal', true);
+    showMenu('.create-event-modal', true);
 });
 
 //Adds buttons functionality to change month/week
@@ -567,7 +567,7 @@ var addByClick = function(){
         
         $('.day-cell').on('dblclick', function(){
             var object = $(this);
-            showMenu('#create-event-modal', true);
+            showMenu('.create-event-modal', true);
             event.stringDate = dayNames[object.index()]+', '+object.find('span').text()+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
             $('.event-when input').val(event.stringDate);
             eventDuration.val('1 hour');
@@ -578,7 +578,7 @@ var addByClick = function(){
         
         $('.time-col').on('dblclick', function(){
             var object = $(this);
-            showMenu('#create-event-modal', true);
+            showMenu('.create-event-modal', true);
             event.stringDate = dayNames[object.index()-1]+', '+$('.week-day-names th:eq('+(object.index()-1)+')').find('span').text().substring(0, 2)+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
             $('.event-when input').val(event.stringDate);
             eventDuration.val('1 hour');
@@ -588,7 +588,7 @@ var addByClick = function(){
         
         $('.day-all-day').on('dblclick', function(){
             var object = $(this);
-            showMenu('#create-event-modal', true);
+            showMenu('.create-event-modal', true);
             event.stringDate = dayNames[object.index()-1]+', '+$('.week-day-names th:eq('+(object.index()-1)+')').find('span').text().substring(0, 2)+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
             $('.event-when input').val(event.stringDate);
             eventDuration.val('all day');
@@ -601,7 +601,7 @@ var addByClick = function(){
         $('.day-cell').on('dblclick', function(){
             var object = $(this);
             selectDay(object);
-            showMenu('#create-event-modal', true);
+            showMenu('.create-event-modal', true);
             event.stringDate = dayNames[object.index()]+', '+object.text()+'th of '+monthNames[showingDate.getMonth()]+', '+showingDate.getFullYear();
             $('.event-when input').val(event.stringDate);
             event.cell = object;

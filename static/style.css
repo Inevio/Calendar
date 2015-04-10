@@ -329,7 +329,7 @@
 }
 
 
-#create-event > img {
+.create-event > img {
     width: 10px;
 }
 
@@ -355,7 +355,7 @@ thead{
 }
 
 /* Calendar Modals  */
-#my-calendars-modal{
+.my-calendars-modal{
     width: 210px;
 	height: auto;
 	-webkit-border-radius: 3px;
@@ -371,7 +371,7 @@ thead{
 }
 
 
-#my-calendars-modal .arrow {
+.my-calendars-modal .arrow {
     background: url('@static/sprite.png') -234px 0;
     background-size: 298px 18px;
     display: block;
@@ -383,26 +383,26 @@ thead{
     left: 81px;
 }
 
-#my-calendars-modal .my-calendars-list {
+.my-calendars-modal .my-calendars-list {
     margin-left: 11px;
     margin-top: 11px;
 }
 
-#my-calendars-modal .my-calendars-list articles {
+.my-calendars-modal .my-calendars-list articles {
     margin-bottom: 11px;
     font-size: 13px;
 }
 
-#my-calendars-modal .calendar {
+.my-calendars-modal .calendar {
     display: block;
     width: 100% !important;
 }
 
-#my-calendars-modal .calendar i{
+.my-calendars-modal .calendar i{
     float: left;
 }
 
-#my-calendars-modal .calendar figure {
+.my-calendars-modal .calendar figure {
     border-radius: 4px;
     float: left;
     height: 8px;
@@ -412,25 +412,13 @@ thead{
     width: 8px;
 }
 
-#my-calendars-modal .deleteCalendar{
+.my-calendars-modal .deleteCalendar{
     margin-right: 10px;
     font-size: 12px;
     color:#dc513a;
 }
 
-#work span figure{
-	background-color: #34aadc;
-}
-
-#office span figure{
-    background-color: #5856d6;
-}
-
-#home span figure{
-    background-color: #f79a03;
-}
-
-#my-calendars-modal .add-new-calendar{
+.my-calendars-modal .add-new-calendar{
 	text-align: center;
     border-top:  1px solid #dadada;
     width: 100%;
@@ -439,7 +427,7 @@ thead{
     background-color: #f6f8f8;
 }
 
-#create-event-modal{   
+.create-event-modal{   
     width: 572px;
 	height: 259px;
 	-webkit-border-radius: 3px;
@@ -458,31 +446,31 @@ thead{
     float:left;
 }
 
-#create-event-modal .left-side {
+.create-event-modal .left-side {
     float: left;
     height: 259px;
     width: 291px;
     position: relative;
 }
 
-#create-event-modal .left-side article{
+.create-event-modal .left-side article{
     float: left;
 }
 
-#create-event-modal .right-side {
+.create-event-modal .right-side {
     float: left;
     height: 259px;
     width: 281px;
     position: relative;
 }
 
-#create-event-modal .right-side .calendar-description {
+.create-event-modal .right-side .calendar-description {
     padding-left: 13px;
     padding-top: 15px;
     width: 268px;
 }
 
-#create-event-modal .right-side .calendar-description > textarea {
+.create-event-modal .right-side .calendar-description > textarea {
     background-color: #fcfeff;
     border: 1px solid #ccd3d5;
     height: 153px;
@@ -490,7 +478,7 @@ thead{
     width: 250px;
 }
 
-#create-event-modal input, #create-event-modal select{
+.create-event-modal input, .create-event-modal select{
     height: 26px;
 	background-color: #fcfeff;
 	-webkit-box-shadow: inset 0 2px rgba(0,0,0,.05);
@@ -503,7 +491,7 @@ thead{
     padding-left: 6px;
 }
 
-#create-event-modal .left-side .separator {
+.create-event-modal .left-side .separator {
   background: none repeat scroll 0 0 #ccd3d5;
   height: 238px;
   position: absolute;
@@ -513,7 +501,7 @@ thead{
 }
 
 
-#create-event-modal .dropdown {
+.create-event-modal .dropdown {
     border-bottom: 1px solid #ccd3d5;
     border-right: 1px solid #ccd3d5;
     border-top: 1px solid #ccd3d5;
@@ -533,7 +521,7 @@ thead{
     margin-right: 4px;
 }
 
-#create-event-modal .arrow {
+.create-event-modal .arrow {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
@@ -545,17 +533,17 @@ thead{
     width: 0;
 }
 
-#create-event-modal .event-name {
+.create-event-modal .event-name {
     height: 41px;
     padding: 15px 0 0 20px;
     width: 176px;
 }
 
-#create-event-modal .event-name input{
+.create-event-modal .event-name input{
     width: 174px;
 }
 
-#create-event-modal .event-color {
+.create-event-modal .event-color {
     margin: 34px 9px 0 0;
     border-radius: 3px;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -563,9 +551,9 @@ thead{
     height: 25px;
 }
 
-#create-event-modal .event-color:hover {background: #e5e5e5;}
+.create-event-modal .event-color:hover {background: #e5e5e5;}
 
-#create-event-modal .event-color .color{
+.create-event-modal .event-color .color{
     background: none repeat scroll 0 0 #7ebe30;
     width: 16px;
     height: 16px;
@@ -573,7 +561,7 @@ thead{
     display: inline-block;
 }
 
-#create-event-modal .event-color .arrow {
+.create-event-modal .event-color .arrow {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
@@ -586,23 +574,23 @@ thead{
     display: inline-block;
 }
 
-#create-event-modal .event-when {
+.create-event-modal .event-when {
     height: 41px;
     padding: 10px 81px 0 20px;
     width: 175px;
 }
 
-#create-event-modal .event-when input{
+.create-event-modal .event-when input{
     width: 254px;
 }
 
-#create-event-modal .event-start {
+.create-event-modal .event-start {
     height: 41px;
     padding: 15px 20px 0 20px;
     width: 107px;
 }
 
-#create-event-modal .event-start input{
+.create-event-modal .event-start input{
     width: 25px;
 }
 
@@ -610,41 +598,41 @@ thead{
     padding-right: 72px;
 }
 
-#create-event-modal .event-duration {
+.create-event-modal .event-duration {
     height: 41px;
     padding: 15px 42px 0 0;
     width: 81px;
 }
 
-#create-event-modal .event-duration select{
+.create-event-modal .event-duration select{
     width: 82px;
 }
 
-#create-event-modal .event-duration input{
+.create-event-modal .event-duration input{
     width: 52px;
 }
 
-#create-event-modal .event-frequency {
+.create-event-modal .event-frequency {
     height: 41px;
     padding: 15px 6px 35px 20px;
     width: 121px;
 }
 
-#create-event-modal .event-frequency input{
+.create-event-modal .event-frequency input{
     width: 92px;
 }
 
-#create-event-modal .event-alert {
+.create-event-modal .event-alert {
     height: 41px;
     padding: 15px 0 35px 0;
     width: 123px;
 }
 
-#create-event-modal .event-alert input{
+.create-event-modal .event-alert input{
     width: 90px;
 }
 
-#create-calendar-modal{
+.create-calendar-modal{
     width: 289px;
 	height: 211px;
 	-webkit-border-radius: 3px;
@@ -663,17 +651,17 @@ thead{
 }
 
 
-#create-calendar-modal .calendar-name > span {
+.create-calendar-modal .calendar-name > span {
     display: block;
     margin-bottom: 7px;
     padding-left: 1px;
 }
 
-#create-calendar-modal calendar-description > span{
+.create-calendar-modal calendar-description > span{
     display: block;
 }
 
-#create-calendar-modal .calendar-name input{
+.create-calendar-modal .calendar-name input{
     width: 161px;
 	height: 26px;
 	background-color: #fcfeff;
@@ -685,14 +673,14 @@ thead{
     color: #6f7578;
 }
 
-#create-calendar-modal .calendar-name {
+.create-calendar-modal .calendar-name {
     margin-left: 6%;
     position: relative;
     top: 24px;
     float: left;
 }
 
-#create-calendar-modal .calendar-color {
+.create-calendar-modal .calendar-color {
     border-radius: 3px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     float: left;
@@ -702,9 +690,9 @@ thead{
     top: 45px;
 }
 
-#create-calendar-modal .calendar-color:hover {background: #e5e5e5;}
+.create-calendar-modal .calendar-color:hover {background: #e5e5e5;}
 
-#create-calendar-modal .calendar-color .color{
+.create-calendar-modal .calendar-color .color{
     background: none repeat scroll 0 0 #7ebe30;
     width: 16px;
     height: 16px;
@@ -712,7 +700,7 @@ thead{
     display: inline-block;
 }
 
-#create-calendar-modal .calendar-color .arrow {
+.create-calendar-modal .calendar-color .arrow {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
@@ -725,14 +713,14 @@ thead{
     display: inline-block;
 }
 
-#create-calendar-modal .calendar-description {
+.create-calendar-modal .calendar-description {
     margin-left: 6%;
     position: relative;
     top: 31px;
     float: left;
 }
 
-#create-calendar-modal .calendar-description textarea{
+.create-calendar-modal .calendar-description textarea{
     width: 256px;
 	height: 49px;
 	background-color: #fcfeff;
@@ -749,7 +737,7 @@ thead{
     background: url("@static/close_hover.png") no-repeat scroll center bottom / 10px auto rgba(0, 0, 0, 0);
 }
 
-#create-calendar-modal .create-calendar-button, #create-event-modal .create-event-button {
+.create-calendar-modal .create-calendar-button, .create-event-modal .create-event-button {
     width: 86px;
 	height: 34px;
 	background-color: #69a55a;
@@ -769,9 +757,9 @@ thead{
     cursor: pointer;
 }
 
-#create-event-modal .right-side .create-event-button{margin-top: 19px;}
+.create-event-modal .right-side .create-event-button{margin-top: 19px;}
 
-#create-calendar-modal .cancel-create-calendar-button, #create-event-modal .cancel-create-event-button {
+.create-calendar-modal .cancel-create-calendar-button, .create-event-modal .cancel-create-event-button {
     cursor: pointer;
     width: 86px;
 	height: 34px;
@@ -789,9 +777,9 @@ thead{
     border-radius: 2px;
 }
 
-#create-event-modal .right-side .cancel-create-event-button{margin-top: 19px;}
+.create-event-modal .right-side .cancel-create-event-button{margin-top: 19px;}
 
-#create-calendar-modal .close-image {
+.create-calendar-modal .close-image {
     float: right;
     left: 250px;
     position: absolute;
@@ -799,7 +787,7 @@ thead{
     cursor: pointer;
 }
 
-#create-calendar-modal .close-image i{
+.create-calendar-modal .close-image i{
     cursor: pointer;
 }
 
