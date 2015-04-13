@@ -65,6 +65,8 @@
     },
 
     "permission" : {
+                
+        "calendar" : true,
 
         "user" : {
 
