@@ -5,7 +5,7 @@
             <li class="week-type hdd wz-dragger calendar-type">Week</li>
             <li class="month-type hdd active-type wz-dragger calendar-type">Month</li>
         </nav>
-        <article class="calendar-menu-event-finder right wz-dragger"> 
+        <article class="calendar-menu-event-finder right wz-dragger hide"> 
             <input class="searching-box" rel="search" type="search" placeholder="Search...">
             <figure class="magnifying-glass-img">
                 <i></i>
@@ -135,7 +135,7 @@
     </article>
 </section>
 <section class="month-calendar calendar-body calendar-active wz-fit">
-    <table>
+    <table class="wz-fit-x">
         <thead class="calendar-day-bar">
             <tr class="title-row">
                 <th class="title-cell">Sunday</th>
@@ -148,9 +148,8 @@
             </tr>
         </thead>
     </table>
-    <section class="mv-event-container wz-fit">
-        <article class="event ellipsis wz-prototype"><span class="ellipsis"></span><span></span></article>
-        <table class="day-table" cellspacing="0" cellpadding="0">
+    <article class="event ellipsis wz-prototype wz-fit-ignore"><span class="ellipsis"></span><span></span></article>
+    <table class="day-table wz-fit" cellspacing="0" cellpadding="0">
             <tbody>
                 <tr>
                     <td class=""><span></span></td>
@@ -208,7 +207,6 @@
                 </tr>
             </tbody>
         </table>
-    </section>
 </section>
 <section class="week-calendar calendar-body wz-fit-ignore">
     <section class="container">
@@ -223,12 +221,12 @@
                                 </section>
                             </th>
                             <th scope="col" title="mar 27/1">
-                                <section class="week-day-name wk-today">
+                                <section class="week-day-name">
                                     <span class="week-day">16 Monday</span>
                                 </section>
                             </th>
                             <th scope="col" title="mié 28/1">
-                                <section class="week-day-name wk-tomorrow">
+                                <section class="week-day-name">
                                     <span class="week-day">17 Tuesday</span>
                                 </section>
                             </th>
@@ -252,7 +250,6 @@
                                     <span class="week-day">21 Saturday</span>
                                 </section>
                             </th>
-                            <td class="week-scroll"></td>
                     </tr>
                     <tr class="week-allday-bar">
                         <td class="all-day">Dia ent</td>
@@ -267,7 +264,7 @@
                 </tbody>
             </table>
         </section>
-        <section class="scroll-time-events">
+        <section class="scroll-time-events wz-scroll">
                 <table class="time-events" cellspacing="0" cellpadding="0">
                     <tbody>
                         <article class="day-moment wz-prototype"></article>
@@ -521,7 +518,7 @@
             <section class="event-list"> 
             </section>
         </section>
-        <section class="time-cells">
+        <section class="time-cells wz-scroll">
             <table>
                 <tbody>
                     <tr>

@@ -334,13 +334,13 @@
 }
 
 .calendar-body{
-	height: 481px;
+	height: 478px;
     color: #6f7578;
     float: left;
 }
 
 .calendar-body table{
-    width:100%;
+    width:935px;
     float: left;
     height: 34px;
     table-layout: fixed;
@@ -867,13 +867,6 @@ thead{
 }
 
 /* Month calendar */
-.month-calendar .mv-event-container {
-    position: relative;
-    width: 100%;
-    height: 444px;
-    float: left;
-}
-
 .month-calendar .calendar-day-bar th {
     vertical-align: middle;
     font-size: 13px;
@@ -884,10 +877,9 @@ thead{
 
 .month-calendar .day-table {
     left: 0;
-    position: absolute;
     table-layout: fixed;
     top: 0;
-    height: 100%;
+    height: 446px;
     font-size: 13px;
 }
 
@@ -1028,10 +1020,9 @@ thead{
 .week-calendar .scroll-time-events {
     line-height: normal;
     overflow-x: hidden;
-    overflow-y: scroll;
     position: relative;
     height: 420px;
-    width: 934px;
+    width: 935px;
     float:left;
 }
 
@@ -1052,7 +1043,7 @@ thead{
 
 .week-calendar .time-events {
     table-layout: fixed;
-    width: 918px;
+    width: 935px;
 }
 
 .week-calendar .marker-cell {
@@ -1092,10 +1083,6 @@ thead{
     text-align: center;
     font-size: 13px;
     background-color: #f6f8f8;
-}
-
-.week-calendar .week-scroll{
-    width:17px;
 }
 
 .week-calendar .time-col {
@@ -1143,12 +1130,12 @@ thead{
     background-color: #de706c;
     height: 1px;
     position: absolute;
-    width: 868px;
+    width: 885px;
     right: 0;
 }
 
 .day-calendar .day-moment {
-    width: 396px;
+    width: 411px;
 }
 
 .day-moment-bullet{
@@ -1187,7 +1174,6 @@ thead{
     position: relative;
     height: 100%;
     display: inline-block;
-    overflow-y: scroll;
     overflow-x: hidden;
     width: 461px;
 }
@@ -1215,7 +1201,6 @@ thead{
     width: 100%;
     border-top: 1px solid rgba(0, 0, 0, 0.15);
     float: left;
-    overflow-y: scroll;
     overflow-x: hidden;
 }
 

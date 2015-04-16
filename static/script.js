@@ -8,11 +8,6 @@ var BROWSER_TYPE = /webkit/i.test( navigator.userAgent ) ? BROWSER_WEBKIT : ( /t
 
 // VARIABLES
 var account = '';
-var accountInfo = {
-  username: 'fgodino@inevio.com',
-  password: 'test',
-  secure: true
-};
 var calendarView = 'month';
 var febNumberOfDays = '';
 var numOfDays = '';
@@ -22,6 +17,13 @@ var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday', 'Sa
 var dayPerMonth = ['31','','31','30','31','30','31','31','30','31','30','31'];
 //date showing
 var showingDate = new Date();
+
+//Calendar
+var Calendar = function(){
+    this.name = '';
+    this.color = '';
+    this.description = '';
+}
 
 //Event
 var Event = function(){ 
@@ -114,7 +116,9 @@ addEventButton.on('click', function() {
 });
 
 addCalendarButton.on('click', function() {
-    addCalendar();
+    var calendar = new Calendar();
+    calendar.name = calendarName.val();
+    addCalendar(calendar);
     showMenu('.create-calendar-modal', true);
 });
 
@@ -474,8 +478,6 @@ var setHour = function(){
 
 var addEvent = function(){
     var event = createEventModal.data('event');
-    console.log(event);
-    console.log(event.cell);
     var eventTime = {
         hour    : +eventStartTimeHour.val(),
         minutes : +eventStartTimeMinutes.val()
@@ -587,22 +589,21 @@ var addEvent = function(){
     }
 }
 
-var addCalendar = function(){
-    var calendar =  calendarPrototype.clone();
-    calendar.removeClass('wz-prototype');
+var addCalendar = function(calendar){
+    var calendarDom =  calendarPrototype.clone();
+    calendarDom.removeClass('wz-prototype');
     //toDo
-    calendar.find('.calendar-name').text(calendarName.val());
-    calendar.find('figure').css('background-color', colorPickerColor.css('background-color'));
-    calendar.find('.deleteCalendar').on( 'click', function(){
-        calendar.remove();
+    calendarDom.find('.calendar-name').text(calendar.name);
+    calendarDom.find('figure').css('background-color', colorPickerColor.css('background-color'));
+    calendarDom.find('.deleteCalendar').on( 'click', function(){
+        calendarDom.data('calendarApi').delete();
+        calendarDom.remove();
     });
-    calendarList.append(calendar);
-    var cal ={
-        name: calendarName.val()
-    };
-    account.createCalendar(cal, function(err, calendarCb){
-        calendar.data('calendar', calendarCb);
-    })
+    calendarList.append(calendarDom);
+    var calendarApi ={name: calendar.name};
+    account.createCalendar(calendarApi, function(err, calendarApi){
+        calendarDom.data('calendarApi', calendarApi);
+    });
 }
 
 //Add events by clicking
@@ -668,9 +669,22 @@ var fixEventTime = function(eventTime){
     }
 }
 
+var recoverCalendars = function(){ 
+    account.getCalendars(function(err, list){
+        for(var i = 0; i < list.length; i++){
+            var calendar = new Calendar();
+            calendar.name = list[i].displayname;
+            list[i].delete();
+            addCalendar(calendar);
+        }
+    });
+}
+
 //Run code
-wz.calendar.addAccount(accountInfo,function(err, calAccount){
-  account = calAccount;
+wz.calendar.getAccounts(function(err, accounts){
+    console.log(accounts);
+    account = accounts[0];
+    recoverCalendars();
 });
 initCalendar();
 setInterval(function(){setHour()}, 60000);
