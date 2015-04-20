@@ -197,24 +197,38 @@ colorPickerHover.on( 'click', function(){
 
 //Displays de calendarType.
 var selectCalendarType = function(calendarType){
-    $('.wz-fit-ignore').removeClass('wz-fit-ignore');
 	$('.calendar-active').removeClass('calendar-active');
 	$('.active-type').removeClass('active-type');
 	if(calendarType.hasClass('day-type')){
 		dayCalendar.addClass('calendar-active');
         calendarView = 'day';
+		dayCalendar.addClass('wz-fit');
+        
+        monthCalendar.removeClass('wz-fit');
+        weekCalendar.removeClass('wz-fit');
         monthCalendar.addClass('wz-fit-ignore');
         weekCalendar.addClass('wz-fit-ignore');
+        dayCalendar.removeClass('wz-fit-ignore');
 	}else if(calendarType.hasClass('week-type')){
 		weekCalendar.addClass('calendar-active');
         calendarView = 'week';
+		weekCalendar.addClass('wz-fit');
+        
+        monthCalendar.removeClass('wz-fit');
+        dayCalendar.removeClass('wz-fit');
         monthCalendar.addClass('wz-fit-ignore');
         dayCalendar.addClass('wz-fit-ignore');
+        weekCalendar.removeClass('wz-fit-ignore');
 	}else if(calendarType.hasClass('month-type')){
 		monthCalendar.addClass('calendar-active');
         calendarView = 'month';
+		monthCalendar.addClass('wz-fit');
+        
+        dayCalendar.removeClass('wz-fit');
+        weekCalendar.removeClass('wz-fit');
         dayCalendar.addClass('wz-fit-ignore');
         weekCalendar.addClass('wz-fit-ignore');
+        monthCalendar.removeClass('wz-fit-ignore');
 	}else{
 		alert('CalendarTypeError');
 	}

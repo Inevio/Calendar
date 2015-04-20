@@ -947,16 +947,6 @@ thead{
 }
 
 /* Week calendar */
-.week-calendar .week-top.week-full-mode {
-    overflow: hidden;
-    table-layout: fixed;
-    height: 100%;
-}
-
-.week-calendar .week-top-container {
-    float: left;
-}
-
 .week-calendar .week-labels {
     border-right: 1px solid #ccd3d5;
     width: 49px;
