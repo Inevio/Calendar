@@ -500,6 +500,14 @@ var addEvent = function(){
     
     event.title = eventName.val();
     
+    var eventApi ={name: event.title, start:event.startDate, end:event.endDate, description:event.description};
+  
+    account.getCalendars(function(err, list){
+      list[0].createEvent(eventApi, function(err, event){
+        console.log(event);
+      });
+    });
+  
     if(calendarView == 'month'){
         var eventDom =  monthEventPrototype.clone();
         eventDom.removeClass('wz-prototype');
@@ -696,7 +704,6 @@ var recoverCalendars = function(){
 
 //Run code
 wz.calendar.getAccounts(function(err, accounts){
-    console.log(accounts);
     account = accounts[0];
     recoverCalendars();
 });
