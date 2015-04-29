@@ -428,15 +428,15 @@ thead{
 }
 
 .create-event-modal{   
-    width: 572px;
-	height: 259px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	background-color: #f6f8f8;
-	-webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.15);
-	-moz-box-shadow: 0 0 0 1px rgba(0,0,0,.15);
-	box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+    width: 590px;
+		height: 259px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		background-color: #f6f8f8;
+		-webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+		-moz-box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+		box-shadow: 0 0 0 1px rgba(0,0,0,.15);
     display: none;
     z-index: 4;
     position: absolute;
@@ -449,7 +449,7 @@ thead{
 .create-event-modal .left-side {
     float: left;
     height: 259px;
-    width: 291px;
+    width: 304px;
     position: relative;
 }
 
@@ -457,10 +457,14 @@ thead{
     float: left;
 }
 
+.left-side article > span {
+  	float: left;
+}
+
 .create-event-modal .right-side {
     float: left;
     height: 259px;
-    width: 281px;
+    width: 286px;
     position: relative;
 }
 
@@ -479,13 +483,13 @@ thead{
 }
 
 .create-event-modal input, .create-event-modal select{
-    height: 26px;
-	background-color: #fcfeff;
-	-webkit-box-shadow: inset 0 2px rgba(0,0,0,.05);
-	-moz-box-shadow: inset 0 2px rgba(0,0,0,.05);
-	box-shadow: inset 0 2px rgba(0,0,0,.05);
-	border: solid 1px #ccd3d5;
-    margin-top: 5px;
+    height: 24px;
+		background-color: #fcfeff;
+		-webkit-box-shadow: inset 0 2px rgba(0,0,0,.05);
+		-moz-box-shadow: inset 0 2px rgba(0,0,0,.05);
+		box-shadow: inset 0 2px rgba(0,0,0,.05);
+		border: solid 1px #ccd3d5;
+    margin-top: 10px;
     color:#6f7578;
     float: left;
     padding-left: 6px;
@@ -506,18 +510,18 @@ thead{
     border-right: 1px solid #ccd3d5;
     border-top: 1px solid #ccd3d5;
     float: left;
-    height: 26px;
-    margin-top: 5px;
-    width: 15px;
+    height: 24px;
+    margin-top: 10px;
+    width: 13px;
     -webkit-border-radius: 0 1px 1px 0;
-	-moz-border-radius: 0 1px 1px 0;
-	border-radius: 0 1px 1px 0;
-	background-color: rgba(204,211,213,0);
-	background-image: -webkit-linear-gradient(bottom, #f2f2f2, #fafaf8);
-	background-image: -moz-linear-gradient(bottom, #f2f2f2, #fafaf8);
-	background-image: -o-linear-gradient(bottom, #f2f2f2, #fafaf8);
-	background-image: -ms-linear-gradient(bottom, #f2f2f2, #fafaf8);
-	background-image: linear-gradient(to top, #f2f2f2, #fafaf8);
+		-moz-border-radius: 0 1px 1px 0;
+		border-radius: 0 1px 1px 0;
+		background-color: rgba(204,211,213,0);
+		background-image: -webkit-linear-gradient(bottom, #f2f2f2, #fafaf8);
+		background-image: -moz-linear-gradient(bottom, #f2f2f2, #fafaf8);
+		background-image: -o-linear-gradient(bottom, #f2f2f2, #fafaf8);
+		background-image: -ms-linear-gradient(bottom, #f2f2f2, #fafaf8);
+		background-image: linear-gradient(to top, #f2f2f2, #fafaf8);
     margin-right: 4px;
 }
 
@@ -528,27 +532,27 @@ thead{
     border-top: 4px solid #919191;
     display: inline-block;
     height: 0;
-    margin: 3.4px;
-    vertical-align: -9px;
+    margin: 2px;
+    vertical-align: -6px;
     width: 0;
 }
 
 .create-event-modal .event-name {
-    height: 41px;
-    padding: 15px 0 0 20px;
-    width: 176px;
+    height: 49px;
+    padding: 20px 0 0 14px;
+    width: 235px;
 }
 
 .create-event-modal .event-name input{
-    width: 174px;
+    width: 227px;
 }
 
 .create-event-modal .event-color {
-    margin: 34px 9px 0 0;
+    margin: 43px 9px 0 0;
     border-radius: 3px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccd3d5;
     float: left;
-    height: 25px;
+    height: 24px;
 }
 
 .create-event-modal .event-color:hover {background: #e5e5e5;}
@@ -576,12 +580,12 @@ thead{
 
 .create-event-modal .event-when {
     height: 41px;
-    padding: 10px 81px 0 20px;
-    width: 175px;
+    padding: 12px 13px 0 14px;
+    width: 120px;
 }
 
 .create-event-modal .event-when input{
-    width: 254px;
+    width: 91px;
 }
 
 .create-event-modal .event-start {

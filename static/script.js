@@ -16,17 +16,16 @@ var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July'
 var monthShortNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var dayPerMonth = ['31', '', '31', '30', '31', '30', '31', '31', '30', '31', '30', '31'];
-//date showing
 var showingDate = new Date();
 
-//Calendar
+// CALENDAR OBJECT
 var Calendar = function() {
   this.name = '';
   this.color = '';
   this.description = '';
 }
 
-//Event
+// EVENT OBJECT
 var Event = function() {
   this.title = '';
   this.description = '';
@@ -82,7 +81,8 @@ var dayMomentBarPrototype = $('.day-moment.wz-prototype');
 var dayMomentBulletPrototype = $('.day-moment-bullet.wz-prototype');
 var dayMomentTimePrototype = $('.day-moment-time.wz-prototype');
 
-//Add getWeek function to Date object
+// GLOBAL FUNCTIONS
+// Add getWeek function to Date object
 Date.prototype.getWeek = function() {
   var onejan = new Date(this.getFullYear(), 0, 1);
   var today = new Date(this.getFullYear(), this.getMonth(), this.getDate());
@@ -90,49 +90,57 @@ Date.prototype.getWeek = function() {
   return Math.ceil(dayOfYear / 7)
 };
 
-//Adds each top bar buttons functionalty to change between calendar types.
+// DOM EFFECTS
+// Change between calendar types.
 $('.calendar-type').on('click', function() {
   selectCalendarType($(this));
   $(this).addClass('active-type');
 });
 
-//Adds buttons functionality to open the menus
+// Open the menus
 $('.my-calendars').on('click', function() {
   showMenu('.my-calendars-modal', false);
 });
 
+// Open 'new calendar' modal
+createCalendar.on('click', function() {
+  showMenu('.create-calendar-modal', true);
+});
+
+// Open 'new event' modal
 createEvent.on('click', function() {
   showMenu('.create-event-modal', true);
   var eventDate = dayNames[getDaySelected().getDay()] + ', ' + getDaySelected().getDate() + 'th of ' + monthNames[showingDate.getMonth()] + ', ' + showingDate.getFullYear();
   $('.event-when input').val(eventDate);
 });
 
-createCalendar.on('click', function() {
-  showMenu('.create-calendar-modal', true);
-});
-
-addEventButton.on('click', function() {
-  addEvent();
-  showMenu('.create-event-modal', true);
-});
-
+// Add calendar button
 addCalendarButton.on('click', function() {
   var calendar = new Calendar();
   calendar.name = calendarName.val();
-  addCalendar(calendar);
+  addCalendarToDom(calendar, true);
   showMenu('.create-calendar-modal', true);
 });
 
+// Add event button
+addEventButton.on('click', function() {
+  addEventToDom(true);
+  showMenu('.create-event-modal', true);
+});
+
+// Close 'new calendar' modal
 cancelCalendarButton.on('click', function() {
   colorPickerContainer.hide();
   showMenu('.create-calendar-modal', true);
 });
+
+// Close 'new event' modal
 cancelEventButton.on('click', function() {
   colorPickerContainer.hide();
   showMenu('.create-event-modal', true);
 });
 
-//Adds buttons functionality to change month/week
+// Change to next month/week
 nextDOM.on('click', function() {
   if (calendarView == 'month') {
     showingDate.setMonth(showingDate.getMonth() + 1);
@@ -145,6 +153,7 @@ nextDOM.on('click', function() {
   initCalendar();
 });
 
+// Change to prev month/week
 prevDOM.on('click', function() {
   if (calendarView == 'month') {
     showingDate.setMonth(showingDate.getMonth() - 1);
@@ -157,7 +166,7 @@ prevDOM.on('click', function() {
   initCalendar();
 });
 
-//Color toolbar positioning
+// Color toolbar positioning
 colorToolbar.on('click', function() {
   colorPickerContainer.toggle();
   colorPickerContainer
@@ -167,7 +176,7 @@ colorToolbar.on('click', function() {
     });
 });
 
-//Color toolbar hover color
+// Color toolbar hover color
 colorPicker
   .on('mousedown', function(e) {
     e.stopPropagation();
@@ -187,7 +196,7 @@ colorPicker
     })
   });
 
-//Set the color picker to the color picked
+// Set the color picker to the color picked
 colorPickerHover.on('click', function() {
   colorPickerColor
     .css('background-color', colorPickerHover.css('background-color'))
@@ -195,8 +204,8 @@ colorPickerHover.on('click', function() {
   colorPickerContainer.css('display', 'none');
 });
 
-
-//Displays de calendarType.
+// AUXILIAR FUNCTIONS
+// Displays calendar types
 var selectCalendarType = function(calendarType) {
   $('.calendar-active').removeClass('calendar-active');
   $('.active-type').removeClass('active-type');
@@ -236,7 +245,7 @@ var selectCalendarType = function(calendarType) {
   initCalendar();
 }
 
-//Display and hides this menu.
+// Display and hides this menu.
 var showMenu = function(menu, shadow) {
   if (shadow) {
     $('.shadow').toggle();
@@ -244,7 +253,7 @@ var showMenu = function(menu, shadow) {
   $(menu).toggle();
 }
 
-//Adds a green area to the cell recieved.
+// Adds a green area to the cell recieved.
 var selectDay = function(cell) {
   $('.day-selected').removeClass('day-selected');
   cell.addClass('day-selected');
@@ -260,10 +269,9 @@ var selectDay = function(cell) {
     dayNameDisplay.text(dayNames[showingDate.getDay()]);
     miniCalendarTittle.text(monthNames[showingDate.getMonth()] + ' ' + showingDate.getFullYear());
   }
-
-
 }
 
+// Set the current day to the cell
 var setCurrentDay = function(cell) {
   $('.day-moment-time').remove();
   $('.day-moment').remove();
@@ -302,9 +310,8 @@ var setCurrentDay = function(cell) {
   }
 }
 
-// -- APP FUNCTIONALITY --
-
-//Set all de calendar
+// APP FUNCTIONALITY
+// Set all de calendar
 var initCalendar = function() {
   if (showingDate.getMonth() == 1) {
     setFebDays();
@@ -323,7 +330,7 @@ var initCalendar = function() {
   selectDay(dayToSelect);
 }
 
-//Determinate if February 28/29
+// Determinate if February 28/29
 var setFebDays = function() {
   var showingYear = showingDate.getFullYear();
   if ((showingYear % 100 != 0) && (showingYear % 4 == 0) || (showingYear % 400 == 0)) {
@@ -333,7 +340,7 @@ var setFebDays = function() {
   }
 }
 
-//Set the showing date on the calendar header
+// Set the showing date on the calendar header
 var setShowingDate = function() {
   var dateText = '';
   if (calendarView == 'month') {
@@ -350,7 +357,7 @@ var setShowingDate = function() {
   currentMonthDOM.text(dateText);
 }
 
-//Set the primary state of the cells of the month view of the calendar
+// Set the primary state of the cells of the month view of the calendar
 var setMonthCells = function() {
   var nCells = 42;
   var nBlankCells = nCells - numOfDays;
@@ -372,21 +379,29 @@ var setMonthCells = function() {
 
   var dayCounter = 1;
   for (var i = firstWeekDayOfMonth; i < nCells - nBlankCells; i++) {
-    $('.day-table td:eq(' + i + ') span').text(dayCounter);
-    $('.day-table td:eq(' + i + ')').addClass('day-cell');
-    var startDate = new Date(showingDate.getFullYear(), showingDate.getMonth(), dayCounter++);
-    var endDate = new Date(startDate.getTime());
-    var dateInterval = {
-      start: startDate.getTime(),
-      end: endDate.getTime()
-    };
-    console.log(calendarStandart);
-    /*if(calendarStandart != ''){
-      calendarStandart.getEventsByDate(dateInterval, function(err, events) {
-        console.log(err);
-        console.log(events);
-      });
-    }*/
+		(function( i ){	
+			$('.day-table td:eq(' + i + ') span').text(dayCounter);
+			$('.day-table td:eq(' + i + ')').addClass('day-cell');
+			var startDate = new Date(showingDate.getFullYear(), showingDate.getMonth(), dayCounter, 0, 0, 0, 0);
+			var endDate = new Date(showingDate.getFullYear(), showingDate.getMonth(), dayCounter++, 23, 59, 59, 999);
+			var dateInterval = {
+				start: startDate.getTime(),
+				end: endDate.getTime()
+			};/*
+			if(calendarStandart != ''){
+				var cell = $('.day-table td:eq(' + i + ')');
+				calendarStandart.getEventsByDate(dateInterval, function(err, events) {
+					console.log( dateInterval );
+					console.log(events);
+					for(var j = 0; j<events.length; j++){
+						var event = new Event();
+						event.cell = cell;
+						createEventModal.data('event', event);
+						addEventToDom(false);
+					}
+				});
+			}*/
+		})( i );
   }
 
   dayCounter = 1;
@@ -403,6 +418,7 @@ var setMonthCells = function() {
   return dayToSelect;
 }
 
+// Set the primary state of the cells of the week view of the calendar
 var setWeekCells = function() {
   $('.week-day-name .week-day:eq(' + showingDate.getDay() + ')').text(showingDate.getDate() + ' ' + dayNames[showingDate.getDay()]);
   var showingDateAux = new Date(showingDate.getTime());
@@ -424,6 +440,7 @@ var setWeekCells = function() {
   return dayToSelect;
 }
 
+// Set the primary state of the cells of the day view of the calendar
 var setDayCells = function() {
   var nCells = 42;
   var nBlankCells = nCells - numOfDays;
@@ -448,7 +465,7 @@ var setDayCells = function() {
   return dayToSelect;
 }
 
-//Clean all the cells of the month view of the calendar
+// Clean all the cells of the month view of the calendar
 var cleanCells = function() {
   if (calendarView == 'month') {
     for (var i = 0; i < 42; i++) {
@@ -466,14 +483,17 @@ var cleanCells = function() {
   }
 }
 
+// Return a Date object with the date selected
 var getDaySelected = function() {
   return new Date(monthNames[showingDate.getMonth()] + ' ' + $('.day-selected span').text() + ' ,' + showingDate.getFullYear());
 }
 
+// Set the colored line in the current time
 var setHour = function() {
-  $('.time-col .day-moment-bullet').remove();
-  $('tbody .day-moment-time').remove();
-  $('tbody .day-moment').remove();
+  $('.visible.day-moment-bullet').remove();
+  $('.visible.day-moment-time').remove();
+  $('.visible.day-moment').remove();
+  
   var currentDate = new Date();
   var hour = currentDate.getHours();
   var minutes = ('0' + currentDate.getMinutes()).slice(-2);
@@ -484,7 +504,10 @@ var setHour = function() {
   dayMomentBar.removeClass('wz-prototype');
   dayMomentBullet.removeClass('wz-prototype');
   dayMomentTime.removeClass('wz-prototype');
-
+  dayMomentBar.addClass('visible');
+  dayMomentBullet.addClass('visible');
+  dayMomentTime.addClass('visible');
+  
   dayMomentTime.text(hour + ':' + minutes);
   if (10 > +(minutes) > 50) {
     dayMomentTime.css('background-color', '#f6f8f8');
@@ -500,11 +523,12 @@ var setHour = function() {
   }
 
   $('.time-events tbody').append(dayMomentBar);
-  $('.day-selected').append(dayMomentBullet);
+  $('.week-calendar .day-selected').append(dayMomentBullet);
   $('.time-cells tbody').append(dayMomentBar.clone());
 }
 
-var addEvent = function() {
+// Add event to the DOM
+var addEventToDom = function(haveToInsert) {
   var event = createEventModal.data('event');
   var eventTime = {
     hour: +eventStartTimeHour.val(),
@@ -513,29 +537,29 @@ var addEvent = function() {
   fixEventTime(eventTime);
 
   event.title = eventName.val();
-  event.startDate.setHours(eventStartTimeHour.val());
-  event.startDate.setMinutes(eventStartTimeMinutes.val());
-  var endDate = new Date(event.startDate.getTime());
-  endDate.setHours(endDate.getHours()+parseInt(eventDuration.val().substr(0,1)));
-  event.endDate = endDate;
-  
+  if(event.startDate != '' && event.startDate != ''){
+		event.startDate.setHours(eventStartTimeHour.val());
+		event.startDate.setMinutes(eventStartTimeMinutes.val());
+		var endDate = new Date(event.startDate.getTime());
+		endDate.setHours(endDate.getHours()+parseInt(eventDuration.val().substr(0,1)));
+		event.endDate = endDate;
+		event.startDate = event.startDate.getTime();
+		event.endDate = event.endDate.getTime();
+	}
   var eventApi = {
     name: event.title,
-    start: event.startDate.getTime(),
-    end: event.endDate.getTime(),
+    start: event.startDate,
+    end: event.endDate,
     description: event.description
   };  
   
-  account.getCalendars(function(err, list) {
-    list[0].createEvent(eventApi, function(err, event) {
-      console.log(event);
-    });
-  });
+  if(haveToInsert){
+		addEvent(eventApi);
+	}
 
   if (calendarView == 'month') {
     var eventDom = monthEventPrototype.clone();
     eventDom.removeClass('wz-prototype');
-    //toDo
     eventDom.html('<figure></figure>' + event.title);
     eventDom.find('figure').css('background-color', colorPickerColor.css('background-color'));
     if (event.cell.find('article').length < 1) {
@@ -567,7 +591,6 @@ var addEvent = function() {
     var daySelected = $('.hour-markers .marker-cell:eq(' + eventTime.hour + ')');
     var eventDom = weekEventPrototype.clone();
     eventDom.removeClass('wz-prototype');
-    //toDo
     eventDom.find('span:eq(0)').text(event.title);
 
     eventDom.css('border-left', '2px solid ' + colorPickerHover.attr('data-border-color'));
@@ -635,10 +658,20 @@ var addEvent = function() {
   }
 }
 
-var addCalendar = function(calendar) {
+// Add event to the API
+var addEvent = function(eventApi){
+	account.getCalendars(function(err, list) {
+    list[0].createEvent(eventApi, function(err, event) {
+      console.log(event);
+    });
+  });
+}
+
+// Add calendar to the DOM
+var addCalendarToDom = function(calendar, haveToInsert) {
   var calendarDom = calendarPrototype.clone();
   calendarDom.removeClass('wz-prototype');
-  //toDo
+  calendarDom.addClass('calendarDom');
   calendarDom.find('.calendar-name').text(calendar.name);
   calendarDom.find('figure').css('background-color', colorPickerColor.css('background-color'));
   calendarDom.find('.deleteCalendar').on('click', function() {
@@ -646,15 +679,19 @@ var addCalendar = function(calendar) {
     calendarDom.remove();
   });
   calendarList.append(calendarDom);
-  var calendarApi = {
-    name: calendar.name
-  };
-  account.createCalendar(calendarApi, function(err, calendarApi) {
-    calendarDom.data('calendarApi', calendarApi);
-  });
+  var calendarApi = {name: calendar.name};
+  if(haveToInsert){
+		addCalendar(calendarApi);
+	}
+}
+// Add calendar to the API
+var addCalendar = function(calendarApi){
+	account.createCalendar(calendarApi, function(err, cal) {
+			calendarDom.data('calendarApi', cal);
+	});
 }
 
-//Add events by clicking
+// Add events by clicking
 var addByClick = function() {
 
   $('td').off('dblclick');
@@ -679,6 +716,7 @@ var addByClick = function() {
       showMenu('.create-event-modal', true);
       event.stringDate = dayNames[object.index() - 1] + ', ' + $('.week-day-names th:eq(' + (object.index() - 1) + ')').find('span').text().substring(0, 2) + 'th of ' + monthNames[showingDate.getMonth()] + ', ' + showingDate.getFullYear();
       $('.event-when input').val(event.stringDate);
+      event.startDate = new Date(showingDate.getFullYear(), showingDate.getMonth(), $('.week-day-names th:eq(' + (object.index() - 1) + ')').find('span').text().substring(0, 2));
       eventDuration.val('1 hour');
       event.allDay = false;
       event.cell = object;
@@ -719,18 +757,18 @@ var fixEventTime = function(eventTime) {
 }
 
 var recoverCalendars = function() {
+  $('.calendarDom').remove();
   account.getCalendars(function(err, list) {
     calendarStandart = list[0];
     for (var i = 0; i < list.length; i++) {
       var calendar = new Calendar();
       calendar.name = list[i].displayname;
-      list[i].delete();
-      addCalendar(calendar);
+      addCalendarToDom(calendar, false);
     }
   });
 }
 
-//Run code
+// Run code
 wz.calendar.getAccounts(function(err, accounts) {
   account = accounts[0];
   recoverCalendars();
