@@ -522,7 +522,6 @@ thead{
 		background-image: -o-linear-gradient(bottom, #f2f2f2, #fafaf8);
 		background-image: -ms-linear-gradient(bottom, #f2f2f2, #fafaf8);
 		background-image: linear-gradient(to top, #f2f2f2, #fafaf8);
-    margin-right: 4px;
 }
 
 .create-event-modal .arrow {
@@ -539,7 +538,7 @@ thead{
 
 .create-event-modal .event-name {
     height: 49px;
-    padding: 20px 0 0 14px;
+    padding: 15px 0 0 14px;
     width: 235px;
 }
 
@@ -548,7 +547,7 @@ thead{
 }
 
 .create-event-modal .event-color {
-    margin: 43px 9px 0 0;
+    margin: 38px 9px 0 0;
     border-radius: 3px;
     border: 1px solid #ccd3d5;
     float: left;
@@ -579,61 +578,61 @@ thead{
 }
 
 .create-event-modal .event-when {
-    height: 41px;
-    padding: 12px 13px 0 14px;
-    width: 120px;
+    height: 49px;
+    padding: 12px 5px 0 14px;
+    width: 99px;
 }
 
 .create-event-modal .event-when input{
-    width: 91px;
+    width: 77px;
 }
 
-.create-event-modal .event-start {
-    height: 41px;
-    padding: 15px 20px 0 20px;
-    width: 107px;
+.create-event-modal .event-time {
+    height: 37px;
+    padding: 24px 14px 0 0;
+    width: 68px;
 }
 
-.create-event-modal .event-start input{
-    width: 25px;
+.create-event-modal .event-time input{
+    width: 46px;
 }
 
-.event-start > span {
-    padding-right: 72px;
+.create-event-modal .event-all-day {
+  	padding-top: 40px;
+		width: 104px;
 }
 
-.create-event-modal .event-duration {
-    height: 41px;
-    padding: 15px 42px 0 0;
-    width: 81px;
+.event-all-day > figure {
+		border: 1px solid #c2cacd;
+		border-radius: 1px;
+		height: 12px;
+		width: 12px;
+		float: left;
+		margin-right: 5px;
 }
 
-.create-event-modal .event-duration select{
-    width: 82px;
+.event-all-day > span {
+  float: left;
 }
 
-.create-event-modal .event-duration input{
-    width: 52px;
+.create-event-modal .event-repeat {
+  	height: 49px;
+    padding: 12px 20px 12px 14px;
+    width: 126px;
 }
 
-.create-event-modal .event-frequency {
-    height: 41px;
-    padding: 15px 6px 35px 20px;
-    width: 121px;
-}
-
-.create-event-modal .event-frequency input{
-    width: 92px;
+.create-event-modal .event-repeat input{
+    width: 104px;
 }
 
 .create-event-modal .event-alert {
-    height: 41px;
-    padding: 15px 0 35px 0;
-    width: 123px;
+    height: 49px;
+    padding: 12px 29px 12px 0;
+    width: 115px;
 }
 
 .create-event-modal .event-alert input{
-    width: 90px;
+    width: 93px;
 }
 
 .create-calendar-modal{

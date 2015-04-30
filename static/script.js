@@ -387,7 +387,7 @@ var setMonthCells = function() {
 			var dateInterval = {
 				start: startDate.getTime(),
 				end: endDate.getTime()
-			};/*
+			};
 			if(calendarStandart != ''){
 				var cell = $('.day-table td:eq(' + i + ')');
 				calendarStandart.getEventsByDate(dateInterval, function(err, events) {
@@ -400,7 +400,7 @@ var setMonthCells = function() {
 						addEventToDom(false);
 					}
 				});
-			}*/
+			}
 		})( i );
   }
 
