@@ -539,19 +539,26 @@ thead{
 .create-event-modal .event-name {
     height: 49px;
     padding: 15px 0 0 14px;
-    width: 235px;
+    width: 173px;
 }
 
 .create-event-modal .event-name input{
-    width: 227px;
+    width: 165px;
 }
 
 .create-event-modal .event-color {
-    margin: 38px 9px 0 0;
     border-radius: 3px;
+    float: left;
+    height: 25px;
+    margin: 38px 9px 0 0;
+    width: 99px;
+}
+
+.event-color.color-toolbar.right > section:first-child {
     border: 1px solid #ccd3d5;
     float: left;
     height: 24px;
+    width: 83px;
 }
 
 .create-event-modal .event-color:hover {background: #e5e5e5;}
@@ -562,6 +569,18 @@ thead{
     height: 16px;
     margin: 4px;
     display: inline-block;
+		float: left;
+}
+
+.event-color.color-toolbar.right span {
+		float: left;
+		padding-left: 1px;
+		padding-top: 5px;
+		width: 57px;
+}
+
+.calendar-head .create-event-modal .event-color .dropdown {
+  	margin-top: 0;
 }
 
 .create-event-modal .event-color .arrow {
@@ -571,7 +590,7 @@ thead{
     border-top: 4px solid #919191;
     display: inline-block;
     height: 0;
-    margin: 0 4px 0 -3px;
+    margin: 10px 0 2px 2px;
     vertical-align: 9px;
     width: 0;
     display: inline-block;
@@ -635,6 +654,66 @@ thead{
     width: 93px;
 }
 
+.date-dropdown {
+  position: absolute;
+  z-index: 3;
+	display: none;
+}
+
+.date-dropdown .mini-calendar-body th {
+  	background: #fff none repeat scroll 0 0;
+    width: 32px;
+}
+
+
+.date-dropdown .mini-calendar .current-month {
+    height: 29px;
+    margin: 0 28px;
+}
+
+.date-dropdown .mini-calendar td {
+  vertical-align: middle;
+}
+
+.date-dropdown .mini-calendar td:hover {
+  background-color: #f8cece;
+}
+
+.date-dropdown .mini-calendar-body > table {
+  height: 163px;
+}
+
+.date-dropdown .mini-calendar .day-cell.current-day {
+  background: #e85c5c none repeat scroll 0 0;
+  color: #fff;
+}
+
+.date-dropdown .mini-calendar-head{
+	width: 222px;
+	height: 29px;
+	text-align: center;
+	background-color: rgba(246,248,248,0);
+	border-left: 1px solid #ccd3d5;
+	border-right: 1px solid #ccd3d5;
+	border-top: 1px solid #ccd3d5;
+	background-image: -webkit-linear-gradient(bottom, #f2f2f2, #fafaf8);
+	background-image: -moz-linear-gradient(bottom, #f2f2f2, #fafaf8);
+	background-image: -o-linear-gradient(bottom, #f2f2f2, #fafaf8);
+	background-image: -ms-linear-gradient(bottom, #f2f2f2, #fafaf8);
+	background-image: linear-gradient(to top, #f2f2f2, #fafaf8);
+}
+
+.date-dropdown .mini-calendar-body{
+	background-color: #fff;
+	border: 1px solid #ccd3d5;
+	box-shadow: 0 2px #ccd3d5;
+	height: 213px;
+	width: 222px;
+	text-align: center;
+  vertical-align: middle;
+}
+
+/* Create calendar modal */
 .create-calendar-modal{
     width: 289px;
 	height: 211px;

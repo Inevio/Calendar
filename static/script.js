@@ -56,6 +56,7 @@ var cancelEventButton = $('.cancel-create-event-button');
 var addCalendarButton = $('.create-calendar-button');
 var cancelCalendarButton = $('.cancel-create-calendar-button');
 var eventName = $('.event-name input');
+var eventWhen = $('.event-when');
 var eventStartTimeHour = $('.event-start input:eq(0)');
 var eventStartTimeMinutes = $('.event-start input:eq(1)');
 var eventDuration = $('.event-duration input');
@@ -65,6 +66,7 @@ var dayNumberDisplay = $('.day article span:first-child');
 var dayNameDisplay = $('.day article span:last-child');
 var miniCalendarTittle = $('.mini-calendar-head > span');
 var eventList = $('.event-list');
+var dateDropDown = $('.date-dropdown');
 
 var colorToolbar = $('.color-toolbar');
 var colorPickerContainer = $('.color-picker-container');
@@ -164,6 +166,15 @@ prevDOM.on('click', function() {
   }
   cleanCells();
   initCalendar();
+});
+
+// Display date dropdown menu
+eventWhen.on('click', function(){
+	dateDropDown.toggle();
+	dateDropDown.css({
+      top: ($(this).offset().top - win.offset().top) + $(this).outerHeight(),
+      left: $(this).offset().left - win.offset().left,
+    });
 });
 
 // Color toolbar positioning
@@ -328,6 +339,9 @@ var initCalendar = function() {
   }
   setCurrentDay(dayToSelect);
   selectDay(dayToSelect);
+	dayToSelect = setDropCalendarCells();
+	setCurrentDay(dayToSelect);
+  selectDay(dayToSelect);
 }
 
 // Determinate if February 28/29
@@ -464,6 +478,26 @@ var setDayCells = function() {
 
   return dayToSelect;
 }
+
+// Set the primary state of the cells of the date dropdown calendar
+var setDropCalendarCells = function(){
+	var nCells = 42;
+  var nBlankCells = nCells - numOfDays;
+  var firstWeekDayOfMonth = new Date(monthNames[showingDate.getMonth()] + ' 1 ,' + showingDate.getFullYear()).getDay();
+  nBlankCells = nBlankCells - firstWeekDayOfMonth;
+
+  var dayCounter = 1;
+  for (var i = firstWeekDayOfMonth; i < nCells - nBlankCells; i++) {
+    $('.date-dropdown .mini-calendar-body table td:eq(' + i + ')').text(dayCounter++);
+    $('.date-dropdown .mini-calendar-body table td:eq(' + i + ')').addClass('day-cell');
+  }
+
+  var currenDate = new Date();
+  var dayToSelect = $('.date-dropdown .mini-calendar-body table td:eq(' + (firstWeekDayOfMonth + (currenDate.getDate() - 1)) + ')');
+
+  return dayToSelect;
+}
+
 
 // Clean all the cells of the month view of the calendar
 var cleanCells = function() {
