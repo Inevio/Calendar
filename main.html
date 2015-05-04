@@ -68,6 +68,7 @@
   </section>
   <section class="create-event-modal wz-fit-ignore">
    	<section class="date-dropdown">
+   		<i class="arrow"></i>
    		<section class="mini-calendar">
           <section class="mini-calendar-head">
 						<section class="current-month">
@@ -140,19 +141,80 @@
               </tbody>
             </table>
             <section class="today-button">
-            	
+            	<button class="chose-today-button">Today</button>
             </section>
           </section>
         </section>  		
+   	</section>
+   	<section class="hour-dropdown">
+   		<i class="arrow"></i>
+   		<section class="hours wz-scroll">
+				<article>00:00</article>
+				<article>00:30</article>
+				<article>01:00</article>
+				<article>01:30</article>
+				<article>02:00</article>
+				<article>02:30</article>
+				<article>03:00</article>
+				<article>03:30</article>
+				<article>04:00</article>
+				<article>04:30</article>
+				<article>05:00</article>
+				<article>05:30</article>
+				<article>06:00</article>
+				<article>06:30</article>
+				<article>07:00</article>
+				<article>07:30</article>
+				<article>08:00</article>
+				<article>08:30</article>
+				<article>09:00</article>
+				<article>09:30</article>
+				<article>10:00</article>
+				<article>10:30</article>
+				<article>11:00</article>
+				<article>11:30</article>
+				<article>12:00</article>
+				<article>12:30</article>
+				<article>13:00</article>
+				<article>13:30</article>
+				<article>14:00</article>
+				<article>14:30</article>
+				<article>15:00</article>
+				<article>15:30</article>
+				<article>16:00</article>
+				<article>16:30</article>
+				<article>17:00</article>
+				<article>17:30</article>
+				<article>18:00</article>
+				<article>18:30</article>
+				<article>19:00</article>
+				<article>19:30</article>
+				<article>20:00</article>
+				<article>20:30</article>
+				<article>21:00</article>
+				<article>21:30</article>
+				<article>22:00</article>
+				<article>22:30</article>
+				<article>23:00</article>
+				<article>23:30</article>
+				<article>24:00</article>
+			</section>	
+   	</section>
+   	<section class="calendar-dropdown">
+   		<i class="arrow"></i>
+   		<article class="calendar wz-prototype">
+   			<i class="color"></i>
+   			<span class="ellipsis"></span>
+   		</article>
    	</section>
     <section class="left-side">
       <article class="event-name">
         <span>Name of the event</span>
         <input type="text">
       </article>
-      <figure class="event-color color-toolbar right">
+      <figure class="event-color right">
         <section>
-        	<i class="color" style="background: rgba(157, 211, 255, 0.5)"></i>
+        	<i class="color"></i>
         	<span class="ellipsis"></span>
         </section>
         <section class="dropdown"><i class="arrow"></i></section>
@@ -167,8 +229,7 @@
         <section class="dropdown"><i class="arrow"></i></section>
       </article>
       <article class="event-all-day">
-        <figure><i></i></figure>
-        <span>All day</span>
+        <input type="checkbox" class="wz-ui-input"><label><i></i><span>All day</span></label>
       </article>
       <article class="event-when end">
         <span>End</span>

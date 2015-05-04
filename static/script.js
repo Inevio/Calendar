@@ -57,8 +57,8 @@ var addCalendarButton = $('.create-calendar-button');
 var cancelCalendarButton = $('.cancel-create-calendar-button');
 var eventName = $('.event-name input');
 var eventWhen = $('.event-when');
-var eventStartTimeHour = $('.event-start input:eq(0)');
-var eventStartTimeMinutes = $('.event-start input:eq(1)');
+var eventTime = $('.event-time');
+var eventColor = $('.event-color');
 var eventDuration = $('.event-duration input');
 var calendarName = $('.calendar-name input');
 var calendarList = $('.my-calendars-list');
@@ -67,6 +67,9 @@ var dayNameDisplay = $('.day article span:last-child');
 var miniCalendarTittle = $('.mini-calendar-head > span');
 var eventList = $('.event-list');
 var dateDropDown = $('.date-dropdown');
+var hourDropDown = $('.hour-dropdown');
+var calendarDropDown = $('.calendar-dropdown');
+var eventAllDay = $('.event-all-day i');
 
 var colorToolbar = $('.color-toolbar');
 var colorPickerContainer = $('.color-picker-container');
@@ -78,7 +81,8 @@ var colorPickerColor = $('.color-toolbar .color');
 var monthEventPrototype = $('.month-calendar .event.wz-prototype');
 var weekEventPrototype = $('.week-calendar .event.wz-prototype');
 var dayEventProtoype = $('.day-events.wz-prototype');
-var calendarPrototype = $('.calendar.wz-prototype');
+var calendarPrototype = $('.my-calendars-list .calendar.wz-prototype');
+var calendarSelectorProtoype = $('.calendar-dropdown .calendar.wz-prototype');
 var dayMomentBarPrototype = $('.day-moment.wz-prototype');
 var dayMomentBulletPrototype = $('.day-moment-bullet.wz-prototype');
 var dayMomentTimePrototype = $('.day-moment-time.wz-prototype');
@@ -113,6 +117,18 @@ createCalendar.on('click', function() {
 createEvent.on('click', function() {
   showMenu('.create-event-modal', true);
   var eventDate = dayNames[getDaySelected().getDay()] + ', ' + getDaySelected().getDate() + 'th of ' + monthNames[showingDate.getMonth()] + ', ' + showingDate.getFullYear();
+	var calendars = calendarDropDown.find('.calendar');
+	var calendar = '';
+	for(var i = 0; i<calendars.length; i++){
+		if(calendars.eq(i).css('display') != 'none'){
+			calendar = calendars.eq(i);
+			break;
+		}
+	}
+	$('.calendar-dropdown .calendarDom.active').removeClass('active');
+	calendar.addClass('active');
+	eventColor.find('.color').css('background-color', calendar.find('.color').css('background-color'));
+	eventColor.find('.ellipsis').text(calendar.find('.ellipsis').text());
   $('.event-when input').val(eventDate);
 });
 
@@ -120,6 +136,7 @@ createEvent.on('click', function() {
 addCalendarButton.on('click', function() {
   var calendar = new Calendar();
   calendar.name = calendarName.val();
+	calendar.color = colorPickerColor.css('background-color');
   addCalendarToDom(calendar, true);
   showMenu('.create-calendar-modal', true);
 });
@@ -170,11 +187,38 @@ prevDOM.on('click', function() {
 
 // Display date dropdown menu
 eventWhen.on('click', function(){
+	displayDateDropdown($(this));
+});
+var displayDateDropdown = function(object){
 	dateDropDown.toggle();
-	dateDropDown.css({
-      top: ($(this).offset().top - win.offset().top) + $(this).outerHeight(),
-      left: $(this).offset().left - win.offset().left,
-    });
+	if(object.hasClass('start')){
+		dateDropDown.css('top','130px');
+		eventWhen.eq(0).find('input').toggleClass('active');
+	}else if(object.hasClass('end')){
+		dateDropDown.css('top','191px');
+		eventWhen.eq(1).find('input').toggleClass('active');
+	}
+}
+
+// Display hour dropdown menu
+eventTime.on('click', function(){
+	displayHourDropdown($(this));
+});
+var displayHourDropdown = function(object){
+	hourDropDown.toggle();
+	if(object.hasClass('start')){
+		hourDropDown.css('top','130px');
+		eventTime.eq(0).find('input').toggleClass('active');
+	}else if(object.hasClass('end')){
+		hourDropDown.css('top','191px');
+		eventTime.eq(1).find('input').toggleClass('active');
+	}
+}
+
+
+// Display calendar dropdown menu
+eventColor.on('click', function(){
+	calendarDropDown.toggle();
 });
 
 // Color toolbar positioning
@@ -215,7 +259,45 @@ colorPickerHover.on('click', function() {
   colorPickerContainer.css('display', 'none');
 });
 
+// Select all day in new event modal
+eventAllDay.on('click', function(){
+	if(eventTime.find('input').prop('disabled')){
+		eventWhen.eq(1).find('input').prop('disabled', false);
+		eventWhen.eq(1).on('click', function(){displayDateDropdown($(this))});
+		eventWhen.eq(1).find('input').removeClass('disabled');
+		eventTime.find('input').prop('disabled', false);
+		eventTime.on('click', function(){displayHourDropdown($(this))});
+		eventTime.find('input').removeClass('disabled');
+	}else{
+		eventWhen.eq(1).find('input').prop('disabled', true);
+		eventWhen.eq(1).off('click');
+		eventWhen.eq(1).find('input').addClass('disabled');
+		eventTime.find('input').prop('disabled', true);
+		eventTime.off('click');
+		eventTime.find('input').addClass('disabled');
+	}
+})
+
 // AUXILIAR FUNCTIONS
+// Color converter
+var normalizeColor = function( color ){
+ if( !color ){
+ 	return '#000000';
+ }
+ if( color.indexOf('#') > -1 ){
+ 	return color;
+ }
+ color = color.match(/(\d+)/g) || [ 0, 0, 0 ];
+ color = color.slice( 0, 3 ); // Prevents alpha if color was a rgba
+ 
+ for( var i in color ){
+ 	color[ i ] = parseInt( color[ i ], 10 ).toString( 16 );
+ 	color[ i ] = color[ i ].length === 1 ? '0' + color[ i ] : color[ i ];
+ }
+
+ return '#' + color.join('');
+};
+
 // Displays calendar types
 var selectCalendarType = function(calendarType) {
   $('.calendar-active').removeClass('calendar-active');
@@ -703,17 +785,19 @@ var addEvent = function(eventApi){
 
 // Add calendar to the DOM
 var addCalendarToDom = function(calendar, haveToInsert) {
+	var calendarShowList = addCalendarToShowList(calendar);
   var calendarDom = calendarPrototype.clone();
   calendarDom.removeClass('wz-prototype');
   calendarDom.addClass('calendarDom');
   calendarDom.find('.calendar-name').text(calendar.name);
-  calendarDom.find('figure').css('background-color', colorPickerColor.css('background-color'));
+  calendarDom.find('figure').css('background-color', normalizeColor(calendar.color));
   calendarDom.find('.deleteCalendar').on('click', function() {
     calendarDom.data('calendarApi').delete();
     calendarDom.remove();
+		calendarShowList.remove();
   });
   calendarList.append(calendarDom);
-  var calendarApi = {name: calendar.name};
+  var calendarApi = {name: calendar.name, color: normalizeColor(calendar.color)};
   if(haveToInsert){
 		addCalendar(calendarApi);
 	}
@@ -723,6 +807,24 @@ var addCalendar = function(calendarApi){
 	account.createCalendar(calendarApi, function(err, cal) {
 			calendarDom.data('calendarApi', cal);
 	});
+}
+
+// Add calendar to show list
+var addCalendarToShowList = function(calendar){
+	var calendarDom = calendarSelectorProtoype.clone();
+	calendarDom.removeClass('wz-prototype');
+	calendarDom.addClass('calendarDom');
+	calendarDom.find('.color').css('background-color', calendar.color);
+	calendarDom.find('span').text(calendar.name);
+	calendarDom.on('click', function(){
+		var object = $(this);
+		$('.calendar-dropdown .calendarDom.active').removeClass('active');
+		object.addClass('active');
+		eventColor.find('.color').css('background-color', object.find('.color').css('background-color'));
+		eventColor.find('.ellipsis').text(object.find('.ellipsis').text());
+	});
+	calendarDropDown.append(calendarDom);
+	return calendarDom;
 }
 
 // Add events by clicking
@@ -797,6 +899,7 @@ var recoverCalendars = function() {
     for (var i = 0; i < list.length; i++) {
       var calendar = new Calendar();
       calendar.name = list[i].displayname;
+			calendar.color = list[i]['calendar-color'];
       addCalendarToDom(calendar, false);
     }
   });

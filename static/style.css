@@ -39,6 +39,14 @@
     background-color: #fff;
 }
 
+input.disabled {
+  background-color: #f0f0f0 !important;
+}
+
+input.active{
+	border: 1px solid #7ebe30 !important;
+}
+
 /* Shadow */
 .hide {display:none;}
 .abs {position:absolute; z-index: 3;}
@@ -441,7 +449,7 @@ thead{
     z-index: 4;
     position: absolute;
     left: 179px;
-    margin-top: 11.5%;
+    margin-top: 7.5%;
     font-size:13px;
     float:left;
 }
@@ -554,11 +562,12 @@ thead{
     width: 99px;
 }
 
-.event-color.color-toolbar.right > section:first-child {
+.event-color.right > section:first-child {
     border: 1px solid #ccd3d5;
     float: left;
     height: 24px;
     width: 83px;
+		background-color: #fff;
 }
 
 .create-event-modal .event-color:hover {background: #e5e5e5;}
@@ -594,6 +603,11 @@ thead{
     vertical-align: 9px;
     width: 0;
     display: inline-block;
+}
+
+.event-color span {
+  float: left;
+  padding-top: 6px;
 }
 
 .create-event-modal .event-when {
@@ -658,13 +672,55 @@ thead{
   position: absolute;
   z-index: 3;
 	display: none;
+	left: -2px;
+}
+
+
+.create-event-modal .date-dropdown .arrow, .create-event-modal .hour-dropdown .arrow, .create-event-modal .calendar-dropdown .arrow {
+	background: url('@static/sprite.png') -234px 0;
+	background-size: 298px 18px;
+	display: block;
+	height: 10px;
+	position: absolute;
+	width: 10px;
+	z-index: 5;
+	top:-6px;
+	left: 100px;
+	border: 0;
 }
 
 .date-dropdown .mini-calendar-body th {
   	background: #fff none repeat scroll 0 0;
     width: 32px;
+		height: 16px;
+    padding-top: 9px;
 }
 
+.date-dropdown .mini-calendar-body td {
+  height: 26px;
+  width: 26px;
+	color: #424242;
+}
+
+.today-button {
+  height: 26px;
+  padding-bottom: 10px;
+  padding-top: 15px;
+}
+
+.chose-today-button{
+	color: #6f7578;
+	width: 101px;
+	height: 26px;
+	background-color: rgba(204,211,213,0);
+	border: solid 1px #ccd3d5;
+	background-image: -webkit-linear-gradient(bottom, #f2f2f2, #fafaf8);
+	background-image: -moz-linear-gradient(bottom, #f2f2f2, #fafaf8);
+	background-image: -o-linear-gradient(bottom, #f2f2f2, #fafaf8);
+	background-image: -ms-linear-gradient(bottom, #f2f2f2, #fafaf8);
+	background-image: linear-gradient(to top, #f2f2f2, #fafaf8);
+
+}
 
 .date-dropdown .mini-calendar .current-month {
     height: 29px;
@@ -711,6 +767,94 @@ thead{
 	width: 222px;
 	text-align: center;
   vertical-align: middle;
+}
+
+.hour-dropdown {
+  position: absolute;
+  z-index: 3;
+	display: none;
+	left: 154px;
+	height: 111px;
+}
+
+.hour-dropdown .hours{
+	height: 111px;
+	background-color: #fff;
+  border: 1px solid #ccd3d5;
+}
+
+.hour-dropdown .hours > article {
+  padding: 5px 12px 5px 8px;
+	border-bottom: 1px solid #fff;
+  border-top: 1px solid #fff;
+}
+
+.hour-dropdown .hours > article:hover {
+  background-color: #e5f2d6;
+	border-top: 1px solid #d0e8b5;
+	border-bottom: 1px solid #d0e8b5;
+}
+
+.create-event-modal .hour-dropdown .arrow{
+	left: 17px;
+}
+
+.calendar-dropdown{
+	position: absolute;
+  z-index: 3;
+	display: none;
+	left: 154px;
+	height: 105px;
+	width: 105px;
+	background-color: #fff;
+	border: 1px solid #ccd3d5;
+	top: 69px;
+	left: 190px;
+	padding-top: 2px;
+}
+
+.create-event-modal .calendar-dropdown .arrow{
+	left: 89px;
+  top: -7px;
+}
+
+.calendar-dropdown .color{
+    width: 16px;
+    height: 16px;
+    margin: 4px;
+    display: inline-block;
+		float: left;
+}
+
+.calendar-dropdown .calendarDom .color{
+	border: 1px solid #fff;
+  margin: 2px 6px 0 4px;
+}
+
+.calendar-dropdown .calendar.calendarDom {
+  height: 22px;
+  padding-bottom: 3px;
+  padding-top: 3px;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.calendar-dropdown .calendarDom span {
+  float: left;
+  padding-top: 4px;
+}
+
+.create-event-modal .calendar-dropdown .calendar.calendarDom.active {
+  background-color: #7ebe30;
+  border-bottom: 1px solid #71ab2b;
+  border-top: 1px solid #71ab2b;
+  color: #fff;
+}
+
+.calendar-dropdown .calendar.calendarDom:hover {
+  background-color: #e5f2d6;
+  border-bottom: 1px solid #d0e8b5;
+  border-top: 1px solid #d0e8b5;
 }
 
 /* Create calendar modal */
