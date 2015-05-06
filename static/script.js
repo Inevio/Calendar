@@ -59,6 +59,8 @@ var eventName = $('.event-name input');
 var eventWhen = $('.event-when');
 var eventTime = $('.event-time');
 var eventColor = $('.event-color');
+var eventRepeat = $('.event-repeat');
+var eventAlert	= $('.event-alert');
 var eventDuration = $('.event-duration input');
 var calendarName = $('.calendar-name input');
 var calendarList = $('.my-calendars-list');
@@ -69,6 +71,8 @@ var eventList = $('.event-list');
 var dateDropDown = $('.date-dropdown');
 var hourDropDown = $('.hour-dropdown');
 var calendarDropDown = $('.calendar-dropdown');
+var repeatDropDown = $('.repeat-dropdown');
+var alertDropDown = $('.alert-dropdown');
 var eventAllDay = $('.event-all-day i');
 
 var colorToolbar = $('.color-toolbar');
@@ -116,7 +120,15 @@ createCalendar.on('click', function() {
 // Open 'new event' modal
 createEvent.on('click', function() {
   showMenu('.create-event-modal', true);
-  var eventDate = dayNames[getDaySelected().getDay()] + ', ' + getDaySelected().getDate() + 'th of ' + monthNames[showingDate.getMonth()] + ', ' + showingDate.getFullYear();
+	var month = (showingDate.getMonth()+1).toString();
+	var day = (getDaySelected().getDate()).toString();
+	if (month.length < 2) {
+    month = '0' + month;
+  }
+	if(day.length < 2){
+		day = '0' + day;
+	}
+  var eventDate = month+'/'+day+'/'+showingDate.getFullYear();
 	var calendars = calendarDropDown.find('.calendar');
 	var calendar = '';
 	for(var i = 0; i<calendars.length; i++){
@@ -219,6 +231,16 @@ var displayHourDropdown = function(object){
 // Display calendar dropdown menu
 eventColor.on('click', function(){
 	calendarDropDown.toggle();
+});
+
+// Display repeat dropdown menu
+eventRepeat.on('click', function(){
+	repeatDropDown.toggle();
+});
+
+// Display alert dropdown menu
+eventAlert.on('click', function(){
+	alertDropDown.toggle();
 });
 
 // Color toolbar positioning
@@ -422,8 +444,6 @@ var initCalendar = function() {
   setCurrentDay(dayToSelect);
   selectDay(dayToSelect);
 	dayToSelect = setDropCalendarCells();
-	setCurrentDay(dayToSelect);
-  selectDay(dayToSelect);
 }
 
 // Determinate if February 28/29

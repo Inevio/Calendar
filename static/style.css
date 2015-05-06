@@ -676,7 +676,7 @@ thead{
 }
 
 
-.create-event-modal .date-dropdown .arrow, .create-event-modal .hour-dropdown .arrow, .create-event-modal .calendar-dropdown .arrow {
+.create-event-modal .date-dropdown .arrow, .create-event-modal .hour-dropdown .arrow, .create-event-modal .calendar-dropdown .arrow, .create-event-modal .repeat-dropdown .arrow, .create-event-modal .alert-dropdown .arrow {
 	background: url('@static/sprite.png') -234px 0;
 	background-size: 298px 18px;
 	display: block;
@@ -803,7 +803,6 @@ thead{
 	position: absolute;
   z-index: 3;
 	display: none;
-	left: 154px;
 	height: 105px;
 	width: 105px;
 	background-color: #fff;
@@ -855,6 +854,53 @@ thead{
   background-color: #e5f2d6;
   border-bottom: 1px solid #d0e8b5;
   border-top: 1px solid #d0e8b5;
+}
+
+.repeat-dropdown{
+	background-color: #fff;
+	border: 1px solid #ccd3d5;
+	display: none;
+	left: 51px;
+	padding: 4px 0;
+	position: absolute;
+	top: 253px;
+	z-index: 3;
+}
+
+.create-event-modal  .repeat-dropdown  .arrow, .create-event-modal  .alert-dropdown  .arrow {
+    left: 73px;
+    top: -8px;
+}
+
+.repeat-options.wz-scroll > article, .alert-options.wz-scroll > article {
+	height: 14px;
+	padding: 4px 15px 4px 5px;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.create-event-modal .repeat-dropdown .repeat-options article.active, .create-event-modal .alert-dropdown .alert-options article.active {
+    background-color: #7ebe30;
+    border-bottom: 1px solid #71ab2b;
+    border-top: 1px solid #71ab2b;
+    color: #fff;
+}
+
+.repeat-dropdown .repeat-options article:hover, .alert-dropdown .alert-options article:hover {
+  background-color: #e5f2d6;
+  border-bottom: 1px solid #d0e8b5;
+  border-top: 1px solid #d0e8b5;
+}
+
+.alert-dropdown{
+	position: absolute;
+  z-index: 3;
+	display: none;
+	background-color: #fff;
+	border: 1px solid #ccd3d5;
+	top: 253px;
+	left: 190px;
+	padding-top: 2px;
 }
 
 /* Create calendar modal */
