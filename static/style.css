@@ -799,6 +799,11 @@ thead{
 	left: 17px;
 }
 
+.hour-dropdown .inactive {
+	background-color: #f0f0f0;
+	color: #aeb1b2;
+}
+
 .calendar-dropdown{
 	position: absolute;
   z-index: 3;
@@ -810,6 +815,10 @@ thead{
 	top: 69px;
 	left: 190px;
 	padding-top: 2px;
+}
+
+.calendar-dropdown .calendars{
+	height: 105px;
 }
 
 .create-event-modal .calendar-dropdown .arrow{
