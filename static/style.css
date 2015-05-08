@@ -675,7 +675,6 @@ thead{
 	left: -2px;
 }
 
-
 .create-event-modal .date-dropdown .arrow, .create-event-modal .hour-dropdown .arrow, .create-event-modal .calendar-dropdown .arrow, .create-event-modal .repeat-dropdown .arrow, .create-event-modal .alert-dropdown .arrow {
 	background: url('@static/sprite.png') -234px 0;
 	background-size: 298px 18px;
@@ -719,7 +718,27 @@ thead{
 	background-image: -o-linear-gradient(bottom, #f2f2f2, #fafaf8);
 	background-image: -ms-linear-gradient(bottom, #f2f2f2, #fafaf8);
 	background-image: linear-gradient(to top, #f2f2f2, #fafaf8);
+}
 
+.chose-today-button:hover{
+	background-color: #fff;
+	background-image: none;
+}
+
+.chose-today-button:active{
+	color: #6f7578;
+	width: 101px;
+	height: 26px;
+	background-color: #fff;
+	-webkit-box-shadow: inset 0 2px rgba(0,0,0,.05);
+	-moz-box-shadow: inset 0 2px rgba(0,0,0,.05);
+	box-shadow: inset 0 2px rgba(0,0,0,.05);
+	border: solid 1px #ccd3d5;
+	background-image: -webkit-linear-gradient(top, #e4e4e4, #f3f3f3);
+	background-image: -moz-linear-gradient(top, #e4e4e4, #f3f3f3);
+	background-image: -o-linear-gradient(top, #e4e4e4, #f3f3f3);
+	background-image: -ms-linear-gradient(top, #e4e4e4, #f3f3f3);
+	background-image: linear-gradient(to bottom, #e4e4e4, #f3f3f3);
 }
 
 .date-dropdown .mini-calendar .current-month {
@@ -767,6 +786,11 @@ thead{
 	width: 222px;
 	text-align: center;
   vertical-align: middle;
+}
+
+.day-cell.inactive {
+  background-color: #f0f0f0;
+  color: #aeb1b2 !important;
 }
 
 .hour-dropdown {
@@ -1020,16 +1044,56 @@ thead{
 
 .create-calendar-modal .create-calendar-button, .create-event-modal .create-event-button {
     width: 86px;
-	height: 34px;
-	background-color: #69a55a;
-	-webkit-box-shadow: inset 0 -2px rgba(0,0,0,.3);
-	-moz-box-shadow: inset 0 -2px rgba(0,0,0,.3);
-	box-shadow: inset 0 -2px rgba(0,0,0,.3);
-	background-image: -webkit-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
-	background-image: -moz-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
-	background-image: -o-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
-	background-image: -ms-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
-	background-image: linear-gradient(to top, rgba(105,165,90,.5), rgba(121,191,104,.5));
+		height: 34px;
+		background-color: #69a55a;
+		-webkit-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		-moz-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		background-image: -webkit-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
+		background-image: -moz-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
+		background-image: -o-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
+		background-image: -ms-linear-gradient(bottom, rgba(105,165,90,.5), rgba(121,191,104,.5));
+		background-image: linear-gradient(to top, rgba(105,165,90,.5), rgba(121,191,104,.5));
+    color:#fff;
+    margin-top: 44px;
+    margin-left: 11px;
+    margin-right: 14px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.create-calendar-modal .create-calendar-button:hover, .create-event-modal .create-event-button:hover {
+    width: 86px;
+		height: 34px;
+		background-color: #69a55a;
+		-webkit-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		-moz-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		background-image: -webkit-linear-gradient(bottom, rgba(120,183,104,.5), rgba(151,224,133,.5));
+		background-image: -moz-linear-gradient(bottom, rgba(120,183,104,.5), rgba(151,224,133,.5));
+		background-image: -o-linear-gradient(bottom, rgba(120,183,104,.5), rgba(151,224,133,.5));
+		background-image: -ms-linear-gradient(bottom, rgba(120,183,104,.5), rgba(151,224,133,.5));
+		background-image: linear-gradient(to top, rgba(120,183,104,.5), rgba(151,224,133,.5));
+    color:#fff;
+    margin-top: 44px;
+    margin-left: 11px;
+    margin-right: 14px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.create-calendar-modal .create-calendar-button:active, .create-event-modal .create-event-button:active {
+    width: 86px;
+		height: 34px;
+		background-color: #69a55a;
+		-webkit-box-shadow: inset 0 2px rgba(0,0,0,.15);
+		-moz-box-shadow: inset 0 2px rgba(0,0,0,.15);
+		box-shadow: inset 0 2px rgba(0,0,0,.15);
+		background-image: -webkit-linear-gradient(top, #4c7f3f, #5da34b);
+		background-image: -moz-linear-gradient(top, #4c7f3f, #5da34b);
+		background-image: -o-linear-gradient(top, #4c7f3f, #5da34b);
+		background-image: -ms-linear-gradient(top, #4c7f3f, #5da34b);
+		background-image: linear-gradient(to bottom, #4c7f3f, #5da34b);
     color:#fff;
     margin-top: 44px;
     margin-left: 11px;
@@ -1043,19 +1107,55 @@ thead{
 .create-calendar-modal .cancel-create-calendar-button, .create-event-modal .cancel-create-event-button {
     cursor: pointer;
     width: 86px;
-	height: 34px;
-	background-color: #ef5251;
-	-webkit-box-shadow: inset 0 -2px rgba(0,0,0,.3);
-	-moz-box-shadow: inset 0 -2px rgba(0,0,0,.3);
-	box-shadow: inset 0 -2px rgba(0,0,0,.3);
-	background-image: -webkit-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
-	background-image: -moz-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
-	background-image: -o-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
-	background-image: -ms-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
-	background-image: linear-gradient(to top, rgba(239,82,81,.5), rgba(255,97,96,.5));
+		height: 34px;
+		background-color: #ef5251;
+		-webkit-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		-moz-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		background-image: -webkit-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
+		background-image: -moz-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
+		background-image: -o-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
+		background-image: -ms-linear-gradient(bottom, rgba(239,82,81,.5), rgba(255,97,96,.5));
+		background-image: linear-gradient(to top, rgba(239,82,81,.5), rgba(255,97,96,.5));
     color:#fff;
     margin-top: 44px;
     border-radius: 2px;
+}
+
+.create-calendar-modal .cancel-create-calendar-button:hover, .create-event-modal .cancel-create-event-button:hover {
+    width: 86px;
+		height: 34px;
+		background-color: #ef5251;
+		-webkit-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		-moz-box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		box-shadow: inset 0 -2px rgba(0,0,0,.3);
+		background-image: -webkit-linear-gradient(bottom, rgba(244,101,100,.5), rgba(255,128,127,.5));
+		background-image: -moz-linear-gradient(bottom, rgba(244,101,100,.5), rgba(255,128,127,.5));
+		background-image: -o-linear-gradient(bottom, rgba(244,101,100,.5), rgba(255,128,127,.5));
+		background-image: -ms-linear-gradient(bottom, rgba(244,101,100,.5), rgba(255,128,127,.5));
+		background-image: linear-gradient(to top, rgba(244,101,100,.5), rgba(255,128,127,.5));
+    color:#fff;
+    margin-top: 44px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.create-calendar-modal .cancel-create-calendar-button:active, .create-event-modal .cancel-create-event-button:active {
+    width: 86px;
+		height: 34px;
+		background-color: #ef5251;
+		-webkit-box-shadow: inset 0 2px rgba(0,0,0,.15);
+		-moz-box-shadow: inset 0 2px rgba(0,0,0,.15);
+		box-shadow: inset 0 2px rgba(0,0,0,.15);
+		background-image: -webkit-linear-gradient(top, #d03a39, #d64948);
+		background-image: -moz-linear-gradient(top, #d03a39, #d64948);
+		background-image: -o-linear-gradient(top, #d03a39, #d64948);
+		background-image: -ms-linear-gradient(top, #d03a39, #d64948);
+		background-image: linear-gradient(to bottom, #d03a39, #d64948);
+    color:#fff;
+    margin-top: 44px;
+    border-radius: 2px;
+    cursor: pointer;
 }
 
 .create-event-modal .right-side .cancel-create-event-button{margin-top: 19px;}

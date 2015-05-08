@@ -75,6 +75,7 @@ var calendarDropDown = $('.calendar-dropdown');
 var repeatDropDown = $('.repeat-dropdown');
 var alertDropDown = $('.alert-dropdown');
 var eventAllDay = $('.event-all-day label');
+var todayDropdown = $('.date-dropdown .chose-today-button');
 
 var colorToolbar = $('.color-toolbar');
 var colorPickerContainer = $('.color-picker-container');
@@ -132,8 +133,9 @@ createEvent.on('click', function() {
 	// Prepare the calendar which is active
 	setActiveCalendar();
 	
-	// Prepare event object to addEventToDom() function
-	prepareEventToAdd(new Date(showingDate.getFullYear(), showingDate.getMonth(), showingDate.getDate()), new Date(showingDate.getFullYear(), showingDate.getMonth(), showingDate.getDate()));
+	// Set the cells and the current day on dropdown calendar
+	setDropCalendarCells();
+	setCurrentDayDropCalendar();
 });
 
 // Add calendar button
@@ -147,7 +149,7 @@ addCalendarButton.on('click', function() {
 
 // Add event button
 addEventButton.on('click', function() {
-  addEventToDom(true);
+  addEventToDom(true, false);
   showMenu('.create-event-modal', true);
 });
 
@@ -174,6 +176,10 @@ nextDOM.on('click', function() {
   }
   cleanCells();
   initCalendar();
+	
+	// Set the cells and the current day on dropdown calendar
+	setDropCalendarCells();
+	setCurrentDayDropCalendar();
 });
 
 // Change to prev month/week
@@ -187,6 +193,10 @@ prevDOM.on('click', function() {
   }
   cleanCells();
   initCalendar();
+	
+	// Set the cells and the current day on dropdown calendar
+	setDropCalendarCells();
+	setCurrentDayDropCalendar();
 });
 
 // Set the input active (green border)
@@ -201,13 +211,34 @@ eventWhen.on('click', function(){
 var displayDateDropdown = function(object){
 	dateDropDown.toggle();
 	if(object.hasClass('start')){
+		dateDropDown.removeClass('end');
+		dateDropDown.addClass('start');
 		dateDropDown.css('top','130px');
 		eventWhen.eq(0).find('input').toggleClass('active');
 	}else if(object.hasClass('end')){
+		dateDropDown.removeClass('start');
+		dateDropDown.addClass('end');
 		dateDropDown.css('top','191px');
 		eventWhen.eq(1).find('input').toggleClass('active');
 	}
 }
+
+// Set current month by pressing today button on date dropdown calendar
+todayDropdown.on('click', function(){
+	
+	var now = new Date();
+	showingDate.setDate(now.getDate());
+	showingDate.setMonth(now.getMonth());
+	showingDate.setFullYear(now.getFullYear());
+	
+	cleanCells();
+  initCalendar();
+	
+	// Set the cells and the current day on dropdown calendar
+	setDropCalendarCells();
+	setCurrentDayDropCalendar();
+
+});
 
 // Display hour dropdown menu
 eventTime.on('click', function(){
@@ -477,13 +508,15 @@ var cleanNewEventModal = function(){
 	hoursSelectables.removeClass('inactive');
 	eventName.val('');
 	eventTime.find('input').val('');
+	dateDropDown.find('.inactive').removeClass('inactive');
 }
 
-var prepareEventToAdd = function(start, end){
-	var event = new Event();
-	event.startDate = start;
-	event.endDate = end;
-	createEventModal.data('event', event);
+var setCurrentDayDropCalendar = function(){
+	var now = new Date();
+	if(showingDate.getMonth() == now.getMonth()){
+		dateDropDown.find('.current-day').removeClass('current-day');
+		dateDropDown.find('.day-cell').eq(showingDate.getDate()-1).addClass('current-day');
+	}
 }
 
 // APP FUNCTIONALITY
@@ -504,7 +537,6 @@ var initCalendar = function() {
   }
   setCurrentDay(dayToSelect);
   selectDay(dayToSelect);
-	dayToSelect = setDropCalendarCells();
 }
 
 // Determinate if February 28/29
@@ -574,7 +606,7 @@ var setMonthCells = function() {
 						var event = new Event();
 						event.cell = cell;
 						createEventModal.data('event', event);
-						addEventToDom(false);
+						addEventToDom(false, false);
 					}
 				});
 			}
@@ -653,16 +685,43 @@ var setDropCalendarCells = function(){
   for (var i = firstWeekDayOfMonth; i < nCells - nBlankCells; i++) {
     $('.date-dropdown .mini-calendar-body table td:eq(' + i + ')').text(dayCounter++);
     $('.date-dropdown .mini-calendar-body table td:eq(' + i + ')').addClass('day-cell');
+		$('.date-dropdown .mini-calendar-body table td:eq(' + i + ')').on('click', function(){
+			var object = $(this);
+			var prevDate = '';
+			var newDate = '';
+			var newDay = object.text();
+			var dayList = dateDropDown.find('.day-cell');
+			if(newDay.length < 2){
+				newDay = '0' + newDay;
+			}
+			
+			if(dateDropDown.hasClass('start')){
+				eventWhen.eq(0).find('input').toggleClass('active');
+				prevDate = eventWhen.eq(0).find('input').val();
+				newDate = prevDate.substr(0,3)+newDay+prevDate.substr(5,5);
+				eventWhen.eq(0).find('input').val(newDate);
+				eventWhen.eq(1).find('input').val(newDate);
+				for(var i = 0; i<parseInt(object.text())-1 ;i++){
+					dayList.eq(i).addClass('inactive');
+					dayList.eq(i).off('click');
+				}
+			}else if(dateDropDown.hasClass('end')){
+				eventWhen.eq(1).find('input').toggleClass('active');
+				prevDate = eventWhen.eq(1).find('input').val();
+				newDate = prevDate.substr(0,3)+newDay+prevDate.substr(5,5);
+				eventWhen.eq(1).find('input').val(newDate);
+				for(var i = parseInt(object.text()); i<dayList.length ;i++){
+					dayList.eq(i).addClass('inactive');
+					dayList.eq(i).off('click');
+				}
+			}
+			dateDropDown.toggle();
+		});
   }
-
-  var currenDate = new Date();
-  var dayToSelect = $('.date-dropdown .mini-calendar-body table td:eq(' + (firstWeekDayOfMonth + (currenDate.getDate() - 1)) + ')');
-
-  return dayToSelect;
 }
 
 
-// Clean all the cells of the month view of the calendar
+// Clean all the cells of the calendar
 var cleanCells = function() {
   if (calendarView == 'month') {
     for (var i = 0; i < 42; i++) {
@@ -678,8 +737,17 @@ var cleanCells = function() {
       $('.mini-calendar-body table th:eq(' + i + ')').removeClass();
     }
   }
+	cleanDropdownCalendarCells();
 }
 
+var cleanDropdownCalendarCells = function(){
+	var dayList = dateDropDown.find('td');
+	for (var i = 0; i < dayList.length; i++) {
+  	dayList.eq(i).text('');
+    dayList.eq(i).removeClass();
+  }
+}			
+			
 // Return a Date object with the date selected
 var getDaySelected = function() {
   return new Date(monthNames[showingDate.getMonth()] + ' ' + $('.day-selected span').text() + ' ,' + showingDate.getFullYear());
@@ -725,15 +793,33 @@ var setHour = function() {
 }
 
 // Add event to the DOM
-var addEventToDom = function(haveToInsert) {
-	// Recover event object and set start and end date
-  var event = createEventModal.data('event');
-  event.title = eventName.val();
-  if(event.startDate != '' && event.endDate != ''){
-		event.startDate.setHours(eventTime.eq(0).find('input').val().substr(0,2));
-		event.startDate.setMinutes(eventTime.eq(0).find('input').val().substr(3,4));
-		event.endDate.setHours(eventTime.eq(1).find('input').val().substr(0,2));
-		event.endDate.setMinutes(eventTime.eq(1).find('input').val().substr(3,4));
+var addEventToDom = function(haveToInsert, reInserting) {
+  
+	var event = new Event();
+	
+	var startDate = eventWhen.eq(0).find('input').val();
+	var endDate = eventWhen.eq(1).find('input').val();
+	
+	event.startDate = new Date(parseInt(startDate.substr(6,4)), parseInt(startDate.substr(0,2)), parseInt(startDate.substr(3,2)));
+	event.endDate = new Date(parseInt(endDate.substr(6,4)), parseInt(endDate.substr(0,2)), parseInt(endDate.substr(3,2)));
+	event.title = eventName.val();
+	event.startDate.setHours(eventTime.eq(0).find('input').val().substr(0,2));
+	event.startDate.setMinutes(eventTime.eq(0).find('input').val().substr(3,2));
+	event.endDate.setHours(eventTime.eq(1).find('input').val().substr(0,2));
+	event.endDate.setMinutes(eventTime.eq(1).find('input').val().substr(3,2));
+	
+	if(!reInserting && (event.startDate.getDate() != event.endDate.getDate())){
+		var plusDuration = (event.endDate.getDate()-event.startDate.getDate());
+		for(var i = 0; i<plusDuration; i++){
+			var day = parseInt(eventWhen.eq(0).find('input').val().substr(3,2)) + 1;
+			day = day.toString();
+			if(day.length < 2){
+				day = '0' + day;
+			}
+			var newDate = startDate.substr(0,3)+day+startDate.substr(5,5);
+			eventWhen.eq(0).find('input').val(newDate);
+			addEventToDom(false, true);
+		}
 	}
 	
 	// Set the event color
@@ -935,14 +1021,15 @@ var addByClick = function() {
 			// Clean inputs
 			cleanNewEventModal();
 			
+			// Set the cells and the current day on dropdown calendar
+			setDropCalendarCells();
+			setCurrentDayDropCalendar();
+			
 			// Prepare string date to show
 			setStringDate(object.find('span').text(), (showingDate.getMonth()+1).toString(), showingDate.getFullYear());
 			
 			// Prepare the calendar which is active
 			setActiveCalendar();
-			
-			// Prepare event object to addEventToDom() function
-			prepareEventToAdd(new Date(showingDate.getFullYear(), showingDate.getMonth(), object.find('span').text()), new Date(showingDate.getFullYear(), showingDate.getMonth(), object.find('span').text()));
 			
 			// Display create event menu
       showMenu('.create-event-modal', true);
