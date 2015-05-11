@@ -211,12 +211,13 @@
    	<section class="repeat-dropdown">
    		<i class="arrow"></i>
    		<section class="repeat-options wz-scroll">
-   			<article class="active">Every week</article>
+   			<article class="active">None</article>
+   			<article>Every week</article>
    			<article>Every month</article>
    			<article>Every year</article>
    		</section>
    	</section>
-   	<section class="alert-dropdown">
+   	<section class="alert-dropdown hide">
    		<i class="arrow"></i>
    		<section class="alert-options wz-scroll">
    			<article class="active">5 mins before</article>
@@ -262,7 +263,7 @@
         <input>
         <section class="dropdown"><i class="arrow"></i></section>
       </article>
-      <article class="event-alert">
+      <article class="event-alert hide">
         <span>Alert</span>
         <input type="text">
         <section class="dropdown"><i class="arrow"></i></section>
@@ -270,7 +271,7 @@
       <article class="separator"></article>
     </section>
     <section class="right-side">
-      <article class="calendar-description">
+      <article class="calendar-description right">
         <span>Description</span>
         <textArea></textArea>
       </article>
@@ -284,7 +285,7 @@
       <input type="text">
     </article>
     <figure class="calendar-color color-toolbar">
-      <i class="color" style="background: rgba(157, 211, 255, 0.5)"></i>
+      <i class="color" style="background: #5ab4fe"></i>
       <i class="arrow"></i>
     </figure>
     <article class="calendar-description">
@@ -297,20 +298,13 @@
   <article class="color-picker-container wz-fit-ignore">
     <i class="arrow"></i>
     <section class="color-picker">
-      <i class="color-picker-hover" data-border-color="#5ab4fe" data-text-color="rgba(42, 119, 173, 0.9)"></i>
+      <i class="color-picker-hover" data-color="0"></i>
       <table class="color-picker-color">
         <tbody>
           <tr>
-            <td data-boder-color="#5ab4fe" data-text-color="rgba(42, 119, 173, 0.9)"></td>
-            <td data-boder-color="#4e9c21" data-text-color="rgba(48, 110, 13, 0.9)"></td>
-            <td data-boder-color="#aa7ff8" data-text-color="rgba(103, 66, 170, 0.9)"></td>
-            <td data-boder-color="#f68738" data-text-color="rgba(180, 93, 31, 0.9)"></td>
-            <td data-boder-color="#6e5646" data-text-color="rgba(90, 70, 56, 0.9)"></td>
-            <td data-boder-color="#22a86c" data-text-color="rgba(10, 90, 54, 0.9)"></td>
-            <td data-boder-color="#e13d35" data-text-color="rgba(145, 37, 33, 0.9)"></td>
-            <td data-boder-color="#b36dbb" data-text-color="rgba(156, 75, 165, 0.9)"></td>
-            <td data-boder-color="#384a59" data-text-color="rgba(53, 59, 67, 0.9)"></td>
-            <td data-boder-color="#c6a937" data-text-color="rgba(132, 116, 11, 0.9)"></td>
+            <td></td><td></td><td></td>
+            <td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td>
           </tr>
         </tbody>
       </table>
@@ -332,6 +326,7 @@
     </thead>
   </table>
   <article class="event ellipsis wz-prototype wz-fit-ignore"><span class="ellipsis"></span><span></span></article>
+  <article class="all-day-event ellipsis wz-prototype wz-fit-ignore"></article>
   <table class="day-table wz-fit" cellspacing="0" cellpadding="0">
     <tbody>
       <tr>
