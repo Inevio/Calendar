@@ -138,19 +138,19 @@ createCalendar.on('click', function() {
 createEvent.on('click', function() {
 	// Clean inputs
 	cleanNewEventModal();
-	
+
 	// Show menu
   showMenu('.create-event-modal', true);
-	
+
 	// Set string date to show
 	setStringDate((showingDate.getDate()).toString(), (showingDate.getMonth()+1).toString(), showingDate.getFullYear());
-	
+
 	// Set default hour in the new event modal
 	setDefaultHour();
-	
+
 	// Prepare the calendar which is active
 	setActiveCalendar();
-	
+
 	// Set the cells and the current day on dropdown calendar
 	setDropCalendarCells();
 	setCurrentDayDropCalendar();
@@ -179,7 +179,7 @@ cancelCalendarButton.on('click', function() {
 
 // Close 'new event' modal
 cancelEventButton.on('click', function() {
-  colorPickerContainer.hide();
+  createEventModal.data('mode', 'add');
   showMenu('.create-event-modal', true);
 });
 
@@ -194,7 +194,7 @@ nextDOM.on('click', function() {
   }
   cleanCells();
   initCalendar();
-	
+
 	// Set the cells and the current day on dropdown calendar
 	setDropCalendarCells();
 	setCurrentDayDropCalendar();
@@ -211,7 +211,7 @@ prevDOM.on('click', function() {
   }
   cleanCells();
   initCalendar();
-	
+
 	// Set the cells and the current day on dropdown calendar
 	setDropCalendarCells();
 	setCurrentDayDropCalendar();
@@ -243,15 +243,15 @@ var displayDateDropdown = function(object){
 
 // Set current month by pressing today button on date dropdown calendar
 todayDropdown.on('click', function(){
-	
+
 	var now = new Date();
 	showingDate.setDate(now.getDate());
 	showingDate.setMonth(now.getMonth());
 	showingDate.setFullYear(now.getFullYear());
-	
+
 	cleanCells();
   initCalendar();
-	
+
 	// Set the cells and the current day on dropdown calendar
 	setDropCalendarCells();
 	setCurrentDayDropCalendar();
@@ -389,7 +389,7 @@ var normalizeColor = function( color ){
  }
  color = color.match(/(\d+)/g) || [ 0, 0, 0 ];
  color = color.slice( 0, 3 ); // Prevents alpha if color was a rgba
- 
+
  for( var i in color ){
  	color[ i ] = parseInt( color[ i ], 10 ).toString( 16 );
  	color[ i ] = color[ i ].length === 1 ? '0' + color[ i ] : color[ i ];
@@ -505,12 +505,8 @@ var setCurrentDay = function(cell) {
 
 // Set the date string on the new event modal
 var setStringDate = function(day, month, year){
-	if (month.length < 2) {
-    month = '0' + month;
-  }
-	if(day.length < 2){
-		day = '0' + day;
-	}
+	month = addZeroToHour(month);
+	day = addZeroToHour(day);
 	$('.event-when input').val(month+'/'+day+'/'+year);
 }
 
@@ -554,22 +550,23 @@ var setCurrentDayDropCalendar = function(){
 
 // Set the default hour on the new event modal
 var setDefaultHour = function(){
-	var now = new Date();	
-	var startHour = now.getHours().toString();
-	var startMinutes = now.getMinutes().toString();
-	if(startHour < 2){
-		startHour = '0' + startHour; 
-	}
-	if(startMinutes < 2){
-		startMinutes = '0' +startMinutes;
-	}
-	var endHour = (parseInt(startHour) + 1).toString();
-	if(endHour < 2){
-		endHour = '0' + endHour; 
-	}
+	var now = new Date();
+	var startHour = addZeroToHour(now.getHours());
+	var startMinutes = addZeroToHour(now.getMinutes());
+	var endHour = addZeroToHour(now.getHours() + 1);
 	eventTime.eq(0).find('input').val(startHour+':'+startMinutes);
 	eventTime.eq(1).find('input').val(endHour+':'+startMinutes);
 }
+
+// Adds a '0' if the string lenght is = 1 and cast to string
+var addZeroToHour = function(hour){
+  var aux = hour.toString();
+  if(aux.length < 2){
+    aux = '0' + aux;
+  }
+  return aux;
+}
+
 // APP FUNCTIONALITY
 // Set all de calendar
 var initCalendar = function() {
@@ -628,7 +625,7 @@ var setMonthCells = function() {
   } else {
     prevNumOfDays = dayPerMonth[showingDate.getMonth() - 1];
   }
-    
+
   var firstWeekDayOfMonth = new Date(monthNames[showingDate.getMonth()] + ' 1 ,' + showingDate.getFullYear()).getDay();
   prevNumOfDays -= firstWeekDayOfMonth - 1;
   for (var i = 0; i < firstWeekDayOfMonth; i++) {
@@ -639,7 +636,7 @@ var setMonthCells = function() {
 
   var dayCounter = 1;
   for (var i = firstWeekDayOfMonth; i < nCells - nBlankCells; i++) {
-		(function( i ){	
+		(function( i ){
 			$('.day-table td:eq(' + i + ') span').text(dayCounter);
 			$('.day-table td:eq(' + i + ')').addClass('day-cell');
 			var startDate = new Date(showingDate.getFullYear(), showingDate.getMonth(), dayCounter, 0, 0, 0, 0);
@@ -742,10 +739,8 @@ var setDropCalendarCells = function(){
 			var newDate = '';
 			var newDay = object.text();
 			var dayList = dateDropDown.find('.day-cell');
-			if(newDay.length < 2){
-				newDay = '0' + newDay;
-			}
-			
+			newDay = addZeroToHour(newDay);
+
 			if(dateDropDown.hasClass('start')){
 				eventWhen.eq(0).find('input').toggleClass('active');
 				prevDate = eventWhen.eq(0).find('input').val();
@@ -797,8 +792,8 @@ var cleanDropdownCalendarCells = function(){
   	dayList.eq(i).text('');
     dayList.eq(i).removeClass();
   }
-}			
-			
+}
+
 // Return a Date object with the date selected
 var getDaySelected = function() {
   return new Date(monthNames[showingDate.getMonth()] + ' ' + $('.day-selected span').text() + ' ,' + showingDate.getFullYear());
@@ -809,7 +804,7 @@ var setHour = function() {
   $('.visible.day-moment-bullet').remove();
   $('.visible.day-moment-time').remove();
   $('.visible.day-moment').remove();
-  
+
   var currentDate = new Date();
   var hour = currentDate.getHours();
   var minutes = ('0' + currentDate.getMinutes()).slice(-2);
@@ -823,7 +818,7 @@ var setHour = function() {
   dayMomentBar.addClass('visible');
   dayMomentBullet.addClass('visible');
   dayMomentTime.addClass('visible');
-  
+
   dayMomentTime.text(hour + ':' + minutes);
   if (10 > +(minutes) > 50) {
     dayMomentTime.css('background-color', '#f6f8f8');
@@ -845,9 +840,12 @@ var setHour = function() {
 
 // Make editable the event
 var makeItEditable = function(eventDom, event){
-	eventDom.on('click', function(){						
+	eventDom.on('dblclick', function(){
+    // Open the new event modal
 		createEvent.click();
+    // Set the name of the event
 		eventName.val(event.title);
+    // Set the calendar in use for the event
 		var calendars = calendarDropDown.find('.calendarDom');
 		for(var i = 0; i < calendars.length; i++){
 			if(calendars.eq(i).find('.ellipsis').text() == event.calendar.displayname){
@@ -858,21 +856,40 @@ var makeItEditable = function(eventDom, event){
 				break;
 			}
 		}
-		eventWhen.eq(0).find('input').val(event.startDate.getMonth()+'/'+event.startDate.getDate()+'/'+event.startDate.getFullYear());
-		eventTime.eq(0).find('input').val(event.startDate.getHours()+':'+event.startDate.getMinutes());			
-		eventWhen.eq(1).find('input').val(event.endDate.getMonth()+'/'+event.endDate.getDate()+'/'+event.endDate.getFullYear());
-		eventTime.eq(1).find('input').val(event.endDate.getHours()+':'+event.endDate.getMinutes());
+    // Set the date and time for the event
+		eventWhen.eq(0).find('input').val(addZeroToHour(event.startDate.getMonth())+'/'+addZeroToHour(event.startDate.getDate())+'/'+event.startDate.getFullYear());
+		eventTime.eq(0).find('input').val(addZeroToHour(event.startDate.getHours())+':'+addZeroToHour(event.startDate.getMinutes()));
+    eventWhen.eq(1).find('input').val(addZeroToHour(event.endDate.getMonth())+'/'+addZeroToHour(event.endDate.getDate())+'/'+event.endDate.getFullYear());
+		eventTime.eq(1).find('input').val(addZeroToHour(event.endDate.getHours())+':'+addZeroToHour(event.endDate.getMinutes()));
+    // Set if the event was all-day
+    if(event.allDay){
+      eventAllDay.find('input').click();
+    }
+    // Set the repeat for the event
+    repeatDropDown.find('.active').removeClass('active');
+    var newRepeat = repeatDropDown.find('article').eq(event.repeat);
+    newRepeat.addClass('active');
+    eventRepeat.find('input').val(newRepeat.text());
+    // Set the TAG to inform thats it is an edit
+    createEventModal.data('mode', 'edit');
 	});
 }
 
 // Add event to the DOM
 var addEventToDom = function(haveToInsert, reInserting) {
-  
+
+  // Check if is editing
+  var edit = createEventModal.data('mode');
+  if(edit == 'edit'){
+    alert('EDITANDO');
+    createEventModal.data('mode', 'add');
+  }
+
 	var event = new Event();
-	
+
 	var startDate = eventWhen.eq(0).find('input').val();
 	var endDate = eventWhen.eq(1).find('input').val();
-	
+
 	event.startDate = new Date(parseInt(startDate.substr(6,4)), parseInt(startDate.substr(0,2)), parseInt(startDate.substr(3,2)));
 	event.endDate = new Date(parseInt(endDate.substr(6,4)), parseInt(endDate.substr(0,2)), parseInt(endDate.substr(3,2)));
 	event.title = eventName.val();
@@ -880,30 +897,29 @@ var addEventToDom = function(haveToInsert, reInserting) {
 	event.startDate.setMinutes(eventTime.eq(0).find('input').val().substr(3,2));
 	event.endDate.setHours(eventTime.eq(1).find('input').val().substr(0,2));
 	event.endDate.setMinutes(eventTime.eq(1).find('input').val().substr(3,2));
+  event.allDay = eventAllDay.find('input').hasClass('checked');
+  event.repeat = repeatDropDown.find('.active').index();
 
 	// If the event have to be repeted
-	if(eventRepeat.find('input').val() == 'Every week'){	
+	if(eventRepeat.find('input').val() == 'Every week'){
 	}
-	
+
 	// In case of an event which last for more than one day, repeat the event the necessary number of times
 	if(!reInserting && (event.startDate.getDate() != event.endDate.getDate())){
 		var plusDuration = (event.endDate.getDate()-event.startDate.getDate());
 		for(var i = 0; i<plusDuration; i++){
 			var day = parseInt(eventWhen.eq(0).find('input').val().substr(3,2)) + 1;
-			day = day.toString();
-			if(day.length < 2){
-				day = '0' + day;
-			}
+			day = addZeroToHour(day);
 			var newDate = startDate.substr(0,3)+day+startDate.substr(5,5);
 			eventWhen.eq(0).find('input').val(newDate);
 			addEventToDom(false, true);
 		}
 	}
-	
+
 	// Set the event color
 	event.color = colorPalette[calendarDropDown.find('.active').data('color')];
 	console.log(event.color);
-	
+
 	// Insert event in the API if it is needed
 	if(haveToInsert){
 		// Prepare the calendar where is going to be inserted
@@ -915,24 +931,24 @@ var addEventToDom = function(haveToInsert, reInserting) {
 					break;
 				}
 			}
-			
+
 			// Prepare event object for insert in the API
 			var eventApi = {
 				name: event.title,
 				start: event.startDate.getTime(),
 				end: event.endDate.getTime(),
 				description: event.description
-			}; 
+			};
 			addEvent(event.calendar, eventApi);
 		});
 	}
-	
+
 	// Insert event in the DOM
   if (calendarView == 'month') {
 		// Prepare the cell where is going to be inserted
 		var cells = $('.month-calendar .day-cell');
 		event.cell = cells.eq(event.startDate.getDate()-1);
-		
+
 		var eventDom = '';
 		if(eventAllDay.find('input').hasClass('checked')){
 			eventDom = monthAllDayEventPrototype.clone();
@@ -943,17 +959,17 @@ var addEventToDom = function(haveToInsert, reInserting) {
 			eventDom.html('<figure></figure>' + event.title);
 			eventDom.find('figure').css('background-color', event.color.border);
 		}
-		
+
 		// Add functionality to edit the event
 		makeItEditable(eventDom, event);
-		
+
 		eventDom.removeClass('wz-prototype');
 		if (event.cell.find('article').length < 2 || eventDom.hasClass('all-day-event')) {
 			if(eventDom.hasClass('event') || event.cell.find('article').length < 1){
 				event.cell.append(eventDom);
 			}else if(eventDom.hasClass('all-day-event')){
 				eventDom.insertBefore(event.cell.find('article').eq(0));
-				if(event.cell.find('article').length > 2){	
+				if(event.cell.find('article').length > 2){
 					event.cell.find('article').eq(2).hide();
 					var moreEvents = event.cell.find('.moreEvents');
 					if (moreEvents.length == 0) {
@@ -1130,25 +1146,26 @@ var addByClick = function() {
 
   if (calendarView == 'month') {
 
-    $('.day-cell').on('dblclick', function() {
+    $('.day-cell').on('dblclick', function(e) {
+      e.stopPropagation();
       var object = $(this);
-			
+
 			// Clean inputs
 			cleanNewEventModal();
-			
+
 			// Set the cells and the current day on dropdown calendar
 			setDropCalendarCells();
 			setCurrentDayDropCalendar();
-			
+
 			// Prepare string date to show
 			setStringDate(object.find('span').text(), (showingDate.getMonth()+1).toString(), showingDate.getFullYear());
-			
+
 			// Set default hour in the new event modal
 			setDefaultHour();
-			
+
 			// Prepare the calendar which is active
 			setActiveCalendar();
-			
+
 			// Display create event menu
       showMenu('.create-event-modal', true);
     });
