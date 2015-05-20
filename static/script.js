@@ -76,6 +76,7 @@ var eventColor = $('.event-color');
 var eventRepeat = $('.event-repeat');
 var eventAlert	= $('.event-alert');
 var eventDuration = $('.event-duration input');
+var eventDescription = $('.event-description');
 var calendarName = $('.calendar-name input');
 var calendarList = $('.my-calendars-list');
 var dayNumberDisplay = $('.day article span:first-child');
@@ -114,7 +115,7 @@ Date.prototype.getWeek = function() {
   var onejan = new Date(this.getFullYear(), 0, 1);
   var today = new Date(this.getFullYear(), this.getMonth(), this.getDate());
   var dayOfYear = ((today - onejan + 86400000) / 86400000);
-  return Math.ceil(dayOfYear / 7)
+  return Math.ceil(dayOfYear / 7);
 };
 
 // DOM EFFECTS
@@ -528,6 +529,7 @@ var setActiveCalendar = function(){
 
 // Clean the inpts and inactive cells of new event modal
 var cleanNewEventModal = function(){
+  eventDescription.find('textarea').val('');
 	hoursSelectables.removeClass('inactive');
 	eventName.val('');
 	eventTime.find('input').val('');
@@ -840,7 +842,9 @@ var setHour = function() {
 
 // Make editable the event
 var makeItEditable = function(eventDom, event){
-	eventDom.on('dblclick', function(){
+	eventDom.on('dblclick', function(e){
+    // Stop propagation of the event to the parent
+    e.stopPropagation();
     // Open the new event modal
 		createEvent.click();
     // Set the name of the event
@@ -870,6 +874,8 @@ var makeItEditable = function(eventDom, event){
     var newRepeat = repeatDropDown.find('article').eq(event.repeat);
     newRepeat.addClass('active');
     eventRepeat.find('input').val(newRepeat.text());
+    // Set the description area
+    eventDescription.find('textarea').val(event.description);
     // Set the TAG to inform thats it is an edit
     createEventModal.data('mode', 'edit');
 	});
@@ -899,6 +905,7 @@ var addEventToDom = function(haveToInsert, reInserting) {
 	event.endDate.setMinutes(eventTime.eq(1).find('input').val().substr(3,2));
   event.allDay = eventAllDay.find('input').hasClass('checked');
   event.repeat = repeatDropDown.find('.active').index();
+  event.description = eventDescription.find('textarea').val();
 
 	// If the event have to be repeted
 	if(eventRepeat.find('input').val() == 'Every week'){
@@ -1146,8 +1153,7 @@ var addByClick = function() {
 
   if (calendarView == 'month') {
 
-    $('.day-cell').on('dblclick', function(e) {
-      e.stopPropagation();
+    $('.day-cell').on('dblclick', function() {
       var object = $(this);
 
 			// Clean inputs
