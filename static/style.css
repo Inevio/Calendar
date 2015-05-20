@@ -1394,7 +1394,7 @@ thead {
     background-color: #de706c;
     height: 1px;
     position: absolute;
-    width: 885px;
+    width: ~'calc(100% - 50px)';
     right: 0;
 }
 .day-calendar .day-moment {
