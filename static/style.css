@@ -398,6 +398,7 @@ thead {
 .my-calendars-modal .calendar {
     display: block;
     width: 100% !important;
+    height: 25px;
 }
 .my-calendars-modal .calendar i {
     float: left;
@@ -887,11 +888,17 @@ thead {
     margin-top: 17%;
     font-size: 14px;
 }
-.create-calendar-modal .calendar-name > div {
-    width: 110px;
-    float: left;
-    font-size: 13px;
+.create-calendar-modal .calendar-name > span {
+    display: block;
+    margin-bottom: 7px;
+    padding-left: 1px;
 }
+.my-calendars-list .calendar-name{
+  width: 110px;
+  float: left;
+  font-size: 13px;
+}
+
 .create-calendar-modal calendar-description > span {
     display: block;
 }
