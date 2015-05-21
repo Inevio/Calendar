@@ -776,7 +776,7 @@ thead {
     z-index: 3;
     display: none;
     height: 105px;
-    width: 105px;
+    width: 165px;
     background-color: #fff;
     border: 1px solid #ccd3d5;
     top: 69px;
@@ -887,10 +887,10 @@ thead {
     margin-top: 17%;
     font-size: 14px;
 }
-.create-calendar-modal .calendar-name > span {
-    display: block;
-    margin-bottom: 7px;
-    padding-left: 1px;
+.create-calendar-modal .calendar-name > div {
+    width: 110px;
+    float: left;
+    font-size: 13px;
 }
 .create-calendar-modal calendar-description > span {
     display: block;
@@ -1654,4 +1654,8 @@ thead {
 
 .month-calendar .day-table{
   height: ~'calc(100% - 34px)';
+}
+
+.calendar-dropdown-item{
+    width: 125px;
 }
