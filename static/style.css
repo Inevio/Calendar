@@ -398,6 +398,7 @@ thead {
 .my-calendars-modal .calendar {
     display: block;
     width: 100% !important;
+    height: 25px;
 }
 .my-calendars-modal .calendar i {
     float: left;
@@ -776,7 +777,7 @@ thead {
     z-index: 3;
     display: none;
     height: 105px;
-    width: 105px;
+    width: 165px;
     background-color: #fff;
     border: 1px solid #ccd3d5;
     top: 69px;
@@ -892,6 +893,12 @@ thead {
     margin-bottom: 7px;
     padding-left: 1px;
 }
+.my-calendars-list .calendar-name{
+  width: 110px;
+  float: left;
+  font-size: 13px;
+}
+
 .create-calendar-modal calendar-description > span {
     display: block;
 }
@@ -1394,7 +1401,7 @@ thead {
     background-color: #de706c;
     height: 1px;
     position: absolute;
-    width: 885px;
+    width: ~'calc(100% - 50px)';
     right: 0;
 }
 .day-calendar .day-moment {
@@ -1654,4 +1661,8 @@ thead {
 
 .month-calendar .day-table{
   height: ~'calc(100% - 34px)';
+}
+
+.calendar-dropdown-item{
+    width: 125px;
 }
