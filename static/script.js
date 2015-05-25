@@ -1042,7 +1042,8 @@ var addEventToDom = function(haveToInsert, reInserting) {
 		if(eventAllDay.find('input').hasClass('checked')){
 			eventDom = monthAllDayEventPrototype.clone();
 			eventDom.css('background-color', event.color.light);
-			eventDom.text(event.title);
+			eventDom.find('.all-day-text').text(event.title);
+			/*eventDom.text(event.title);*/
 		}else{
 			eventDom = monthEventPrototype.clone();
 			eventDom.html('<figure></figure>' + event.title);
