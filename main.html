@@ -272,11 +272,14 @@
     </section>
     <section class="right-side">
       <article class="event-description right">
-        <span>Description</span>
+        <span class="event-description-title">Description</span>
+        <figure class="close-modal-button">
+          <i></i>
+        </figure>
         <textArea></textArea>
       </article>
       <button type="submit" class="create-event-button right">CREATE</button>
-      <button type="button" class="cancel-create-event-button right">CANCEL</button>
+      <button type="button" class="delete-event-button right">DELETE</button>
     </section>
   </section>
   <section class="create-calendar-modal wz-fit-ignore">
@@ -325,9 +328,12 @@
       </tr>
     </thead>
   </table>
-  <article class="event ellipsis wz-prototype wz-fit-ignore"><span class="ellipsis"></span><span></span></article>
+  <article class="event ellipsis wz-prototype wz-fit-ignore">
+    <figure></figure>
+    <div class="all-day-text ellipsis"></div>
+  </article>
   <article class="all-day-event ellipsis wz-prototype wz-fit-ignore">
-		<div class="all-day-text"></div>
+		<div class="all-day-text ellipsis"></div>
 	</article>
   <table class="day-table" cellspacing="0" cellpadding="0">
     <tbody>
