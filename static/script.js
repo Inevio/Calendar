@@ -1128,6 +1128,9 @@ var addEventToDom = function(haveToInsert, reInserting, id) {
     createEventModal.data('mode', 'add');
   }
 
+  addEventButton.text('CREATE');
+  deleteEventButton.css('display', 'none');
+
 	var event = new Event();
 
 	var startDate = eventWhen.eq(0).find('input').val();
@@ -1396,12 +1399,14 @@ var addEventToDom = function(haveToInsert, reInserting, id) {
 // Add event to the API
 var addEvent = function(calendar, eventApi){
 
+  console.log('Voy a añadir evento');
+
 	calendar.createEvent(eventApi, function(err, event) {
 
     console.log('Evento creado en API');
     console.log(event);
-    var startDate = new Date((event['dtstart']['date']));
-    console.log(startDate);
+    var startDate = new Date((event.start));
+    console.log('Imprimiendo fecha: ' + startDate);
 
   });
 

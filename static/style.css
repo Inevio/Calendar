@@ -1033,7 +1033,7 @@ thead {
     cursor: pointer;
 }
 .create-event-modal .right-side .create-event-button {
-    margin-top: 19px;
+    margin-top: 15px;
 }
 .create-calendar-modal .cancel-create-calendar-button,
 .create-event-modal .delete-event-button {
@@ -1090,7 +1090,7 @@ thead {
     cursor: pointer;
 }
 .create-event-modal .right-side .delete-event-button {
-    margin-top: 19px;
+    margin-top: 15px;
     display: none;
 }
 .create-calendar-modal .close-image {
