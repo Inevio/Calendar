@@ -1390,7 +1390,8 @@ thead {
 .week-calendar .event {
     display: block;
     position: absolute;
-    width: 102px;
+    /*width: 102px;*/
+    width: ~'calc((100% - 165px) / 7)';
     z-index: 2;
     padding: 2px 9.3px;
     margin-left: 1.4px;
