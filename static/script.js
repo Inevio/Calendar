@@ -23,6 +23,7 @@ var Calendar = function() {
   this.name = '';
   this.color = '';
   this.description = '';
+  this.path = '';
 
 }
 
@@ -1413,7 +1414,25 @@ var addEvent = function(calendar, eventApi){
 }
 
 // Add calendar to the DOM
-var addCalendarToDom = function(calendar, haveToInsert) {
+var addCalendarToDom = function(calendar2, haveToInsert) {
+
+  if (!haveToInsert) {
+
+    var calendar = new Calendar();
+    calendar.name = calendar2.displayname;
+    calendar.color = normalizeColor(calendar2['calendar-color']);
+    for(var j = 0; j < colorPalette.length; j++){
+      if(colorPalette[j].border == calendar.color){
+        calendar.color = j;
+        break;
+      }
+    }
+
+  }else{
+
+    var calendar = calendar2;
+
+  }
 
 	var calendarShowList = addCalendarToShowList(calendar);
   var calendarDom = calendarPrototype.clone();
@@ -1429,7 +1448,8 @@ var addCalendarToDom = function(calendar, haveToInsert) {
 	}
   calendarDom.find('.deleteCalendar').on('click', function() {
 
-    calendarDom.data('calendarApi').delete();
+    console.log(calendar2);
+    calendar2.delete();
 		calendarDom.remove();
 		calendarShowList.remove();
 
@@ -1575,20 +1595,14 @@ var addByClick = function() {
 
 var recoverCalendars = function() {
 
+
   $('.calendarDom').remove();
   account.getCalendars(function(err, list) {
 
     for (var i = 0; i < list.length; i++) {
-      var calendar = new Calendar();
-      calendar.name = list[i].displayname;
-			calendar.color = normalizeColor(list[i]['calendar-color']);
-			for(var j = 0; j < colorPalette.length; j++){
-				if(colorPalette[j].border == calendar.color){
-					calendar.color = j;
-					break;
-				}
-			}
-      addCalendarToDom(calendar, false);
+
+      //addCalendarToDom(calendar, false);
+      addCalendarToDom(list[i],false);
     }
 
   });
