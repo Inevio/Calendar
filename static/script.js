@@ -169,10 +169,8 @@ createEvent.on('click', function() {
 // Add calendar button
 addCalendarButton.on('click', function() {
 
-  var calendar = new Calendar();
-  calendar.name = calendarName.val();
-	calendar.color = colorPickerHover.attr('data-color');
-  addCalendarToDom(calendar, true);
+  var calendarApi = {name: calendarName.val(), color: normalizeColor(colorPalette[colorPickerHover.attr('data-color')].border)};
+  addCalendar(calendarApi);
   showMenu('.create-calendar-modal', true);
 
 });
@@ -1414,24 +1412,16 @@ var addEvent = function(calendar, eventApi){
 }
 
 // Add calendar to the DOM
-var addCalendarToDom = function(calendar2, haveToInsert) {
+var addCalendarToDom = function(calendar2) {
 
-  if (!haveToInsert) {
-
-    var calendar = new Calendar();
-    calendar.name = calendar2.displayname;
-    calendar.color = normalizeColor(calendar2['calendar-color']);
-    for(var j = 0; j < colorPalette.length; j++){
-      if(colorPalette[j].border == calendar.color){
-        calendar.color = j;
-        break;
-      }
+  var calendar = new Calendar();
+  calendar.name = calendar2.displayname;
+  calendar.color = normalizeColor(calendar2['calendar-color']);
+  for(var j = 0; j < colorPalette.length; j++){
+    if(colorPalette[j].border == calendar.color){
+      calendar.color = j;
+      break;
     }
-
-  }else{
-
-    var calendar = calendar2;
-
   }
 
 	var calendarShowList = addCalendarToShowList(calendar);
@@ -1441,14 +1431,9 @@ var addCalendarToDom = function(calendar2, haveToInsert) {
   calendarDom.find('.calendar-name').text(calendar.name);
 	calendarDom.data('color', calendar.color);
   calendarDom.find('figure').css('background-color', normalizeColor(colorPalette[calendar.color].border));
-	var calendarApi = {name: calendar.name, color: normalizeColor(colorPalette[calendar.color].border)};
 
-  if(haveToInsert){
-		addCalendar(calendarApi, calendarDom);
-	}
   calendarDom.find('.deleteCalendar').on('click', function() {
 
-    console.log(calendar2);
     calendar2.delete();
 		calendarDom.remove();
 		calendarShowList.remove();
@@ -1459,10 +1444,11 @@ var addCalendarToDom = function(calendar2, haveToInsert) {
 }
 
 // Add calendar to the API
-var addCalendar = function(calendarApi, calendarDom){
+var addCalendar = function(calendarApi){
 
 	account.createCalendar(calendarApi, function(err, cal) {
-			calendarDom.data('calendarApi', cal);
+			//calendarDom.data('calendarApi', cal);
+      addCalendarToDom(cal);
 	});
 
 }
@@ -1602,7 +1588,7 @@ var recoverCalendars = function() {
     for (var i = 0; i < list.length; i++) {
 
       //addCalendarToDom(calendar, false);
-      addCalendarToDom(list[i],false);
+      addCalendarToDom(list[i]);
     }
 
   });
