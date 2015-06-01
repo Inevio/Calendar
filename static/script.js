@@ -178,7 +178,53 @@ addCalendarButton.on('click', function() {
 // Add event button
 addEventButton.on('click', function() {
 
-  addEventToDom(true, false);
+  if( addEventButton.text() === 'EDIT' ){
+
+    //Editar el evento
+
+  }else{
+
+    //Creamos el objeto a insertar en el api
+    var event = new Event();
+
+    var startDate = eventWhen.eq(0).find('input').val();
+    var endDate = eventWhen.eq(1).find('input').val();
+
+    event.startDate = new Date(parseInt(startDate.substr(6,4)), parseInt(startDate.substr(0,2))-1, parseInt(startDate.substr(3,2)));
+    event.endDate = new Date(parseInt(endDate.substr(6,4)), parseInt(endDate.substr(0,2))-1, parseInt(endDate.substr(3,2)));
+    event.title = eventName.val();
+    event.startDate.setHours(eventTime.eq(0).find('input').val().substr(0,2));
+    event.startDate.setMinutes(eventTime.eq(0).find('input').val().substr(3,2));
+    event.endDate.setHours(eventTime.eq(1).find('input').val().substr(0,2));
+    event.endDate.setMinutes(eventTime.eq(1).find('input').val().substr(3,2));
+    event.allDay = eventAllDay.find('input').hasClass('checked');
+    event.repeat = repeatDropDown.find('.active').index();
+    event.description = eventDescription.find('textarea').val();
+
+    var calendarToSearch = eventColor.find('span').text();
+    account.getCalendars(function(err, list) {
+      for(var i = 0; i< list.length; i++){
+        if(calendarToSearch == list[i].displayname){
+          event.calendar = list[i];
+          break;
+        }
+      }
+    });
+
+      // Prepare event object for insert in the API
+    var eventApi = {
+      name: event.title,
+      start: event.startDate.getTime(),
+      end: event.endDate.getTime(),
+      description: event.description
+    };
+
+    addEvent(event.calendar, eventApi);
+
+  }
+
+
+  //addEventToDom(true, false);
   showMenu('.create-event-modal', true);
 
 });
@@ -575,6 +621,9 @@ var setActiveCalendar = function(){
 // Clean the inpts and inactive cells of new event modal
 var cleanNewEventModal = function(){
 
+  addEventButton.text('CREATE');
+  deleteEventButton.css('display', 'none');
+  
   eventDescription.find('textarea').val('');
 	hoursSelectables.removeClass('inactive');
 	eventName.val('');
@@ -679,7 +728,7 @@ var addEventFromApi = function(calendarApi, eventApi){
 
   //console.log(eventApi.id);
   // Add the event to the Dom
-  addEventToDom(false, false, eventApi.id);
+  addEventToDom(false, eventApi.id);
 
 }
 
@@ -813,7 +862,7 @@ var setMonthCells = function() {
           calendars[i].getEventsByDate(startDate.getTime(), endDate.getTime(), function(err, events) {
             for(var j = 0; j<events.length; j++){
               var event = new Event();
-              addEventFromApi(calendars[i], events[j]);
+              addEventToDom(events[j],calendars[i]);
             }
           });
 
@@ -892,7 +941,7 @@ var setWeekCells = function() {
           calendars[i].getEventsByDate(startDate.getTime(), endDate.getTime(), function(err, events) {
             for(var j = 0; j<events.length; j++){
               var event = new Event();
-              addEventFromApi(calendars[i], events[j]);
+              addEventToDom(events[j],calendars[i]);
             }
           });
         })( i );
@@ -1118,24 +1167,51 @@ var makeItEditable = function(eventDom, event){
 }
 
 // Add event to the DOM
-var addEventToDom = function(haveToInsert, reInserting, id) {
-
-  // Check if is editing
-  var edit = createEventModal.data('mode');
-  if(edit == 'edit'){
-    alert('EDITANDO');
-    createEventModal.data('mode', 'add');
-  }
+var addEventToDom = function(eventApi, calendar) {
 
   addEventButton.text('CREATE');
   deleteEventButton.css('display', 'none');
 
+  //console.log(calendar);
+  //console.log(eventApi);
+
+  // Check if is editing
+  /*if(edit){
+    //alert('EDITANDO');
+    addEventButton.text('EDIT');
+    deleteEventButton.css('display', 'block');
+    //createEventModal.data('mode', 'add');
+  }*/
+
 	var event = new Event();
 
-	var startDate = eventWhen.eq(0).find('input').val();
-	var endDate = eventWhen.eq(1).find('input').val();
+  event.title = eventApi.title;
+  event.description = eventApi.description;
+  event.allDay = eventApi.allDay;
 
-	event.startDate = new Date(parseInt(startDate.substr(6,4)), parseInt(startDate.substr(0,2))-1, parseInt(startDate.substr(3,2)));
+  if ( event.allDay === 'true' ){
+
+    //event.startDate = ;
+    //event.endDate =;
+
+  }else{
+
+    var startDate = new Date(eventApi.start.date);
+    var endDate = new Date(eventApi.end.date);
+
+    event.startDate = new Date(eventApi.start.date);
+    event.endDate = new Date(eventApi.end.date);
+
+    //console.log(eventApi.start.date);
+    //console.log(event.startDate);
+    //console.log(event.startDate.getDay());
+
+  }
+
+	/*var startDate = eventWhen.eq(0).find('input').val();
+	var endDate = eventWhen.eq(1).find('input').val();*/
+
+	/*event.startDate = new Date(parseInt(startDate.substr(6,4)), parseInt(startDate.substr(0,2))-1, parseInt(startDate.substr(3,2)));
 	event.endDate = new Date(parseInt(endDate.substr(6,4)), parseInt(endDate.substr(0,2))-1, parseInt(endDate.substr(3,2)));
 	event.title = eventName.val();
 	event.startDate.setHours(eventTime.eq(0).find('input').val().substr(0,2));
@@ -1144,14 +1220,14 @@ var addEventToDom = function(haveToInsert, reInserting, id) {
 	event.endDate.setMinutes(eventTime.eq(1).find('input').val().substr(3,2));
   event.allDay = eventAllDay.find('input').hasClass('checked');
   event.repeat = repeatDropDown.find('.active').index();
-  event.description = eventDescription.find('textarea').val();
+  event.description = eventDescription.find('textarea').val();*/
 
 	// If the event have to be repeted
 	if(eventRepeat.find('input').val() == 'Every week'){
 	}
 
 	// In case of an event which last for more than one day, repeat the event the necessary number of times
-	if(!reInserting && (event.startDate.getDate() != event.endDate.getDate())){
+	if((event.startDate.getDate() != event.endDate.getDate())){
 
 		var plusDuration = (event.endDate.getDate()-event.startDate.getDate());
 		for(var i = 0; i<plusDuration; i++){
@@ -1159,16 +1235,27 @@ var addEventToDom = function(haveToInsert, reInserting, id) {
 			day = addZeroToHour(day);
 			var newDate = startDate.substr(0,3)+day+startDate.substr(5,5);
 			eventWhen.eq(0).find('input').val(newDate);
-			addEventToDom(false, true);
+			//addEventToDom(false, true);
 		}
 
 	}
 
 	// Set the event color
-	event.color = colorPalette[calendarDropDown.find('.active').data('color')];
+  for ( var i=0; i<colorPalette.length; i++ ){
+
+    if( colorPalette[i].border == calendar['calendar-color'] ){
+
+      event.color = colorPalette[i];
+      break;
+
+    }
+
+  }
+
+	//event.color = colorPalette[calendarDropDown.find('.active').data('color')];
 
 	// Insert event in the API if it is needed
-	if(haveToInsert){
+	/*if(haveToInsert){
 
 		// Prepare the calendar where is going to be inserted
 		var calendarToSearch = eventColor.find('span').text();
@@ -1188,7 +1275,7 @@ var addEventToDom = function(haveToInsert, reInserting, id) {
       	description: event.description
       };
       addEvent(event.calendar, eventApi);
-	});}
+	});}*/
 
 	// Insert event in the DOM
   if (calendarView == 'month') {
@@ -1199,7 +1286,7 @@ var addEventToDom = function(haveToInsert, reInserting, id) {
 		event.cell = cells.eq(event.startDate.getDate()-1);
 
 		var eventDom = '';
-		if(eventAllDay.find('input').hasClass('checked')){
+		if(event.allDay){
 
 			eventDom = monthAllDayEventPrototype.clone();
 			eventDom.css('background-color', event.color.light);
@@ -1215,8 +1302,6 @@ var addEventToDom = function(haveToInsert, reInserting, id) {
 
 		}
 
-    eventDom.data('id',id);
-
     // Prepare the calendar where is going to be inserted
     var calendarToSearch = eventColor.find('span').text();
     account.getCalendars(function(err, list) {
@@ -1227,10 +1312,12 @@ var addEventToDom = function(haveToInsert, reInserting, id) {
         }
       }
     });
-		// Add functionality to edit the event
-		makeItEditable(eventDom, event);
 
-		eventDom.removeClass('wz-prototype');
+    eventDom.removeClass('wz-prototype');
+
+    makeItEditable(eventDom, event);
+
+
 		if (event.cell.find('article').length < 2 || eventDom.hasClass('all-day-event')) {
 
 			if(eventDom.hasClass('event') || event.cell.find('article').length < 1){
@@ -1402,10 +1489,12 @@ var addEvent = function(calendar, eventApi){
 
 	calendar.createEvent(eventApi, function(err, event) {
 
-    console.log('Evento creado en API');
+    /*console.log('Evento creado en API');
     console.log(event);
     var startDate = new Date((event.start));
-    console.log('Imprimiendo fecha: ' + startDate);
+    console.log('Imprimiendo fecha: ' + startDate);*/
+
+    addEventToDom(event, calendar);
 
   });
 
