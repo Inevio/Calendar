@@ -201,6 +201,14 @@ addEventButton.on('click', function() {
     event.repeat = repeatDropDown.find('.active').index();
     event.description = eventDescription.find('textarea').val();
 
+    // Prepare event object for insert in the API
+    var eventApi = {
+      name: event.title,
+      start: event.startDate.getTime(),
+      end: event.endDate.getTime(),
+      description: event.description
+    };
+
     var calendarToSearch = eventColor.find('span').text();
     account.getCalendars(function(err, list) {
       for(var i = 0; i< list.length; i++){
@@ -209,17 +217,8 @@ addEventButton.on('click', function() {
           break;
         }
       }
+      addEvent(event.calendar, eventApi);
     });
-
-      // Prepare event object for insert in the API
-    var eventApi = {
-      name: event.title,
-      start: event.startDate.getTime(),
-      end: event.endDate.getTime(),
-      description: event.description
-    };
-
-    addEvent(event.calendar, eventApi);
 
   }
 
@@ -623,7 +622,7 @@ var cleanNewEventModal = function(){
 
   addEventButton.text('CREATE');
   deleteEventButton.css('display', 'none');
-  
+
   eventDescription.find('textarea').val('');
 	hoursSelectables.removeClass('inactive');
 	eventName.val('');
@@ -1188,6 +1187,7 @@ var addEventToDom = function(eventApi, calendar) {
   event.title = eventApi.title;
   event.description = eventApi.description;
   event.allDay = eventApi.allDay;
+  event.calendar = calendar;
 
   if ( event.allDay === 'true' ){
 
@@ -1486,6 +1486,8 @@ var addEventToDom = function(eventApi, calendar) {
 var addEvent = function(calendar, eventApi){
 
   console.log('Voy a añadir evento');
+
+  console.log(calendar);
 
 	calendar.createEvent(eventApi, function(err, event) {
 
