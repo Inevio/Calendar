@@ -1225,6 +1225,9 @@ thead {
     display: block;
     margin-bottom: 1px;
 }
+.month-calendar article.moreEvents{
+  height: 0px !important;
+}
 .all-day-event.ellipsis.wz-fit-ignore {
   border-radius: 1px;
   float: left;

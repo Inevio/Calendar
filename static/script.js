@@ -206,7 +206,8 @@ addEventButton.on('click', function() {
       name: event.title,
       start: event.startDate.getTime(),
       end: event.endDate.getTime(),
-      description: event.description
+      description: event.description,
+      allDay: event.allDay
     };
 
     var calendarToSearch = eventColor.find('span').text();
@@ -683,58 +684,6 @@ var addZeroToHour = function(hour){
 
 }
 
-// Set the 'new event' modal inputs to the parameters passed and add it to the Dom
-var addEventFromApi = function(calendarApi, eventApi){
-
-  console.log('añadiendo evento desde api----------------------');
-  console.log(eventApi);
-  // Set the name of the event
-  eventName.val(eventApi.title);
-  // Set the calendar in use for the event
-  var calendars = calendarDropDown.find('.calendarDom');
-
-  for(var i = 0; i < calendars.length; i++){
-
-    if(calendars.eq(i).find('.ellipsis').text() == calendarApi.displayname){
-
-      calendarDropDown.find('.active').removeClass('active');
-      calendars.eq(i).addClass('active');
-      eventColor.find('.color').css('background-color', calendars.eq(i).find('.color').css('background-color'));
-      eventColor.find('.ellipsis').text(calendars.eq(i).find('.ellipsis').text());
-      break;
-
-    }
-
-  }
-
-  // Set the date and time for the event
-  var startDate = new Date(eventApi.start.date);
-  var endDate = new Date(eventApi.end.date);
-  eventWhen.eq(0).find('input').val(addZeroToHour(startDate.getMonth()+1)+'/'+addZeroToHour(startDate.getDate())+'/'+startDate.getFullYear());
-  eventTime.eq(0).find('input').val(addZeroToHour(startDate.getHours())+':'+addZeroToHour(startDate.getMinutes()));
-  eventWhen.eq(1).find('input').val(addZeroToHour(endDate.getMonth()+1)+'/'+addZeroToHour(endDate.getDate())+'/'+endDate.getFullYear());
-  eventTime.eq(1).find('input').val(addZeroToHour(endDate.getHours())+':'+addZeroToHour(endDate.getMinutes()));
-  // Set if the event was all-day
-  /*
-  if(event.allDay){
-    eventAllDay.find('input').click();
-  }
-  // Set the repeat for the event
-  repeatDropDown.find('.active').removeClass('active');
-  var newRepeat = repeatDropDown.find('article').eq(event.repeat);
-  newRepeat.addClass('active');
-  eventRepeat.find('input').val(newRepeat.text());
-  */
-  // Set the description area
-  //console.log(eventApi.description);
-  eventDescription.find('textarea').val(eventApi.description);
-
-  //console.log(eventApi.id);
-  // Add the event to the Dom
-  addEventToDom(false, eventApi.id);
-
-}
-
 var todayInWeek = function(weekStart){
 
   var now = new Date();
@@ -865,7 +814,7 @@ var setMonthCells = function() {
           calendars[i].getEventsByDate(startDate.getTime(), endDate.getTime(), function(err, events) {
             for(var j = 0; j<events.length; j++){
               var event = new Event();
-              addEventToDom(events[j],calendars[i]);
+              addEventToDom(events[j],calendars[i], false);
             }
           });
 
@@ -944,7 +893,7 @@ var setWeekCells = function() {
           calendars[i].getEventsByDate(startDate.getTime(), endDate.getTime(), function(err, events) {
             for(var j = 0; j<events.length; j++){
               var event = new Event();
-              addEventToDom(events[j],calendars[i]);
+              addEventToDom(events[j],calendars[i], false, [startDate, endDate]);
             }
           });
         })( i );
@@ -1012,7 +961,6 @@ var setDropCalendarCells = function(){
 
 			if(dateDropDown.hasClass('start')){
 
-				eventWhen.eq(0).find('input').toggleClass('active');
 				prevDate = eventWhen.eq(0).find('input').val();
 				newDate = prevDate.substr(0,3)+newDay+prevDate.substr(5,5);
 				eventWhen.eq(0).find('input').val(newDate);
@@ -1024,7 +972,6 @@ var setDropCalendarCells = function(){
 
 			}else if(dateDropDown.hasClass('end')){
 
-				eventWhen.eq(1).find('input').toggleClass('active');
 				prevDate = eventWhen.eq(1).find('input').val();
 				newDate = prevDate.substr(0,3)+newDay+prevDate.substr(5,5);
 				eventWhen.eq(1).find('input').val(newDate);
@@ -1034,7 +981,8 @@ var setDropCalendarCells = function(){
 				}
 
 			}
-			dateDropDown.toggle();
+      eventWhen.find('input').removeClass('active');
+			dateDropDown.hide();
 		});
   }
 
@@ -1170,7 +1118,7 @@ var makeItEditable = function(eventDom, event){
 }
 
 // Add event to the DOM
-var addEventToDom = function(eventApi, calendar) {
+var addEventToDom = function(eventApi, calendar, reinserting, dateInterval) {
 
   addEventButton.text('CREATE');
   deleteEventButton.css('display', 'none');
@@ -1181,35 +1129,31 @@ var addEventToDom = function(eventApi, calendar) {
   event.description = eventApi.description;
   event.allDay = eventApi.allDay;
   event.calendar = calendar;
-
-  if ( event.allDay === 'true' ){
-
-  }else{
-
-    var startDate = new Date(eventApi.start.date);
-    var endDate = new Date(eventApi.end.date);
-
+  if(!reinserting){
     event.startDate = new Date(eventApi.start.date);
     event.endDate = new Date(eventApi.end.date);
-
+  }else{
+    event.startDate = eventApi.startDate;
+    event.endDate = eventApi.endDate;
   }
-
 	// If the event have to be repeted
 	if(eventRepeat.find('input').val() == 'Every week'){
 	}
 
 	// In case of an event which last for more than one day, repeat the event the necessary number of times
-	if((event.startDate.getDate() != event.endDate.getDate())){
+	if((event.startDate.getDate() != event.endDate.getDate()) && !reinserting){
 
 		var plusDuration = (event.endDate.getDate()-event.startDate.getDate());
-		for(var i = 0; i<plusDuration; i++){
-			var day = parseInt(eventWhen.eq(0).find('input').val().substr(3,2)) + 1;
-			day = addZeroToHour(day);
-			var newDate = startDate.substr(0,3)+day+startDate.substr(5,5);
-			eventWhen.eq(0).find('input').val(newDate);
-			//addEventToDom(false, true);
+		var dateRecuperate = event.startDate;
+    for(var i = 0; i<plusDuration; i++){
+			var startDay = new Date();
+      startDay.setDate(event.startDate.getDate() + 1);
+      startDay.setHours(event.startDate.getHours());
+      startDay.setMinutes(event.startDate.getMinutes());
+      event.startDate = startDay;
+      addEventToDom(event, calendar, true, dateInterval);
 		}
-
+    event.startDate = dateRecuperate;
 	}
 
 	// Set the event color
@@ -1263,7 +1207,7 @@ var addEventToDom = function(eventApi, calendar) {
     makeItEditable(eventDom, event);
 
 
-		if (event.cell.find('article').length < 2 || eventDom.hasClass('all-day-event')) {
+		if (event.cell.find('article').length < 3 || eventDom.hasClass('all-day-event')) {
 
 			if(eventDom.hasClass('event') || event.cell.find('article').length < 1){
 
@@ -1328,7 +1272,7 @@ var addEventToDom = function(eventApi, calendar) {
 			}
 
 		}
-  } else if ( calendarView == 'week' ) {
+  } else if ( calendarView == 'week'  && ((dateInterval[0].getDate()-1) < event.startDate.getDate()) && (event.startDate.getDate() < (dateInterval[1].getDate()+1))) {
 
     // Prepare the cell where is going to be inserted
     var cell = '';
@@ -1347,7 +1291,7 @@ var addEventToDom = function(eventApi, calendar) {
     eventDom.css('color', event.color.text);
 
     // If is an all-day event
-    if (eventAllDay.find('input').hasClass('checked')) {
+    if (event.allDay) {
 
       cell = $('.day-all-day:eq(' + (event.startDate.getDay()) + ')');
       eventDom.css('display', 'inline-block');
@@ -1370,19 +1314,21 @@ var addEventToDom = function(eventApi, calendar) {
     }else{
 
       cell = $('.hour-markers .marker-cell:eq(' + (event.startDate.getHours()) + ')');
-      var eventTimeString = eventTime.eq(0).find('input').val() +'-'+ eventTime.eq(1).find('input').val();
+      var eventTimeString = addZeroToHour(event.startDate.getHours()) + ':'+ addZeroToHour(event.startDate.getMinutes()) +'-'+ addZeroToHour(event.endDate.getHours()) + ':'+ addZeroToHour(event.endDate.getMinutes());
       eventDom.find('span:eq(1)').text(eventTimeString);
       eventDom.css('left', 14.28 * event.startDate.getDay() + '%');
-      var hourDuration = event.endDate - event.startDate;
-      if(hourDuration <= 1800000 ){
+      var hourDuration = event.endDate.getHours() - event.startDate.getHours();
+      var minuteDuration = event.endDate.getMinutes() - event.startDate.getMinutes();
+      var eventMinuteDuration = hourDuration*60 + minuteDuration;
+
+      if(eventMinuteDuration <= 30 ){
         eventDom.find('span:eq(1)').text('');
         eventDom.css('height', '19px');
       }else{
-        hourDuration = hourDuration * (2.77777778 * Math.pow(10, -7));
-        eventDom.css('height', 37 * hourDuration + 'px');
+        eventDom.css('height' , 0.666666 * eventMinuteDuration + 'px');
       }
-      var minuteDuration = event.startDate.getMinutes();
-      eventDom.css('margin-top', 0.666666 * minuteDuration + 'px');
+      var minuteStart = event.startDate.getMinutes();
+      eventDom.css('margin-top', 0.666666 * minuteStart + 'px');
 
     }
     cell.append(eventDom);
@@ -1431,11 +1377,11 @@ var addEventToDom = function(eventApi, calendar) {
 var addEvent = function(calendar, eventApi){
 
   console.log('Voy a añadir evento');
-  console.log(calendar);
+  console.log(eventApi);
 
 	calendar.createEvent(eventApi, function(err, event) {
     //LA API CRASHEA -X-
-    addEventToDom(event, calendar);
+    addEventToDom(event, calendar, false);
   });
 
 }
@@ -1633,38 +1579,3 @@ initCalendar();
 setInterval(function() {
   setHour()
 }, 60000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
