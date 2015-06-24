@@ -222,16 +222,17 @@ addEventButton.on('click', function() {
     });
 
   }
-
-
-  //addEventToDom(true, false);
   showMenu('.create-event-modal', true);
-
 });
 
 // Delete event button
 deleteEventButton.on('click', function(){
-  win.data(eventName.val()).delete(function(err){throw('pepe')});
+  win.data(eventName.val()).delete(function(err){
+    console.log(err)
+    });
+  showMenu('.create-event-modal', true);
+  var eventToRemove = createEventModal.data('toRemove');
+  eventToRemove.remove();
 })
 
 // Close 'new calendar' modal
@@ -1071,6 +1072,8 @@ var makeItEditable = function(eventDom, event){
     e.stopPropagation();
     // Open the new event modal
 		createEvent.click();
+    // Attach the event to the modal to be removed
+    createEventModal.data('toRemove', eventDom);
     // Set the name of the event
 		eventName.val(event.title);
     // Set the calendar in use for the event
