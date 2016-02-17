@@ -805,7 +805,7 @@ var setMonthCells = function() {
   var daysOfTheMonth = (nCells - nBlankCells) - firstWeekDayOfMonth;
   var startDate = new Date(showingDate.getFullYear(), showingDate.getMonth(), 1, 0, 0, 0, 0);
   var endDate = new Date(showingDate.getFullYear(), showingDate.getMonth(), daysOfTheMonth, 23, 59, 59, 999);
-  wz.calendar.getAccounts(function(err, accounts) {
+  api.calendar.getAccounts(function(err, accounts) {
 
     accounts[0].getCalendars(function(err, calendars) {
 
@@ -887,7 +887,7 @@ var setWeekCells = function() {
   // Search for the events of this week and added to the DOM
   var startDate = new Date(firstDayOfWeek.getFullYear(), firstDayOfWeek.getMonth(), firstDayOfWeek.getDate(), 0, 0, 0, 0);
   var endDate = new Date(lastDayOfWeek.getFullYear(), lastDayOfWeek.getMonth(), lastDayOfWeek.getDate(), 23, 59, 59, 999);
-  wz.calendar.getAccounts(function(err, accounts) {
+  api.calendar.getAccounts(function(err, accounts) {
     accounts[0].getCalendars(function(err, calendars) {
       for (var i = 0; i < calendars.length; i++) {
         (function( i ){
@@ -1574,7 +1574,7 @@ var recoverCalendars = function() {
 }
 
 // Run code
-wz.calendar.getAccounts(function(err, accounts) {
+api.calendar.getAccounts(function(err, accounts) {
   account = accounts[0];
   recoverCalendars();
 });
